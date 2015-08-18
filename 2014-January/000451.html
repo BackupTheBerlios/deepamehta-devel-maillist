@@ -1,0 +1,109 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [deepamehta-devel] WebSockets
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/deepamehta-devel/2014-January/index.html" >
+   <LINK REL="made" HREF="mailto:deepamehta-devel%40lists.berlios.de?Subject=Re%3A%20%5Bdeepamehta-devel%5D%20WebSockets&In-Reply-To=%3CB88074CF-99D8-4C49-9905-A2062BFBEE3A%40deepamehta.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000450.html">
+   <LINK REL="Next"  HREF="000452.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[deepamehta-devel] WebSockets</H1>
+    <B>J&#246;rg Richter</B> 
+    <A HREF="mailto:deepamehta-devel%40lists.berlios.de?Subject=Re%3A%20%5Bdeepamehta-devel%5D%20WebSockets&In-Reply-To=%3CB88074CF-99D8-4C49-9905-A2062BFBEE3A%40deepamehta.de%3E"
+       TITLE="[deepamehta-devel] WebSockets">jri at deepamehta.de
+       </A><BR>
+    <I>Wed Jan  8 18:09:55 CET 2014</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000450.html">[deepamehta-devel] WebSockets
+</A></li>
+        <LI>Next message: <A HREF="000452.html">[deepamehta-devel] WebSockets
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#451">[ date ]</a>
+              <a href="thread.html#451">[ thread ]</a>
+              <a href="subject.html#451">[ subject ]</a>
+              <a href="author.html#451">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>
+On Jan 8, 2014, at 10:52, Juergen Neumann wrote:
+
+&gt;<i> I had talked to Danny about websocket implementation a few days a go. He
+</I>&gt;<i> said that Jetty would not fit into apache OSGi framework anyways and
+</I>&gt;<i> that for the karaf version he would need to use PAX anyways.
+</I>
+Pax Web embeds Jetty just like Apache Felix HTTP Jetty does. Why should Jetty not fit the apache OSGi framework?
+
+I think you mean that Apache Felix HTTP Jetty does not fit the Apache Karaf landscape. This is what I understand from my talk with Danny.
+
+&gt;<i> I would therefor hardly recommend to shift away from Jetty towards PAX
+</I>&gt;<i> even though its footprint might be slightly bigger.
+</I>
+The footprint (which I would not call &quot;slightly&quot; bigger) is not my main concern about Pax Web. It is that Pax Web is very unstable. Each release changes behavior and introduces new bugs. To work at all with DM it requires a workaround that uglyfies DM's config file, what I regard as a usability problem.
+My painful Pax Web experience is described in <A HREF="https://trac.deepamehta.de/ticket/448">https://trac.deepamehta.de/ticket/448</A>
+
+&gt;<i> Did you and Danny disscuss this issue in person? If not, I would hardly
+</I>&gt;<i> recommend that you speak to each other and clearify the future strategy
+</I>&gt;<i> here.
+</I>
+I had a lengthy phone talk with Danny yesterday.
+He likes the way I realized the dm4-websockets plugin.
+In fact this plugin does not rely on any particular OSGi HTTP Service implementation.
+I tried to explain that in the posting.
+
+Regarding WebSockets it doesn't matter if we use Felix HTTP Jetty or Pax Web.
+
+Originally we thought that the sole fact that Pax Web embeds a Jetty 7 server (which supports WebSockets) -- in contrast to the Jetty 6 embedded in Felix HTTP Jetty -- would bring us one step further to WebSockets. But we never thought about the 2nd step, that is how we actually deploy WebSockets in DM. This is what I did now with the dm4-websockets plugin.
+
+Since Apache updated the Felix HTTP Jetty package recently it embeds a Jetty 7 as well. It is now on a par with Pax Web. Regarding WebSockets the bias towards Pax Web became irrelevant.
+<A HREF="https://trac.deepamehta.de/ticket/584">https://trac.deepamehta.de/ticket/584</A>
+
+For the DM Karaf Distribution Danny tends to Pax Web but for reasons not related to WebSockets.
+
+Results from my talk with Danny:
+
+1. The DM Karaf Distribution will include Pax Web. Apache Felix HTTP Jetty will be dropped.
+
+2. The DM Standard Distribution will include Apache Felix HTTP Jetty.
+
+3. The fact that dm4-websockets currently instantiates its own Jetty server, and that 2 HTTP ports are open, is not considered a problem by Danny. He even sees it as a possible advantage. (I see the 2 HTTP ports rather a problem in conjunction with firewalls).
+
+4. Danny will check out weather Pax Web provides any proprietary (non-OSGi standard) facilities that would help to solve the possible problems mentioned in 3.
+
+Cheers,
+J&#246;rg
+
+</PRE>
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000450.html">[deepamehta-devel] WebSockets
+</A></li>
+	<LI>Next message: <A HREF="000452.html">[deepamehta-devel] WebSockets
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#451">[ date ]</a>
+              <a href="thread.html#451">[ thread ]</a>
+              <a href="subject.html#451">[ subject ]</a>
+              <a href="author.html#451">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/deepamehta-devel">More information about the deepamehta-devel
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,148 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [deepamehta-devel] L&#246;sung f&#252;r Download-Problem?
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/deepamehta-devel/2008-December/index.html" >
+   <LINK REL="made" HREF="mailto:deepamehta-devel%40lists.berlios.de?Subject=Re%3A%20%5Bdeepamehta-devel%5D%0A%20%3D%3Fiso-8859-1%3Fq%3FL%3DF6sung_f%3DFCr_Download-Problem%3F%3D%0A%20%3D%3Fiso-8859-1%3Fq%3F%3D3F%3F%3D&In-Reply-To=%3C4936D052.1090303%40deepamehta.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000299.html">
+   <LINK REL="Next"  HREF="000301.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[deepamehta-devel] L&#246;sung f&#252;r Download-Problem?</H1>
+    <B>Malte Rei&#223;ig</B> 
+    <A HREF="mailto:deepamehta-devel%40lists.berlios.de?Subject=Re%3A%20%5Bdeepamehta-devel%5D%0A%20%3D%3Fiso-8859-1%3Fq%3FL%3DF6sung_f%3DFCr_Download-Problem%3F%3D%0A%20%3D%3Fiso-8859-1%3Fq%3F%3D3F%3F%3D&In-Reply-To=%3C4936D052.1090303%40deepamehta.de%3E"
+       TITLE="[deepamehta-devel] L&#246;sung f&#252;r Download-Problem?">mre at deepamehta.de
+       </A><BR>
+    <I>Wed Dec  3 19:30:42 CET 2008</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000299.html">[deepamehta-devel] L&#246;sung f&#252;r Download-Problem?
+</A></li>
+        <LI>Next message: <A HREF="000301.html">[deepamehta-devel] [Bug #14881] File upload doesn't work when	client runs as applet
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#300">[ date ]</a>
+              <a href="thread.html#300">[ thread ]</a>
+              <a href="subject.html#300">[ subject ]</a>
+              <a href="author.html#300">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Mein Fehlerreport, f&#252;r den DeepaMehta Release Download
+<A HREF="http://www.deepamehta.de/download/deepamehta-2.0b8.zip">http://www.deepamehta.de/download/deepamehta-2.0b8.zip</A>
+
+* Ich konnte 2mal je 4.7 MB herunterladen (via Firefox).
+* Mit wget wurde der download 6 mal unterbrochen und war bei ~20% 
+(~3MB) mit der einfachen Meldung
+
+&quot;16:56:07 (29.95 KB/s) - Verbindung bei Byte 2507040 geschlossen.
+Erneuter Versuch.&quot;
+
+bevor ich den Downloadversuch manuell dann ganz abgebrochen habe.
+
+Wenn ich folgende Datei vom aus dem wiki/ webapp directory mit Firefox
+und &quot;ziel speichern unter&quot; herunterlade, l&#228;uft der Download fehlerfrei
+bis zu 260 MB.
+
+<A HREF="http://www.deepamehta.de/wiki/ka-control.ogg">http://www.deepamehta.de/wiki/ka-control.ogg</A>
+
+Beim progr. HTTP Streaming der Datei im Video Plugin meines Browsers,
+wird die verbindung nach etwa 35 sek. unterbrochen..
+
+Also scheint es nicht an einer konfigurierten Gr&#246;&#223;enbeschr&#228;nkung f&#252;r
+Downloads zu geben zumindest liegen beide Download-Ressourcen in
+verschiedenen webapp-directories.
+
+Vielleicht dient das zur Eingrenzung der Fehlerquelle.
+
+J&#246;rg Richter wrote on 03.12.2008 16:12:
+&gt;<i> Liebe Entwickler und Admins,
+</I>&gt;<i>
+</I>&gt;<i> jemand hat mich aufmerksam gemacht, da&#223; DeepaMehta nicht korrekt von 
+</I>&gt;<i> der Website heruntergeladen werden kann (s.u.).
+</I>&gt;<i> www.deepamehta.de/docs/download.html
+</I>&gt;<i>
+</I>&gt;<i> Der 12,5 MB gro&#223;e Download bricht bei mir nach 1,8 MB ab.
+</I>&gt;<i>
+</I>&gt;<i> =&gt; Wer hat eine Idee, woran das liegen k&#246;nnte?
+</I>&gt;<i>
+</I>&gt;<i> Ich hab's gecheckt: auf'm Server liegt die korrekte Datei (12,5 MB)
+</I>&gt;<i>
+</I>&gt;<i> Die ganze DeepaMehta-Website wird von Tomcat 6 serviert, ich glaube mit 
+</I>&gt;<i> Apache als Reverse Proxy. Soweit ich wei&#223;, hat der Download fr&#252;her 
+</I>&gt;<i> funktioniert. M&#246;glicherweise h&#228;ngt das Problem mit dem letzten 
+</I>&gt;<i> Apache-Update (vor etwa 2 Wochen) zusammen.
+</I>&gt;<i>
+</I>&gt;<i> &#220;ber Hinweise bin ich dankbar.
+</I>&gt;<i>
+</I>&gt;<i> Gr&#252;&#223;e
+</I>&gt;<i> J&#246;rg
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> On 03.12.2008, at 15:58, J&#246;rg Richter wrote:
+</I>&gt;<i>
+</I>&gt;<i>   
+</I>&gt;&gt;<i> Dear Bamba,
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> yes, I checked it, and indeed, there is a problem.
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> This comes as a surprise to me. I have no solution yet, sorry.
+</I>&gt;&gt;<i> We'll investigate this, and notify you once it's fixed.
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> For the meantime you could try out DeepaMehta Online. See
+</I>&gt;&gt;<i> www.deepamehta.de/install/client/login.html
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> Thank you for notification.
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> Best wishes
+</I>&gt;&gt;<i> J&#246;rg Richter (DeepaMehta founder and lead architect)
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> www.deepamehta.de
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> On 02.12.2008, at 10:49, bamba Ndiaye wrote:
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>     
+</I>&gt;&gt;&gt;<i> Dear Sir,
+</I>&gt;&gt;&gt;<i> I am having trouble dowloding a copy of the software. It cuts at 1 
+</I>&gt;&gt;&gt;<i> mb. Any help?
+</I>&gt;&gt;&gt;<i>       
+</I>&gt;<i>
+</I>&gt;<i> _______________________________________________
+</I>&gt;<i> deepamehta-devel mailing list
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/deepamehta-devel">deepamehta-devel at lists.berlios.de</A>
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/deepamehta-devel">https://lists.berlios.de/mailman/listinfo/deepamehta-devel</A>
+</I>&gt;<i>
+</I>&gt;<i>   
+</I>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000299.html">[deepamehta-devel] L&#246;sung f&#252;r Download-Problem?
+</A></li>
+	<LI>Next message: <A HREF="000301.html">[deepamehta-devel] [Bug #14881] File upload doesn't work when	client runs as applet
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#300">[ date ]</a>
+              <a href="thread.html#300">[ thread ]</a>
+              <a href="subject.html#300">[ subject ]</a>
+              <a href="author.html#300">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/deepamehta-devel">More information about the deepamehta-devel
+mailing list</a><br>
+</body></html>

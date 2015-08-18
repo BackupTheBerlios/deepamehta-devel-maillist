@@ -1,0 +1,206 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [deepamehta-devel] a blog post on how to create a plugin and a question
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/deepamehta-devel/2013-December/index.html" >
+   <LINK REL="made" HREF="mailto:deepamehta-devel%40lists.berlios.de?Subject=Re%3A%20%5Bdeepamehta-devel%5D%20a%20blog%20post%20on%20how%20to%20create%20a%20plugin%20and%20a%0A%20question&In-Reply-To=%3C52C0B33A.2010703%40sindominio.net%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000444.html">
+   <LINK REL="Next"  HREF="000446.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[deepamehta-devel] a blog post on how to create a plugin and a question</H1>
+    <B>carolina</B> 
+    <A HREF="mailto:deepamehta-devel%40lists.berlios.de?Subject=Re%3A%20%5Bdeepamehta-devel%5D%20a%20blog%20post%20on%20how%20to%20create%20a%20plugin%20and%20a%0A%20question&In-Reply-To=%3C52C0B33A.2010703%40sindominio.net%3E"
+       TITLE="[deepamehta-devel] a blog post on how to create a plugin and a question">carolina at sindominio.net
+       </A><BR>
+    <I>Mon Dec 30 00:41:46 CET 2013</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000444.html">[deepamehta-devel] a blog post on how to create a plugin and a	question
+</A></li>
+        <LI>Next message: <A HREF="000446.html">[deepamehta-devel] a blog post on how to create a plugin and a question
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#445">[ date ]</a>
+              <a href="thread.html#445">[ thread ]</a>
+              <a href="subject.html#445">[ subject ]</a>
+              <a href="author.html#445">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
+
+Hi!!
+
+&gt;<i> 
+</I>&gt;<i> On Dec 27, 2013, at 20:51, carolina wrote:
+</I>&gt;<i> 
+</I>&gt;&gt;<i> I've written a post explaining the steps of how to create a very
+</I>&gt;&gt;<i> simple plugin in DM
+</I>&gt;&gt;<i> 
+</I>&gt;&gt;<i> <A HREF="http://abriraqui.net/2013/12/27/creating-a-plugin-in-deepamehta-hackership/">http://abriraqui.net/2013/12/27/creating-a-plugin-in-deepamehta-hackership/</A>
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> 
+</I>[...]
+&gt;&gt;<i> pd: any feedback on the post is also very welcome :))
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> Hi Carolina,
+</I>&gt;<i> 
+</I>&gt;<i> thank you very much for the blog post!
+</I>
+thanks for the feedback :-))) I'll update the post with your
+observations.
+
+&gt;<i> I just posted a comment there but line wrapping is kind of odd and
+</I>&gt;<i> XML elements (&lt;name&gt;, &lt;groupId&gt;, ...) are omitted.
+</I>
+:<i>-O I guess &quot;out of the box&quot; blog themes sometimes do weird things
+</I>
+&gt;<i> So I post my comment here as well.
+</I>
+thanks
+
+best
+C
+
+
+
+
+
+&gt;<i> -------------------
+</I>&gt;<i> 
+</I>&gt;<i> Thank you for this great article! It provides a good help in making
+</I>&gt;<i> DM approachable for new developers! I appreciate the clear language
+</I>&gt;<i> and structure as well as the handcrafted illustrations.
+</I>&gt;<i> 
+</I>&gt;<i> While our personal &quot;hackership&quot;, which I enjoyed very much, I was
+</I>&gt;<i> not always as clear/complete as I could have been. So here I like
+</I>&gt;<i> to fill some of my gaps resp., relating to your article, suggest
+</I>&gt;<i> some improvements:
+</I>&gt;<i> 
+</I>&gt;<i> - Before the introducing quote you could say that DeepaMehta is
+</I>&gt;<i> both, a *Webclient*, and an application development platform. (Most
+</I>&gt;<i> of the quote relates to the Webclient while the remainder of the
+</I>&gt;<i> article refers to the development platform).
+</I>&gt;<i> 
+</I>&gt;<i> - The plugin directory name must not necessarily match the Maven
+</I>&gt;<i> artifact ID. You're free to choose any name. Anyway, it's not a bad
+</I>&gt;<i> idea to let these names match.
+</I>&gt;<i> 
+</I>&gt;<i> - A migration does not only define the database schema. In general
+</I>&gt;<i> a migration transforms the DB to ensure its structure and content
+</I>&gt;<i> is compatible with your code.
+</I>&gt;<i> 
+</I>&gt;<i> - For better readability the pom.xml contents could be indented.
+</I>&gt;<i> 
+</I>&gt;<i> - I would not say the project &lt;name&gt; is a description of the
+</I>&gt;<i> project (which would be more verbose) but just, exactly as you
+</I>&gt;<i> said, &quot;the human readable name of the plugin&quot;.
+</I>&gt;<i> 
+</I>&gt;<i> - The &lt;groupId&gt; must not actually be a valid URL, but a globally
+</I>&gt;<i> unique name under which you collect the project's artifacts. To
+</I>&gt;<i> fulfill the &quot;globally unique&quot; requirement it is best practice to
+</I>&gt;<i> begin the name with a reversed domain name (as you've described).
+</I>&gt;<i> You could use e.g. &quot;net.abriraqui.cgc-calendar&quot; as the group ID.
+</I>&gt;<i> 
+</I>&gt;<i> - Generally in Maven the &lt;artifactId&gt; is the name of the generated
+</I>&gt;<i> .jar file (the Java binary). Within the group this name must be
+</I>&gt;<i> unique. Your choice (&quot;cgc-calendar&quot;) is a good one. (So, with the
+</I>&gt;<i> group ID suggested above &quot;cgc-calendar&quot; appears twice, which is
+</I>&gt;<i> fine. That's because your project consist of only 1 artifact, but
+</I>&gt;<i> in general there may be many). Remember: the artifact ID must not
+</I>&gt;<i> necessarily match the plugin's directory name. 
+</I>&gt;<i> <A HREF="http://maven.apache.org/guides/mini/guide-naming-conventions.html">http://maven.apache.org/guides/mini/guide-naming-conventions.html</A>
+</I>&gt;<i> 
+</I>&gt;<i> - I would not say relationships in DeepaMehta are *hypergraph*
+</I>&gt;<i> relationships. In a hypergraph a relationship can have more than 2
+</I>&gt;<i> ends. In DM it has always 2. Although one thing is special with the
+</I>&gt;<i> DM data model: at a relationship's end there can be both: a node
+</I>&gt;<i> (as usual), or a relationship (!). Anyway, if this structure is
+</I>&gt;<i> equivalent to a hypergraph is an ongoing discussion (J&#252;rgen says
+</I>&gt;<i> yes, I say no :-)
+</I>&gt;<i> 
+</I>&gt;<i> - It is a convention in DM to use underscores in URIs instead of
+</I>&gt;<i> dashes. So it should be e.g. &quot;cgc.calendar.start_date&quot;. (While our
+</I>&gt;<i> hackership I told differently.)
+</I>&gt;<i> 
+</I>&gt;<i> - A type's &quot;value&quot; property is its (human readable) *name*, not
+</I>&gt;<i> actually a &quot;description&quot; (which would possibly more verbose).
+</I>&gt;<i> 
+</I>&gt;<i> - I would talk about &quot;Event&quot;, &quot;Start Date&quot;, and &quot;End Date&quot; as
+</I>&gt;<i> *Topic Types* (instead of Topics). The distinction is like in OO: a
+</I>&gt;<i> type is like a *class* while a topic is like an *instance* of a
+</I>&gt;<i> class. However, it is technically correct to talk of DM Types as
+</I>&gt;<i> Topics, because in DM Type is derived from Topic. But the more
+</I>&gt;<i> specific term might make things more clear for the reader
+</I>&gt;<i> (especially if she is familiar with OO).
+</I>&gt;<i> 
+</I>&gt;<i> - The plugin.properties file should contain a 2nd line: 
+</I>&gt;<i> importModels=de.deepamehta.webclient This declares your plugin
+</I>&gt;<i> makes use of the DM Webclient data model (namely its type
+</I>&gt;<i> dm4.webclient.view_config). DM then takes care the Webclient is
+</I>&gt;<i> installed *before* the Calendar plugin. However, this is only of
+</I>&gt;<i> importance if Calendar is installed along with DM (e.g. when you
+</I>&gt;<i> publish a custom DM distro). While our hackership I omitted that
+</I>&gt;<i> setting.
+</I>&gt;<i> 
+</I>&gt;<i> - In the latter code examples indentation is a bit out of place.
+</I>&gt;<i> 
+</I>&gt;<i> - At the article end: you should say that this configuration goes
+</I>&gt;<i> to DM's &quot;global&quot; pom.xml. This is found at the top-level of its
+</I>&gt;<i> home directory.
+</I>&gt;<i> 
+</I>&gt;<i> Hmh, I feel little like a rigid schoolmaster now ;-) Your article
+</I>&gt;<i> is great!
+</I>&gt;<i> 
+</I>&gt;<i> _______________________________________________ deepamehta-devel
+</I>&gt;<i> mailing list <A HREF="https://lists.berlios.de/mailman/listinfo/deepamehta-devel">deepamehta-devel at lists.berlios.de</A> 
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/deepamehta-devel">https://lists.berlios.de/mailman/listinfo/deepamehta-devel</A>
+</I>&gt;<i> 
+</I>
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.11 (GNU/Linux)
+Comment: Using GnuPG with Thunderbird - <A HREF="http://www.enigmail.net/">http://www.enigmail.net/</A>
+
+iQEcBAEBAgAGBQJSwLMyAAoJEOQV1Jy26HIvo6QH/1eJBr2fhBxX7PFAntQx1ml+
+gOxf9lXQR8nFnS9PtchMtXJtF7w6lh/t9AMCnRx8+1CrIJcXQTrVKnwIEANiq2W8
+Bg6MZIgFtO0tAZV46Q6/IMWBwd7RSiIPIJDdBt5xaNdQ/c9ehKim50Eg8LAyL4as
+54EvlZbrw55G/FE2Kgf/1dWmRL3kqtyDzfk8mZJNUoMkvvAqXj+saKFPAgICowah
+X2Sr/V7BuANUqY9dF95TqcssgJiNMTX0H3I8zRZIVJS2XQ5XlkMIQqBTvUYU3tYU
+rOkR+DA2sHkU2c7HwjvHT/YyzNyE5kEs4W6DE7cYVQCEIWpiIE9Nid4jp/Vw3Jg=
+=1cSg
+-----END PGP SIGNATURE-----
+</PRE>
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000444.html">[deepamehta-devel] a blog post on how to create a plugin and a	question
+</A></li>
+	<LI>Next message: <A HREF="000446.html">[deepamehta-devel] a blog post on how to create a plugin and a question
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#445">[ date ]</a>
+              <a href="thread.html#445">[ thread ]</a>
+              <a href="subject.html#445">[ subject ]</a>
+              <a href="author.html#445">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/deepamehta-devel">More information about the deepamehta-devel
+mailing list</a><br>
+</body></html>

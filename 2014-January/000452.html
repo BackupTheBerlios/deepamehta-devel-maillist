@@ -1,0 +1,145 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [deepamehta-devel] WebSockets
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/deepamehta-devel/2014-January/index.html" >
+   <LINK REL="made" HREF="mailto:deepamehta-devel%40lists.berlios.de?Subject=Re%3A%20%5Bdeepamehta-devel%5D%20WebSockets&In-Reply-To=%3CCABHcWbkwTOb%3DJy_koX_AwZwe9Fmkm2k%2B0YNXiEtpZOmqU11epQ%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000451.html">
+   <LINK REL="Next"  HREF="000456.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[deepamehta-devel] WebSockets</H1>
+    <B>J&#246;rn Wei&#223;enborn</B> 
+    <A HREF="mailto:deepamehta-devel%40lists.berlios.de?Subject=Re%3A%20%5Bdeepamehta-devel%5D%20WebSockets&In-Reply-To=%3CCABHcWbkwTOb%3DJy_koX_AwZwe9Fmkm2k%2B0YNXiEtpZOmqU11epQ%40mail.gmail.com%3E"
+       TITLE="[deepamehta-devel] WebSockets">joern.weissenborn at gmail.com
+       </A><BR>
+    <I>Wed Jan  8 23:48:02 CET 2014</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000451.html">[deepamehta-devel] WebSockets
+</A></li>
+        <LI>Next message: <A HREF="000456.html">[deepamehta-devel] WebSockets
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#452">[ date ]</a>
+              <a href="thread.html#452">[ thread ]</a>
+              <a href="subject.html#452">[ subject ]</a>
+              <a href="author.html#452">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Is there a way to run DM without Karaf or Felix?
+
+
+2014/1/8 J&#246;rg Richter &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/deepamehta-devel">jri at deepamehta.de</A>&gt;
+
+&gt;<i>
+</I>&gt;<i> On Jan 8, 2014, at 10:52, Juergen Neumann wrote:
+</I>&gt;<i>
+</I>&gt;<i> &gt; I had talked to Danny about websocket implementation a few days a go. He
+</I>&gt;<i> &gt; said that Jetty would not fit into apache OSGi framework anyways and
+</I>&gt;<i> &gt; that for the karaf version he would need to use PAX anyways.
+</I>&gt;<i>
+</I>&gt;<i> Pax Web embeds Jetty just like Apache Felix HTTP Jetty does. Why should
+</I>&gt;<i> Jetty not fit the apache OSGi framework?
+</I>&gt;<i>
+</I>&gt;<i> I think you mean that Apache Felix HTTP Jetty does not fit the Apache
+</I>&gt;<i> Karaf landscape. This is what I understand from my talk with Danny.
+</I>&gt;<i>
+</I>&gt;<i> &gt; I would therefor hardly recommend to shift away from Jetty towards PAX
+</I>&gt;<i> &gt; even though its footprint might be slightly bigger.
+</I>&gt;<i>
+</I>&gt;<i> The footprint (which I would not call &quot;slightly&quot; bigger) is not my main
+</I>&gt;<i> concern about Pax Web. It is that Pax Web is very unstable. Each release
+</I>&gt;<i> changes behavior and introduces new bugs. To work at all with DM it
+</I>&gt;<i> requires a workaround that uglyfies DM's config file, what I regard as a
+</I>&gt;<i> usability problem.
+</I>&gt;<i> My painful Pax Web experience is described in
+</I>&gt;<i> <A HREF="https://trac.deepamehta.de/ticket/448">https://trac.deepamehta.de/ticket/448</A>
+</I>&gt;<i>
+</I>&gt;<i> &gt; Did you and Danny disscuss this issue in person? If not, I would hardly
+</I>&gt;<i> &gt; recommend that you speak to each other and clearify the future strategy
+</I>&gt;<i> &gt; here.
+</I>&gt;<i>
+</I>&gt;<i> I had a lengthy phone talk with Danny yesterday.
+</I>&gt;<i> He likes the way I realized the dm4-websockets plugin.
+</I>&gt;<i> In fact this plugin does not rely on any particular OSGi HTTP Service
+</I>&gt;<i> implementation.
+</I>&gt;<i> I tried to explain that in the posting.
+</I>&gt;<i>
+</I>&gt;<i> Regarding WebSockets it doesn't matter if we use Felix HTTP Jetty or Pax
+</I>&gt;<i> Web.
+</I>&gt;<i>
+</I>&gt;<i> Originally we thought that the sole fact that Pax Web embeds a Jetty 7
+</I>&gt;<i> server (which supports WebSockets) -- in contrast to the Jetty 6 embedded
+</I>&gt;<i> in Felix HTTP Jetty -- would bring us one step further to WebSockets. But
+</I>&gt;<i> we never thought about the 2nd step, that is how we actually deploy
+</I>&gt;<i> WebSockets in DM. This is what I did now with the dm4-websockets plugin.
+</I>&gt;<i>
+</I>&gt;<i> Since Apache updated the Felix HTTP Jetty package recently it embeds a
+</I>&gt;<i> Jetty 7 as well. It is now on a par with Pax Web. Regarding WebSockets the
+</I>&gt;<i> bias towards Pax Web became irrelevant.
+</I>&gt;<i> <A HREF="https://trac.deepamehta.de/ticket/584">https://trac.deepamehta.de/ticket/584</A>
+</I>&gt;<i>
+</I>&gt;<i> For the DM Karaf Distribution Danny tends to Pax Web but for reasons not
+</I>&gt;<i> related to WebSockets.
+</I>&gt;<i>
+</I>&gt;<i> Results from my talk with Danny:
+</I>&gt;<i>
+</I>&gt;<i> 1. The DM Karaf Distribution will include Pax Web. Apache Felix HTTP Jetty
+</I>&gt;<i> will be dropped.
+</I>&gt;<i>
+</I>&gt;<i> 2. The DM Standard Distribution will include Apache Felix HTTP Jetty.
+</I>&gt;<i>
+</I>&gt;<i> 3. The fact that dm4-websockets currently instantiates its own Jetty
+</I>&gt;<i> server, and that 2 HTTP ports are open, is not considered a problem by
+</I>&gt;<i> Danny. He even sees it as a possible advantage. (I see the 2 HTTP ports
+</I>&gt;<i> rather a problem in conjunction with firewalls).
+</I>&gt;<i>
+</I>&gt;<i> 4. Danny will check out weather Pax Web provides any proprietary (non-OSGi
+</I>&gt;<i> standard) facilities that would help to solve the possible problems
+</I>&gt;<i> mentioned in 3.
+</I>&gt;<i>
+</I>&gt;<i> Cheers,
+</I>&gt;<i> J&#246;rg
+</I>&gt;<i>
+</I>&gt;<i> _______________________________________________
+</I>&gt;<i> deepamehta-devel mailing list
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/deepamehta-devel">deepamehta-devel at lists.berlios.de</A>
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/deepamehta-devel">https://lists.berlios.de/mailman/listinfo/deepamehta-devel</A>
+</I>&gt;<i>
+</I>-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/deepamehta-devel/attachments/20140108/d149c8a3/attachment.html">https://lists.berlios.de/pipermail/deepamehta-devel/attachments/20140108/d149c8a3/attachment.html</A>&gt;
+</PRE>
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000451.html">[deepamehta-devel] WebSockets
+</A></li>
+	<LI>Next message: <A HREF="000456.html">[deepamehta-devel] WebSockets
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#452">[ date ]</a>
+              <a href="thread.html#452">[ thread ]</a>
+              <a href="subject.html#452">[ subject ]</a>
+              <a href="author.html#452">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/deepamehta-devel">More information about the deepamehta-devel
+mailing list</a><br>
+</body></html>

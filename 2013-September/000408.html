@@ -1,0 +1,141 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [deepamehta-devel] usecases
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/deepamehta-devel/2013-September/index.html" >
+   <LINK REL="made" HREF="mailto:deepamehta-devel%40lists.berlios.de?Subject=Re%3A%20%5Bdeepamehta-devel%5D%20usecases&In-Reply-To=%3CCABHcWbkbPqPUQccXTX%2BGDkxGGxMFYa%2BieSU7jA_-OA-nBNLv6A%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000410.html">
+   <LINK REL="Next"  HREF="000414.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[deepamehta-devel] usecases</H1>
+    <B>J&#246;rn Wei&#223;enborn</B> 
+    <A HREF="mailto:deepamehta-devel%40lists.berlios.de?Subject=Re%3A%20%5Bdeepamehta-devel%5D%20usecases&In-Reply-To=%3CCABHcWbkbPqPUQccXTX%2BGDkxGGxMFYa%2BieSU7jA_-OA-nBNLv6A%40mail.gmail.com%3E"
+       TITLE="[deepamehta-devel] usecases">joern.weissenborn at gmail.com
+       </A><BR>
+    <I>Wed Sep 11 21:47:21 CEST 2013</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000410.html">[deepamehta-devel] Next developer meeting?
+</A></li>
+        <LI>Next message: <A HREF="000414.html">[deepamehta-devel] click detection
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#408">[ date ]</a>
+              <a href="thread.html#408">[ thread ]</a>
+              <a href="subject.html#408">[ subject ]</a>
+              <a href="author.html#408">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi,
+
+here a simple sketch of usecase cases. Please don't take it to serious,
+just ideas...
+
+After each solution a name is written. This does mean that in case of &quot;jri&quot;
+it would be jris job, in case its not jri the name is a suggestion.
+
+Usecase 1
+
+Problem:
+
+I am an experienced programer and I design my new app (either webapp or
+plain old desktop or sever). I find the webclient neat but of no use for
+me. Most of the other modules are as well. wWhat I what I want, is a simple
+deepa-mehta core. I most likely don't know, understand or like OSGi. I want
+an instance. Just let me instanciate DM and give me an nice interface.
+
+Possible Solution:
+
+- define low-level DM API:(JRI)
+
+    What does DM offer you which no other tool/library offers? German:
+Schuster bleib bei deinen Leisten!&quot;
+
+- create generic bridge class which enables a module to break out if the
+application: (jri)
+    it should provide hookups as easy as overriding a specific &quot;onThat&quot;
+method and also provide predefiend functions. You must not learn any OSGI
+to write your bride
+
+- create zmq based bridge together with a simple endpoint.(joern)
+    this endpoint works like 2 sub/pub channels, an upstream and
+downstream. the interface now provides methods to call specific DM
+functions and to look for events or changes of the state of the DM engine.
+this way you can can work asynchrone with DM
+
+
+
+Usecase 2:
+
+Unlike the user of scenario one I have only a simple (web)application. I
+don't need your webmodule or your rendereres, I just want a kind of core-dm
+with several options to decide if I want for example websocket bindings or
+rest binding. I May develop a pure desktop app, so a ZeroMQ binding would
+come in handy.
+
+Possible Solution:
+
+- use bridge from usecase 1
+
+- create a websocket bridge (joern)
+
+- refactor DM REST service to bridge model(?)
+
+Usecase 3:
+
+I don't know anything about programming. I can write html and know some
+basic javascript, but not more then eventhandling... I would like to simply
+give my topic types a kind of ID and a html/css which contains all the info
+needed to render this topic.
+
+Possible solution:
+
+- take ember.js (or whatever) + twitter bootstrap and create a cool mockup
+with static data(?)
+    static data will be supplied by rest or websockets. we take of that
+later
+
+- alternative: throw away the webmodule and create a new modern mvc with an
+asynchrone bridge from Usecase 2, importand for pushing stuff -&gt;
+collaboration!
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/deepamehta-devel/attachments/20130911/00a9989a/attachment.html">https://lists.berlios.de/pipermail/deepamehta-devel/attachments/20130911/00a9989a/attachment.html</A>&gt;
+</PRE>
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000410.html">[deepamehta-devel] Next developer meeting?
+</A></li>
+	<LI>Next message: <A HREF="000414.html">[deepamehta-devel] click detection
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#408">[ date ]</a>
+              <a href="thread.html#408">[ thread ]</a>
+              <a href="subject.html#408">[ subject ]</a>
+              <a href="author.html#408">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/deepamehta-devel">More information about the deepamehta-devel
+mailing list</a><br>
+</body></html>

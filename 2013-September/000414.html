@@ -1,0 +1,135 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [deepamehta-devel] click detection
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/deepamehta-devel/2013-September/index.html" >
+   <LINK REL="made" HREF="mailto:deepamehta-devel%40lists.berlios.de?Subject=Re%3A%20%5Bdeepamehta-devel%5D%20click%20detection&In-Reply-To=%3C52414DDE.9040502%40ziegi.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000408.html">
+   <LINK REL="Next"  HREF="000415.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[deepamehta-devel] click detection</H1>
+    <B>Torsten Ziegler</B> 
+    <A HREF="mailto:deepamehta-devel%40lists.berlios.de?Subject=Re%3A%20%5Bdeepamehta-devel%5D%20click%20detection&In-Reply-To=%3C52414DDE.9040502%40ziegi.de%3E"
+       TITLE="[deepamehta-devel] click detection">torsten at ziegi.de
+       </A><BR>
+    <I>Tue Sep 24 10:31:26 CEST 2013</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000408.html">[deepamehta-devel] usecases
+</A></li>
+        <LI>Next message: <A HREF="000415.html">[deepamehta-devel] click detection
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#414">[ date ]</a>
+              <a href="thread.html#414">[ thread ]</a>
+              <a href="subject.html#414">[ subject ]</a>
+              <a href="author.html#414">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi J&#246;rg and all GUI developers,
+
+I am about to implement a new click detection for my renderer
+and seek for some advice, respectively am looking for a common
+ground of my development and the default renderer.
+
+Right now the click detection in the functions
+find_topic_by_position and .._association_..
+implements &quot;a a second drawing process&quot;
+- all calculation is done over again on each mouse event
+- possible all but one objects on the canvas have to be examined
+- right now works only with rectangular bounding boxes of shapes
+(clicking on the &quot;not painted corner&quot; of the standard note ball will
+counted as click on the icon itself)
+- topics are always preferred over associations
+- topics first painted are preferred over the other ones in case of overlap
+(without repecting that visibility is the other way round)
+
+What I would like to implement:
+- a lookup table to find the object without new calculations
+- non rectangular areas to reflect the transparent portions of an icon,
+or irregular shapes
+- allow for certain areas of one topic to react differently to the mouse 
+interaction
+- allow more advanced detection of overlapped objects:
+-- certain objects might know that its not them to react but the lower one
+-- if unsure ask the user which one he/she tries to click
+(as it is just so nasty to move a topic accidently over another and
+suddenly you are not able to select it any more, but have to work your way
+through the selectable ones till you reach the one you would like to 
+have selected
+in the beginning)
+
+I see 2(3) ways to do this and here I would like your input:
+
+1. using a muldimensional array to keep track of all the objects and 
+desired action on the canvas
+(object_canvas[x][y]=[{&quot;id&quot;:id,&quot;action&quot;:action},..] &lt;- each point holds 
+an array of one or many object ids and actions,
+empty points may be removed from the array ?speed vs. memory use?)
+- on drawing each object registers itself to this array (object_id + 
+action(show detail pane, start association, bring to front etc.))
+- for unregular shapes or icons with alpha a helper function
+-- is provided with the smallest possible bounding box that includes the 
+object
+-- does a bitmap compare of the canvas region bevore and after drawing
+-- calculates the visible parts that should be registered in the array
+- on a mouse event only the array has to be queried and all possible 
+objects are directly accessible by lookup of their id
+
+2. using the KineticJS (<A HREF="http://kinetikjs.com">http://kinetikjs.com</A>)
+- implement the whole drawing and click detection using the kineticjs 
+framework
+- pro: less code as drawing, caching, event handling is allready 
+implented (using a second canvas for hit detection)
+- contra: overlapping objects are not supported, topmost rules
+
+3. wait till browsers implement the HTML5 HitRegion
+- this may take a while
+
+Inspired by the KineticJS I would also like to look into caching of the 
+objects,
+if this makes sense for the yet simple objects.
+It works the way that the object is drawn only once but then saved as an 
+image that is
+drawn to the canvas later on.
+
+What do you think?
+torsten
+
+-- 
+Torsten Ziegler
+<A HREF="https://lists.berlios.de/mailman/listinfo/deepamehta-devel">torsten at ziegi.de</A>
+
+</PRE>
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000408.html">[deepamehta-devel] usecases
+</A></li>
+	<LI>Next message: <A HREF="000415.html">[deepamehta-devel] click detection
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#414">[ date ]</a>
+              <a href="thread.html#414">[ thread ]</a>
+              <a href="subject.html#414">[ subject ]</a>
+              <a href="author.html#414">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/deepamehta-devel">More information about the deepamehta-devel
+mailing list</a><br>
+</body></html>

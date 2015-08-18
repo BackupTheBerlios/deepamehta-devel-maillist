@@ -1,0 +1,157 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [deepamehta-devel] PDF Topic Preview
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/deepamehta-devel/2009-January/index.html" >
+   <LINK REL="made" HREF="mailto:deepamehta-devel%40lists.berlios.de?Subject=Re%3A%20%5Bdeepamehta-devel%5D%20PDF%20Topic%20Preview&In-Reply-To=%3C496C4B5C.6040606%40randomice.net%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000309.html">
+   <LINK REL="Next"  HREF="000312.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[deepamehta-devel] PDF Topic Preview</H1>
+    <B>Enrico Schnepel</B> 
+    <A HREF="mailto:deepamehta-devel%40lists.berlios.de?Subject=Re%3A%20%5Bdeepamehta-devel%5D%20PDF%20Topic%20Preview&In-Reply-To=%3C496C4B5C.6040606%40randomice.net%3E"
+       TITLE="[deepamehta-devel] PDF Topic Preview">enrico.schnepel at randomice.net
+       </A><BR>
+    <I>Tue Jan 13 09:05:48 CET 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000309.html">[deepamehta-devel] PDF Topic Preview
+</A></li>
+        <LI>Next message: <A HREF="000312.html">[deepamehta-devel] PDF Topic Preview
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#311">[ date ]</a>
+              <a href="thread.html#311">[ thread ]</a>
+              <a href="subject.html#311">[ subject ]</a>
+              <a href="author.html#311">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
+
+Hallo Malte,
+
+da f&#228;llt mir nur ein, das byte != char ist. das hei&#223;t du kannst nicht
+ein String nehmen und einfach getBytes aufrufen, denn dies liefert dir
+nur die zu Bytes konvertierten Chars aus dem String. Wie immer gibt es
+dabei Probleme mit dem Encoding. (Wer hat so etwas doofes wie Encoding
+&#252;berhaupt erfunden? - Grrr! ;-) Wenn jeder UTF8 nehmen w&#252;rde, h&#228;tte
+man nicht so viel Probleme!)
+Du findest hier...
+<A HREF="http://svn.apache.org/repos/asf/james/mime4j/trunk/src/main/java/org/apache/james/mime4j/decoder/">http://svn.apache.org/repos/asf/james/mime4j/trunk/src/main/java/org/apache/james/mime4j/decoder/</A>
+einen Base64Input- und OutputStream. Damit kannst du auf jeden Fall
+Bytes sicher zu Chars konvertieren und auch wieder zur&#252;ck.
+
+cu
+
+Enrico
+
+Malte Rei&#223;ig schrieb:
+&gt;<i> Hey Danny,
+</I>&gt;<i>
+</I>&gt;<i> ist ja super von dir zu h&#246;ren.
+</I>&gt;<i> Momentan versuche ich folgendes, bin dank deines Hinweis auch wieder
+</I>&gt;<i> weiter gekommen und habe beim dr&#252;berschauen noch Fehler bei mir
+</I>&gt;<i> entdeckt. Jetzt denke ich, hakt es woanders. Ich erkl&#228;re es nochmal
+</I>&gt;<i> kurz, wie wir uns das momentan gedacht haben.
+</I>&gt;<i>
+</I>&gt;<i> In DM werden ja alle Properties als String in der TopicProp Tabelle im
+</I>&gt;<i> CM hinterlegt. Momentan schreibe ich also entweder
+</I>&gt;<i>
+</I>&gt;<i> 1) mittels eines BufferedReaders.readLine() den Inhalt der PDFFile in's
+</I>&gt;<i> CM. Das scheint aber schon nicht korrekt zu funktionieren, denn wenn ich
+</I>&gt;<i> diesen Wert aus der DB &quot;dumpe&quot; und in &quot;value.pdf&quot; speicher, ist diese
+</I>&gt;<i> nicht mehr mit einem PDFViewer zu lesen. Ich kann mir hier aber auch
+</I>&gt;<i> irgendwie nicht vorstellen das der InputStream durch die zwei Buffer und
+</I>&gt;<i> der toString Methode korrumpiert werden sollte.
+</I>&gt;<i>
+</I>&gt;<i> 2) oder mittels DataInputStream, welcher mir bei dis.readUTF() immer
+</I>&gt;<i> nach ein paar Bytes einlesen um die Ohren fliegt, mit der Meldung:
+</I>&gt;<i> &quot;malformed input around byte 10&quot;
+</I>&gt;<i>
+</I>&gt;<i> Wenn ich jetzt diese Datei als String in der DB abspeichern will, m&#252;sste
+</I>&gt;<i> ich wahrscheinlich die Bytes mittels readByte() lesen und immer zwei
+</I>&gt;<i> Bytes von Hand in einen x-beliebigen String kodieren, damit h&#228;tte ich
+</I>&gt;<i> dann die gleichen Bytes wieder mit text.getBytes()..
+</I>&gt;<i>
+</I>&gt;<i> zum pdf-renderers findet sich etwas mehr hier
+</I>&gt;<i> <A HREF="https://pdf-renderer.dev.java.net/examples.html">https://pdf-renderer.dev.java.net/examples.html</A>
+</I>&gt;<i>
+</I>&gt;<i> Nur wenn ich den ByteBuffer wie folgt f&#252;lle, kann ich auch die PDFFile
+</I>&gt;<i> korrekt erzeugen. Vielleicht verstehe ich auch hier etwas nicht ganz...
+</I>&gt;<i>
+</I>&gt;<i> RandomAccessFile raf = new RandomAccessFile(file, &quot;r&quot;);
+</I>&gt;<i> FileChannel channel = raf.getChannel();
+</I>&gt;<i> ByteBuffer buff = channel.map(FileChannel.MapMode.READ_ONLY, 0,
+</I>&gt;<i> channel.size());
+</I>&gt;<i> PDFFile pdffile = new PDFFile(buff);
+</I>&gt;<i>
+</I>&gt;<i> Die pdfTopic sourcen, k&#246;nnte ich dir irgendwie mal im Wiki hinterlassen,
+</I>&gt;<i> dachte mir, das dass jetzt noch nicht so viel sinn hat. Zum testen
+</I>&gt;<i> m&#252;sste ich dir eine kleine Anleitung schreiben und noch zwei
+</I>&gt;<i> dm-source-files schicken. Aber ich dachte mir, vielleicht sieht man die
+</I>&gt;<i> Fehler jetze schon.
+</I>&gt;<i>
+</I>&gt;<i> Danke und'nen fetten Gru&#223;!
+</I>&gt;<i>
+</I>&gt;<i> Malte
+</I>&gt;<i>
+</I>&gt;<i> Danny Gr&#228;f wrote on 11.01.2009 13:06:
+</I>&gt;&gt;<i> Hallo Malte,
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> bin in letzter Zeit mal wieder ein wenig OutOfOrder,
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> funktioniert new String(&quot;bytefoo&quot;).getBytes() nicht oder was genau
+</I>&gt;&gt;<i> versuchst Du da? Ansonsten kannst Du die Streams auch ohne den Umweg
+</I>&gt;&gt;<i> &#252;ber String verbinden. W&#252;rde Dich da gern unterst&#252;tzen. Wie kann ich
+</I>&gt;&gt;<i> auf die entsprechenden Sourcen bzw. Tests zugreifen?
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> Gru&#223; Danny
+</I>&gt;&gt;<i>
+</I>&gt;<i> _______________________________________________
+</I>&gt;<i> deepamehta-devel mailing list
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/deepamehta-devel">deepamehta-devel at lists.berlios.de</A>
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/deepamehta-devel">https://lists.berlios.de/mailman/listinfo/deepamehta-devel</A>
+</I>
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.9 (Cygwin)
+Comment: Using GnuPG with Mozilla - <A HREF="http://enigmail.mozdev.org">http://enigmail.mozdev.org</A>
+
+iEYEARECAAYFAklsS1sACgkQ2n08vWt9Ijdz4QCfeL+FRqG7nh43TapgRL23jcY0
+x5UAn08+DujURmnece/NxVDX9pYAMu6a
+=g7RQ
+-----END PGP SIGNATURE-----
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000309.html">[deepamehta-devel] PDF Topic Preview
+</A></li>
+	<LI>Next message: <A HREF="000312.html">[deepamehta-devel] PDF Topic Preview
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#311">[ date ]</a>
+              <a href="thread.html#311">[ thread ]</a>
+              <a href="subject.html#311">[ subject ]</a>
+              <a href="author.html#311">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/deepamehta-devel">More information about the deepamehta-devel
+mailing list</a><br>
+</body></html>

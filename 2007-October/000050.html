@@ -1,0 +1,84 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [deepamehta-devel] [Bug #12290] Some associations lack privilegs	for non-administrators
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/deepamehta-devel/2007-October/index.html" >
+   <LINK REL="made" HREF="mailto:deepamehta-devel%40lists.berlios.de?Subject=Re%3A%20%5Bdeepamehta-devel%5D%20%5BBug%20%2312290%5D%20Some%20associations%20lack%20privilegs%0A%09for%20non-administrators&In-Reply-To=%3C200710282021.l9SKLlVC019563%40unicorn.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000049.html">
+   <LINK REL="Next"  HREF="000051.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[deepamehta-devel] [Bug #12290] Some associations lack privilegs	for non-administrators</H1>
+    <B>admin at berlios.de</B> 
+    <A HREF="mailto:deepamehta-devel%40lists.berlios.de?Subject=Re%3A%20%5Bdeepamehta-devel%5D%20%5BBug%20%2312290%5D%20Some%20associations%20lack%20privilegs%0A%09for%20non-administrators&In-Reply-To=%3C200710282021.l9SKLlVC019563%40unicorn.berlios.de%3E"
+       TITLE="[deepamehta-devel] [Bug #12290] Some associations lack privilegs	for non-administrators">admin at berlios.de
+       </A><BR>
+    <I>Sun Oct 28 21:21:47 CET 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000049.html">[deepamehta-devel] [Bug #12170] Web applications: password is shown	in clear
+</A></li>
+        <LI>Next message: <A HREF="000051.html">[deepamehta-devel] [Bug #12290] Some associations lack privilegs	for non-administrators
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#50">[ date ]</a>
+              <a href="thread.html#50">[ thread ]</a>
+              <a href="subject.html#50">[ subject ]</a>
+              <a href="author.html#50">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Bug #12290, was updated on 2007-Oct-28 21:19
+Here is a current snapshot of the bug.
+
+Project: DeepaMehta
+Category: None
+Status: Open
+Resolution: None
+Bug Group: None
+Priority: 5
+Submitted by: jri
+Assigned to : jri
+Summary: Some associations lack privilegs for non-administrators
+
+Details: There is an error in the access control system: at least in 2 situations programatically created associations lack privilegs for non-administrators:
+
+1) the &quot;Type Access&quot; association which is programtically created between a user and a type once the user created a new type manually.
+
+2) the &quot;Derivation&quot; association which is programtically created between a type and its supertype once the user created a new type manually.
+
+As a result the user is not able e.g. to delete these programtically created associations, but he should. This error applies to users which are not administrators.
+
+For detailed info, follow this link:
+<A HREF="http://developer.berlios.de/bugs/?func=detailbug&amp;bug_id=12290&amp;group_id=5174">http://developer.berlios.de/bugs/?func=detailbug&amp;bug_id=12290&amp;group_id=5174</A>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000049.html">[deepamehta-devel] [Bug #12170] Web applications: password is shown	in clear
+</A></li>
+	<LI>Next message: <A HREF="000051.html">[deepamehta-devel] [Bug #12290] Some associations lack privilegs	for non-administrators
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#50">[ date ]</a>
+              <a href="thread.html#50">[ thread ]</a>
+              <a href="subject.html#50">[ subject ]</a>
+              <a href="author.html#50">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/deepamehta-devel">More information about the deepamehta-devel
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,150 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [deepamehta-devel] PROPERTY_UNIQUE_TOPIC_NAMES
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/deepamehta-devel/2008-October/index.html" >
+   <LINK REL="made" HREF="mailto:deepamehta-devel%40lists.berlios.de?Subject=Re%3A%20%5Bdeepamehta-devel%5D%20PROPERTY_UNIQUE_TOPIC_NAMES&In-Reply-To=%3C48EDEE39.7040304%40ziegi.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000277.html">
+   <LINK REL="Next"  HREF="000281.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[deepamehta-devel] PROPERTY_UNIQUE_TOPIC_NAMES</H1>
+    <B>Torsten Ziegler</B> 
+    <A HREF="mailto:deepamehta-devel%40lists.berlios.de?Subject=Re%3A%20%5Bdeepamehta-devel%5D%20PROPERTY_UNIQUE_TOPIC_NAMES&In-Reply-To=%3C48EDEE39.7040304%40ziegi.de%3E"
+       TITLE="[deepamehta-devel] PROPERTY_UNIQUE_TOPIC_NAMES">torsten at ziegi.de
+       </A><BR>
+    <I>Thu Oct  9 13:42:49 CEST 2008</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000277.html">[deepamehta-devel] [Bug #14516] Several bugs in feature #4299	(handling of result sets)
+</A></li>
+        <LI>Next message: <A HREF="000281.html">[deepamehta-devel] PROPERTY_UNIQUE_TOPIC_NAMES
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#280">[ date ]</a>
+              <a href="thread.html#280">[ thread ]</a>
+              <a href="subject.html#280">[ subject ]</a>
+              <a href="author.html#280">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Dear deepamehta developers
+
+i've got a short question (feel free to answer also shortly):
+The check field &quot;Unique Topic Names&quot; in the &quot;Topic Type&quot;
+is it used anywhere ?
+I haven't found any implementation for this (yet) in trunk 354
+
+
+background (longer explanation):
+
+As some of you might know i am working on
+using deepamehta for explaining the chinese medicine.
+
+For this I am missing some kind of hierarchical structuring
+of data in DeepaMehta. So right now I am experimenting
+with the implementation of new topic types that allow to
+categorize topics not only by implementing new subtypes
+(as this would have to be done in the Type Builder)
+but by associating them to certain categories (this should be
+done on the &quot;normal&quot; Topic Map)
+And for these features I am also looking in how to make
+topic names unique throughout the corporate memory
+(or at least the part of cm associated to one user, or maybe
+a part of the cm associated to one grand category)
+
+To illustrate what I am looking for try to imagine this example.
+I think you all know the actors and movies example from the
+DeepaMehta installation.
+If I add to this example a new Information about the role of an
+actor in a movie there will be the three topic types
+-actor
+-role
+-movie
+
+while it is easy to associate actors with movies it gets complicated
+if you want to specify the role of an actor in a movie.
+Given there are
+actor A -  role 1 -  movie x
+actor B -  role 1 -  movie y
+actor A -  role 1 -  movie z
+actor A -  role 2 -  movie z
+
+as role 1 (e.g. the gardener) appears several times it has to be
+cloned for each movie, so the example would look like
+actor A -  role 1 in movie x -  movie x
+actor B -  role 1 in movie y -  movie y
+actor A -  role 1 in movie z -  movie z
+actor A -  role 2 in movie z -  movie z
+this leads to a naming scheme that uses very long names
+
+what I am looking in right now is to
+split the associations to:
+actor A -  role 1
+actor A -  movie x
+role 1 -  movie x
+....
+and then modify the search for related topics so that
+you can get from
+from actor to role and movie and vice versa,
+but you should be also be able to find all actors playing the gardener
+in any film.
+
+For sure this needs then a top category attached to it,
+as the gardener has different aspects in movies (e.g. the assassin)
+as in agriculture. But for sure it also has some common aspects,
+so the gardener should be unique throughout the corporate memory.
+
+If you have any thoughts on this problem
+I am very curious to see other aspects of this problem
+or insights in side effects of my proposal.
+
+Torsten
+
+
+
+
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: torsten.vcf
+Type: text/x-vcard
+Size: 148 bytes
+Desc: not available
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/deepamehta-devel/attachments/20081009/a8b88856/attachment.vcf">https://lists.berlios.de/pipermail/deepamehta-devel/attachments/20081009/a8b88856/attachment.vcf</A>&gt;
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: smime.p7s
+Type: application/x-pkcs7-signature
+Size: 3311 bytes
+Desc: S/MIME Cryptographic Signature
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/deepamehta-devel/attachments/20081009/a8b88856/attachment.bin">https://lists.berlios.de/pipermail/deepamehta-devel/attachments/20081009/a8b88856/attachment.bin</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000277.html">[deepamehta-devel] [Bug #14516] Several bugs in feature #4299	(handling of result sets)
+</A></li>
+	<LI>Next message: <A HREF="000281.html">[deepamehta-devel] PROPERTY_UNIQUE_TOPIC_NAMES
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#280">[ date ]</a>
+              <a href="thread.html#280">[ thread ]</a>
+              <a href="subject.html#280">[ subject ]</a>
+              <a href="author.html#280">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/deepamehta-devel">More information about the deepamehta-devel
+mailing list</a><br>
+</body></html>

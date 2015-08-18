@@ -1,0 +1,124 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [deepamehta-devel] type qualifying question
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/deepamehta-devel/2013-September/index.html" >
+   <LINK REL="made" HREF="mailto:deepamehta-devel%40lists.berlios.de?Subject=Re%3A%20%5Bdeepamehta-devel%5D%20type%20qualifying%20question&In-Reply-To=%3C14E9D4D0-1E96-4400-A869-4ED6EE4D3EF5%40deepamehta.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000399.html">
+   <LINK REL="Next"  HREF="000401.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[deepamehta-devel] type qualifying question</H1>
+    <B>J&#246;rg Richter</B> 
+    <A HREF="mailto:deepamehta-devel%40lists.berlios.de?Subject=Re%3A%20%5Bdeepamehta-devel%5D%20type%20qualifying%20question&In-Reply-To=%3C14E9D4D0-1E96-4400-A869-4ED6EE4D3EF5%40deepamehta.de%3E"
+       TITLE="[deepamehta-devel] type qualifying question">jri at deepamehta.de
+       </A><BR>
+    <I>Fri Sep  6 18:19:39 CEST 2013</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000399.html">[deepamehta-devel] type qualifying question
+</A></li>
+        <LI>Next message: <A HREF="000401.html">[deepamehta-devel] Fwd:  custom renderer question
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#406">[ date ]</a>
+              <a href="thread.html#406">[ thread ]</a>
+              <a href="subject.html#406">[ subject ]</a>
+              <a href="author.html#406">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>
+On Sep 3, 2013, at 14:01, Torsten Ziegler wrote:
+
+&gt;<i> I have another question regarding some kind of
+</I>&gt;<i> topictype qualifying in relation to the toplevel menu (uppermost bar with
+</I>&gt;<i> workspace, topicmap selectors and search, create interface)
+</I>&gt;<i> 
+</I>&gt;<i> I want to create a custom topicmap type with some additional fields,
+</I>&gt;<i> while this works fine the newly created topicmaps of the new type do not show up
+</I>&gt;<i> any more in the topicmap selector.
+</I>&gt;<i> 
+</I>&gt;<i> I could adjust the code in the selector of course but it seems to be more reasonable
+</I>&gt;<i> to add some kind of inheritance or qualifying to the newly created topictype that
+</I>&gt;<i> signals the other parts of deepamehta that this topictype acts like another type (e.g. a standard topicmap)
+</I>
+Yes, Topicmaps must be of type &quot;dm4.topicmaps.topicmap&quot;. Currently there is no other way. Behind the scenes each topicmap is assigned a Topicmap Renderer implementation (identified by URI). The renderer implementation determines the topicmap's view model and (client-side) presentation logic.
+
+DM provides no inheritance and probably never will.
+Instead you can associate any type of child topics (simple or composite) to each topic/association instance. The FacetsService (see module dm4-facets) provides support to do so in a type-safe fashion.
+To deliver certain facets along with a topic/association via the REST API you can use the server-side PreSend... hooks or the service response filter to enrich a topic/association on-the-fly.
+	PreSendTopicListener 
+	PreSendAssociationListener 
+	PreSendTopicTypeListener 
+	PreSendAssociationTypeListener
+	ServiceResponseFilterListener
+
+As an example see how the GeomapsPlugin provides a PreSendTopicListener to enrich all Address topics (that are topics of type &quot;dm4.contacts.address&quot;) that are delivered via REST with a Geo-Coordinate facet:
+
+    /**
+     * Enriches an Address topic with its Geo Coordinate facet.
+     */
+    @Override
+    public void preSendTopic(Topic topic, ClientState clientState) {
+        TopicModel address = findAddress(topic);
+        if (address == null) {
+            return;
+        }
+        //
+        Topic geoFacet = facetsService.getFacet(address.getId(), &quot;dm4.geomaps.geo_coordinate_facet&quot;);
+        if (geoFacet != null) {
+            logger.info(&quot;### Enriching address &quot; + address.getId() + &quot; with its geo facet&quot;);
+            address.getCompositeValueModel().put(&quot;dm4.geomaps.geo_coordinate&quot;, geoFacet.getModel());
+        } else {
+            logger.info(&quot;### Enriching address &quot; + address.getId() + &quot; with its geo facet ABORTED &quot; +
+                &quot;-- no geo facet in DB&quot;);
+        }
+    }
+
+&gt;<i> I thinks this might also be usefull to other parts of deepamehta,
+</I>&gt;<i> for example the email plugin does use the dm4-contacts topictypes as
+</I>&gt;<i> resources for email adresses. But there might be other usefull resources,
+</I>&gt;<i> so a qualifier as &quot;this topictype provides an email address like xx standard topictype&quot;  might be usefull.
+</I>
+If a DM application needs to express the semantics &quot;email address&quot; it should use the topic type &quot;dm4.contacts.email_address&quot; (part of the dm4-contacts module) for that. Other modules can reuse this type for creating its domain specific types (like &quot;Person&quot; or &quot;Institution&quot;). Danny made the dm4-mail module flexible in the way the user can configure what domain specific types to be used for addressing an email. The only prerequisite is the type has a &quot;dm4.contacts.email_address&quot; as (direct or indirect) child-type.
+Currently there is no Aliasing mechanism.
+
+Cheers,
+J&#246;rg
+
+</PRE>
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000399.html">[deepamehta-devel] type qualifying question
+</A></li>
+	<LI>Next message: <A HREF="000401.html">[deepamehta-devel] Fwd:  custom renderer question
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#406">[ date ]</a>
+              <a href="thread.html#406">[ thread ]</a>
+              <a href="subject.html#406">[ subject ]</a>
+              <a href="author.html#406">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/deepamehta-devel">More information about the deepamehta-devel
+mailing list</a><br>
+</body></html>

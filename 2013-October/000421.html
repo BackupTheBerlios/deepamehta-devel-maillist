@@ -1,0 +1,235 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [deepamehta-devel] Fwd:  custom renderer question
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/deepamehta-devel/2013-October/index.html" >
+   <LINK REL="made" HREF="mailto:deepamehta-devel%40lists.berlios.de?Subject=Re%3A%20%5Bdeepamehta-devel%5D%20Fwd%3A%20%20custom%20renderer%20question&In-Reply-To=%3CCABHcWbkdN%3D-W7a7ryfgvObkKwr1aZOepZ-PVLaxwL6iWxqJbVw%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000420.html">
+   <LINK REL="Next"  HREF="000426.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[deepamehta-devel] Fwd:  custom renderer question</H1>
+    <B>J&#246;rn Wei&#223;enborn</B> 
+    <A HREF="mailto:deepamehta-devel%40lists.berlios.de?Subject=Re%3A%20%5Bdeepamehta-devel%5D%20Fwd%3A%20%20custom%20renderer%20question&In-Reply-To=%3CCABHcWbkdN%3D-W7a7ryfgvObkKwr1aZOepZ-PVLaxwL6iWxqJbVw%40mail.gmail.com%3E"
+       TITLE="[deepamehta-devel] Fwd:  custom renderer question">joern.weissenborn at gmail.com
+       </A><BR>
+    <I>Sat Oct 26 21:48:03 CEST 2013</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000420.html">[deepamehta-devel] custom renderer question
+</A></li>
+        <LI>Next message: <A HREF="000426.html">[deepamehta-devel] custom renderer question
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#421">[ date ]</a>
+              <a href="thread.html#421">[ thread ]</a>
+              <a href="subject.html#421">[ subject ]</a>
+              <a href="author.html#421">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>---------- Forwarded message ----------
+From: J&#246;rn Wei&#223;enborn &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/deepamehta-devel">joern.weissenborn at gmail.com</A>&gt;
+Date: 2013/10/25
+Subject: Re: [deepamehta-devel] custom renderer question
+To: J&#246;rg Richter &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/deepamehta-devel">jri at deepamehta.de</A>&gt;
+Cc: <A HREF="https://lists.berlios.de/mailman/listinfo/deepamehta-devel">deepamehta-devel at lists.berlios.de</A>
+
+
+Hi,
+
+
+2013/10/25 J&#246;rg Richter &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/deepamehta-devel">jri at deepamehta.de</A>&gt;
+
+&gt;<i>
+</I>&gt;<i> HTML based topic rendering BREAKTHROUGH (#505).
+</I>&gt;<i>
+</I>&gt;<i> HTML based topic rendering has reached a crucial state. It can now
+</I>&gt;<i> friendly coexist with Canvas based topic rendering. A DM View Customizer
+</I>&gt;<i> can be HTML-based, or Canvas-based, or hybrid. Various View Customizers
+</I>&gt;<i> (possibly provided by different DM plugins) can be active at the same time
+</I>&gt;<i> and perform together.
+</I>&gt;<i>
+</I>&gt;<i> Note: also with HTML based topic rendering a Canvas is always involved,
+</I>&gt;<i> mainly for drawing the associations.
+</I>&gt;<i>
+</I>&gt;<i> For the moment a DM View Customizer provides 7 hooks (all are optional):
+</I>&gt;<i>
+</I>&gt;<i> General:
+</I>&gt;<i>     - update_topic() -- sync the view once the model has changed (topic
+</I>&gt;<i> content change or retype)
+</I>&gt;<i>
+</I>
+=&gt; How is this done? Is every TopicRenderers update event is called upon
+every value changes in the model, regardless if its bound to the data auf
+the respective topic? Do I register a view instance to a specific topic ID?
+
+
+&gt;<i>     - move_topic() -- sync the view once the model has changed (topic
+</I>&gt;<i> position change)
+</I>&gt;<i>
+</I>
+=&gt; So every topic takes care that it is rendered at the exact position? Why
+not put a DOM over it and fix it to a location, create a child element and
+give the to the customizer. It makes no sense to do the coordinate handling
+inside a the TopicRenderer. This should all be done by the
+TopicmapRenderer, which should actually also dretect if a topic at a
+position is actually visible in the actual canvas view at given x-y
+coordinates and prevent rendering. This is crucial for large maps. A good
+testcase for performance is by the way the &gt;eduzen DM database. There you
+get LARGE maps. One should test how your implementation is performing in
+such cases.
+
+
+&gt;<i> Canvas based:
+</I>&gt;<i>     - draw_topic() -- draw a topic on the canvas
+</I>&gt;<i>     - on_mousedown() -- intercept mouse events on the canvas
+</I>&gt;<i>
+</I>
+=&gt; So if I don't want canvas I can have my own eventhandling with blackjack
+and hookers? Great!
+
+
+&gt;<i> HTML based:
+</I>&gt;<i>     - topic_dom() -- provide the topic's basic DOM
+</I>&gt;<i>
+</I>
+=&gt; Nice.
+
+
+&gt;<i>     - topic_dom_appendix() -- modify the topic DOM once it is added to the
+</I>&gt;<i> document
+</I>&gt;<i>
+</I>
+=&gt; More confusing than useful. Everyone writing the rendering without
+canvas will know how to set DOM properties with jquery, which is always
+available.
+
+
+&gt;<i>     - topic_dom_draggable_handle() -- configure which part of the topic
+</I>&gt;<i> DOM initiates dragging
+</I>&gt;<i>
+</I>
+=&gt; As I understand it I can define a specific child DOM to fire the onDrag
+event on the canvas. Do I give the DOM ID as argument or the DOM object?
+
+I still have the following questions:
+
+Model binding: I still don't see how my customize view have a clean 2 way
+databinding. So I know I get model updates intiated by my session. But when
+I work with others on the same topicmap the changes are afaik not reflected
+on the collaborators session without manual reload. Thanks to the
+topicupdate event though, I can at least change the model from my
+customView.
+
+Here (in german) I wrote to JRI about this.
+
+- Topics sollten sich selbst an Daten binden koennen. Dh auch, das Topics
+unabhaengig von anderen Topics ihre DOM updaten koennen. Das ist eine Must
+Have um z.b. eine TopicView zu einer kompletten UI werden zu lassen. Oder
+wenn ich meinetwegen jetzt wirklich die Daten von Messgeraeten reinfuettern
+wuerde, dann muestte ich mir eine Visualisierung z.b. in Form eines Graphen
+bauen. Davon habe ich dann schonmal 20 oder so auf eine TMap (mit meinen
+2600x1440 hier auf Arbeit kein Problem). Man stelle sich vor 9 davon sind
+statisch und einer wird alle 200ms geupdatet, jedes mal die komplette TMap
+neurendern wenn ein Update reinkommt waere Wahnsinn, dabei braucht man nur
+die rote Linie im Koordinatensystem umzeichenen!
+
+A take-a-way word: One could think this far, that a topic must not have to
+be some static data. A topic could also be a function on all connected
+topics. Or a composit of functions. Or a full blown app. Just replace e.g.
+the note png with a html texteditor. And then make another note include
+that (and reflect changes). DeepaMehta wants to be a semantic Application
+Platform., as I perceived it. You could be that, the custom view is the
+first step. People will need their own UIs!
+
+
+&gt;<i> To demonstrate HTML based topic rendering the demo Box Renderer plugin is
+</I>&gt;<i> now divided into 2 plugins:
+</I>&gt;<i>     <A HREF="https://github.com/jri/dm4-box-renderer-canvas">https://github.com/jri/dm4-box-renderer-canvas</A>
+</I>&gt;<i>     <A HREF="https://github.com/jri/dm4-box-renderer-html">https://github.com/jri/dm4-box-renderer-html</A>
+</I>&gt;<i>
+</I>&gt;<i> So the known dm4-box-renderer (which is now defunct) is actually renamed
+</I>&gt;<i> to dm4-box-renderer-canvas. The new dm4-box-renderer-html provides the very
+</I>&gt;<i> same look &amp; feel but renders topics as HTML. So you can e.g. inspect the
+</I>&gt;<i> topic DOM in the Web Console as usual.
+</I>&gt;<i>
+</I>&gt;<i> HTML based topic rendering has several advantages. Because drawing, event
+</I>&gt;<i> handling and object click detection is performed natively by the browser,
+</I>&gt;<i> implementing a HTML based DM View Customizer is much more comfortable due
+</I>&gt;<i> to the power of the DOM. Furthermore the topic style is customizable via
+</I>&gt;<i> CSS. In contrast on a Canvas there are no objects, just pixels. It means
+</I>&gt;<i> laborious work for the View Customizer developer to emulate clickable and
+</I>&gt;<i> movable objects on a Canvas.
+</I>&gt;<i>
+</I>&gt;<i> What did we tell you? ;)
+</I>
+
+&gt;<i> The heart of the Canvas based Box Renderer consist of 100 lines of code
+</I>&gt;<i> (mostly boring geometry calculations). The HTML version consist of 50 lines
+</I>&gt;<i> of code (mostly handy jQuery DOM manipulations).
+</I>&gt;<i>
+</I>&gt;<i> Lets see how much you need for 2 way databinding ;)
+</I>
+
+&gt;<i> You have 3 choices:
+</I>&gt;<i> - Do not install a Box Renderer and get the &quot;classic&quot; DM look &amp; feel
+</I>&gt;<i> (which should be as stable as before).
+</I>&gt;<i> - Install the Canvas Box Renderer to get Torsten's &quot;modern&quot; look &amp; feel
+</I>&gt;<i> (should be stable as well).
+</I>&gt;<i> - Install the HTML Box Renderer to get (nearly) the very same modern look
+</I>&gt;<i> &amp; feel (there are still minor issues).
+</I>&gt;<i> You can even install both Box Renderers together to get a mixed
+</I>&gt;<i> experience. This is not very useful in this case, just to demonstrate the
+</I>&gt;<i> flexibility.
+</I>&gt;<i>
+</I>&gt;<i> Testing all 3 scenarios is very appreciated.
+</I>&gt;<i>
+</I>&gt;<i> Everything is available in DM's and the respective Box Renderer's master
+</I>&gt;<i> branches.
+</I>&gt;<i>
+</I>&gt;<i> Cheers,
+</I>&gt;<i> J&#246;rg
+</I>&gt;<i>
+</I>&gt;<i> Feinavend,
+</I>
+JW
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/deepamehta-devel/attachments/20131026/ee818a71/attachment.html">https://lists.berlios.de/pipermail/deepamehta-devel/attachments/20131026/ee818a71/attachment.html</A>&gt;
+</PRE>
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000420.html">[deepamehta-devel] custom renderer question
+</A></li>
+	<LI>Next message: <A HREF="000426.html">[deepamehta-devel] custom renderer question
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#421">[ date ]</a>
+              <a href="thread.html#421">[ thread ]</a>
+              <a href="subject.html#421">[ subject ]</a>
+              <a href="author.html#421">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/deepamehta-devel">More information about the deepamehta-devel
+mailing list</a><br>
+</body></html>

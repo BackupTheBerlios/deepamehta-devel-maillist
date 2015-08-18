@@ -1,0 +1,94 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [deepamehta-devel] Creating Topics programmatically as part of	Migrations
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/deepamehta-devel/2012-November/index.html" >
+   <LINK REL="made" HREF="mailto:deepamehta-devel%40lists.berlios.de?Subject=Re%3A%20%5Bdeepamehta-devel%5D%20Creating%20Topics%20programmatically%20as%20part%20of%0A%09Migrations&In-Reply-To=%3C7133D443-1A89-47A6-A762-632FE43ECF8D%40deepamehta.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000381.html">
+   <LINK REL="Next"  HREF="000382.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[deepamehta-devel] Creating Topics programmatically as part of	Migrations</H1>
+    <B>J&#246;rg Richter</B> 
+    <A HREF="mailto:deepamehta-devel%40lists.berlios.de?Subject=Re%3A%20%5Bdeepamehta-devel%5D%20Creating%20Topics%20programmatically%20as%20part%20of%0A%09Migrations&In-Reply-To=%3C7133D443-1A89-47A6-A762-632FE43ECF8D%40deepamehta.de%3E"
+       TITLE="[deepamehta-devel] Creating Topics programmatically as part of	Migrations">jri at deepamehta.de
+       </A><BR>
+    <I>Mon Nov 26 15:40:51 CET 2012</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000381.html">[deepamehta-devel] Creating Topics programmatically as part of Migrations
+</A></li>
+        <LI>Next message: <A HREF="000382.html">[deepamehta-devel] FYI: Declarative Migrations need to be rewritten to be compatible with 4.0.13
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#385">[ date ]</a>
+              <a href="thread.html#385">[ thread ]</a>
+              <a href="subject.html#385">[ subject ]</a>
+              <a href="author.html#385">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>
+On Nov 26, 2012, at 3:00, Malte Rei&#223;ig wrote:
+
+&gt;<i> So I can go with the way already implemented by dagnu, nice!
+</I>&gt;<i> 
+</I>&gt;<i> from line 524 on:
+</I>&gt;<i> <A HREF="https://github.com/dgf/dm4-mail/blob/4ecf81526239d2db1f01e34c7de2ce3b8b9518ff/src/main/java/de/deepamehta/plugins/mail/MailPlugin.java">https://github.com/dgf/dm4-mail/blob/4ecf81526239d2db1f01e34c7de2ce3b8b9518ff/src/main/java/de/deepamehta/plugins/mail/MailPlugin.java</A>
+</I>
+Yes, exactly, this is the spot I had in mind.
+
+One more hint: when constructing an AccessControlList you can specify more than one ACLEntry at once (one per Operation), and for each entry: you can specify more than one UserRole.
+Example (AccessControlList for a type):
+
+new AccessControlList(
+	new ACLEntry(Operation.WRITE,  UserRole.CREATOR, UserRole.OWNER, UserRole.MEMBER),
+	new ACLEntry(Operation.CREATE, UserRole.CREATOR, UserRole.OWNER, UserRole.MEMBER)
+);
+
+BTW: Operation.CREATE applies to types only.
+
+&gt;<i> Which points me to another question; From the current dm4-weblcient
+</I>&gt;<i> perspective, would it be enough if I fix the ACL Entry just for  complex
+</I>&gt;<i> &quot;parent&quot; topic or do I need to fix the ACL Entries for all &quot;simple&quot;
+</I>&gt;<i> topics making up the complex too? The aim is: The complex, and (thus the
+</I>&gt;<i> simple topics) should be editable after my migration.
+</I>
+Generally it is sufficient to setup Access Control only at the parent topic.
+The setup is virtually adopted by all the childs in the moment the parent is edited/updated.
+
+However, if you want edit a child topic directly (by selecting it and then EDIT) the child topic needs an individual AC setup.
+
+Cheers,
+J&#246;rg
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000381.html">[deepamehta-devel] Creating Topics programmatically as part of Migrations
+</A></li>
+	<LI>Next message: <A HREF="000382.html">[deepamehta-devel] FYI: Declarative Migrations need to be rewritten to be compatible with 4.0.13
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#385">[ date ]</a>
+              <a href="thread.html#385">[ thread ]</a>
+              <a href="subject.html#385">[ subject ]</a>
+              <a href="author.html#385">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/deepamehta-devel">More information about the deepamehta-devel
+mailing list</a><br>
+</body></html>

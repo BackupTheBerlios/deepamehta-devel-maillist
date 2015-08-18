@@ -1,0 +1,86 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [deepamehta-devel] [Bug #13664] MySQL-based installation fails on	Windows
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/deepamehta-devel/2008-April/index.html" >
+   <LINK REL="made" HREF="mailto:deepamehta-devel%40lists.berlios.de?Subject=Re%3A%20%5Bdeepamehta-devel%5D%20%5BBug%20%2313664%5D%20MySQL-based%20installation%20fails%20on%0A%09Windows&In-Reply-To=%3C200804221129.m3MBTauF023918%40unicorn.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000154.html">
+   <LINK REL="Next"  HREF="000156.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[deepamehta-devel] [Bug #13664] MySQL-based installation fails on	Windows</H1>
+    <B>admin at berlios.de</B> 
+    <A HREF="mailto:deepamehta-devel%40lists.berlios.de?Subject=Re%3A%20%5Bdeepamehta-devel%5D%20%5BBug%20%2313664%5D%20MySQL-based%20installation%20fails%20on%0A%09Windows&In-Reply-To=%3C200804221129.m3MBTauF023918%40unicorn.berlios.de%3E"
+       TITLE="[deepamehta-devel] [Bug #13664] MySQL-based installation fails on	Windows">admin at berlios.de
+       </A><BR>
+    <I>Tue Apr 22 13:29:36 CEST 2008</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000154.html">[deepamehta-devel] Attention, it`s about your Corporate Memory
+</A></li>
+        <LI>Next message: <A HREF="000156.html">[deepamehta-devel] intussuscept
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#155">[ date ]</a>
+              <a href="thread.html#155">[ thread ]</a>
+              <a href="subject.html#155">[ subject ]</a>
+              <a href="author.html#155">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Bug #13664, was updated on 2008-Apr-22 13:29
+Here is a current snapshot of the bug.
+
+Project: DeepaMehta
+Category: None
+Status: Open
+Resolution: None
+Bug Group: None
+Priority: 7
+Submitted by: jri
+Assigned to : jri
+Summary: MySQL-based installation fails on Windows
+
+Details: 
+MySQL-based installation fails on Windows. Output is as follows:
+
+BUILD FAILED
+D:\deepamehta\build.xml:60: The following error occurred while executing this line:
+D:\deepamehta\build.xml:76: The following error occurred while executing this line:
+D:\deepamehta\build.xml:295: java.sql.SQLException: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ''<A HREF="file://D:\deepamehta\install\client\">file://D:\deepamehta\install\client\</A>')' at line 1
+
+The problem are the backslahes in Windows-paths which are in turn interpreted in MySQL-Queries as escape-charachters.
+
+For detailed info, follow this link:
+<A HREF="http://developer.berlios.de/bugs/?func=detailbug&amp;bug_id=13664&amp;group_id=5174">http://developer.berlios.de/bugs/?func=detailbug&amp;bug_id=13664&amp;group_id=5174</A>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000154.html">[deepamehta-devel] Attention, it`s about your Corporate Memory
+</A></li>
+	<LI>Next message: <A HREF="000156.html">[deepamehta-devel] intussuscept
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#155">[ date ]</a>
+              <a href="thread.html#155">[ thread ]</a>
+              <a href="subject.html#155">[ subject ]</a>
+              <a href="author.html#155">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/deepamehta-devel">More information about the deepamehta-devel
+mailing list</a><br>
+</body></html>

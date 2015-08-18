@@ -1,0 +1,99 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> No subject
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/deepamehta-devel/2012-March/index.html" >
+   <LINK REL="made" HREF="mailto:deepamehta-devel%40lists.berlios.de?Subject=Re%3A%20No%20subject&In-Reply-To=%3Cmailman.2.1331727865.31076.deepamehta-devel%40lists.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000321.html">
+   
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>No subject</H1>
+    <B></B> 
+    <A HREF="mailto:deepamehta-devel%40lists.berlios.de?Subject=Re%3A%20No%20subject&In-Reply-To=%3Cmailman.2.1331727865.31076.deepamehta-devel%40lists.berlios.de%3E"
+       TITLE="No subject">
+       </A><BR>
+    <I>Wed Mar 14 13:24:23 CET 2012</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000321.html">No subject
+</A></li>
+        
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#326">[ date ]</a>
+              <a href="thread.html#326">[ thread ]</a>
+              <a href="subject.html#326">[ subject ]</a>
+              <a href="author.html#326">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>The web url was this wiki-page: <A HREF="http://de.wikipedia.org/wiki/Kurt_G%C3%B6del">http://de.wikipedia.org/wiki/Kurt_G%C3%B6del</A>
+
+here the logs during the process:
+
+[java] 2009/03/19 08:48:53 [root] TYPE_REQUEST_ASSOC_TYPE &quot;at-navigation&quot;
+     [java] 2009/03/19 08:48:53 [root] REQUEST_SET_GEOMETRY &quot;t-1331:U&quot; (1 topics)
+     [java] &gt; sending 0 directives ...
+     [java] 2009/03/19 08:48:56 [root] REQUEST_SET_GEOMETRY &quot;t-1331:U&quot; (1 topics)
+     [java] &gt; sending 0 directives ...
+     [java] 2009/03/19 08:48:57 [root] REQUEST_EXEC_TOPIC_COMMAND t-1326:1 &quot;getTopicCommands|t-1326|1|353|298&quot;
+     [java] &gt; sending 1 directives ...
+     [java] 2009/03/19 08:49:00 [root] REQUEST_EXEC_TOPIC_COMMAND t-1326:1 &quot;navByTopic|tt-webpage&quot;
+     [java] &gt; sending 2 directives ...
+     [java] 2009/03/19 08:49:00 [root] TYPE_REQUEST_TOPIC_TYPE &quot;tt-webpage&quot;
+     [java] 2009/03/19 08:49:00 [root] TYPE_REQUEST_ASSOC_TYPE &quot;at-association&quot;
+     [java] 2009/03/19 08:49:00 [root] REQUEST_SET_GEOMETRY &quot;t-1331:U&quot; (1 topics)
+     [java] &gt; sending 0 directives ...
+     [java] java.io.UTFDataFormatException: encoded string too long: 81374 bytes
+     [java]     at java.io.DataOutputStream.writeUTF(DataOutputStream.java:347)
+     [java]     at java.io.DataOutputStream.writeUTF(DataOutputStream.java:306)
+     [java]     at de.deepamehta.util.DeepaMehtaUtils.writeHashtable(DeepaMehtaUtils.java:131)
+     [java]     at de.deepamehta.service.CorporateDirectives.write(CorporateDirectives.java:486)
+     [java]     at de.deepamehta.service.InteractionConnection.executeTopicCommand(InteractionConnection.java:276)
+     [java]     at de.deepamehta.service.InteractionConnection.handleRequest(InteractionConnection.java:154)
+     [java]     at de.deepamehta.service.InteractionConnection.run(InteractionConnection.java:80)
+     [java]     at java.lang.Thread.run(Thread.java:595)
+     [java] 2009/03/19 08:49:01 [root] REQUEST_EXEC_TOPIC_COMMAND t-1328:1 &quot;selectTopic&quot;
+     [java] &gt; sending 1 directives ...
+     [java] *** error while processing a request of type 3: java.io.UTFDataFormatException: encoded string too long: 81374 bytes -- drop interaction connection
+     [java] *** [root] interaction connection dropped due to failure
+
+i see this causes the error 
+java.io.UTFDataFormatException: encoded string too long: 81374 bytes
+
+its a svn-trunk (10.03.09) build &quot;dms&quot; on a Debian Linux 2.26.x.x kernel. Java: sunJDK_1.5, MySQL 5, PHP5, apache2.2
+
+For detailed info, follow this link:
+<A HREF="http://developer.berlios.de/bugs/?func=detailbug&amp;bug_id=15408&amp;group_id=5174">http://developer.berlios.de/bugs/?func=detailbug&amp;bug_id=15408&amp;group_id=5174</A>
+
+</PRE>
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000321.html">No subject
+</A></li>
+	
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#326">[ date ]</a>
+              <a href="thread.html#326">[ thread ]</a>
+              <a href="subject.html#326">[ subject ]</a>
+              <a href="author.html#326">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/deepamehta-devel">More information about the deepamehta-devel
+mailing list</a><br>
+</body></html>

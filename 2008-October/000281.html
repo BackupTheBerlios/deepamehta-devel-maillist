@@ -1,0 +1,162 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [deepamehta-devel] PROPERTY_UNIQUE_TOPIC_NAMES
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/deepamehta-devel/2008-October/index.html" >
+   <LINK REL="made" HREF="mailto:deepamehta-devel%40lists.berlios.de?Subject=Re%3A%20%5Bdeepamehta-devel%5D%20PROPERTY_UNIQUE_TOPIC_NAMES&In-Reply-To=%3C48EDF9E6.5070807%40randomice.net%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000280.html">
+   <LINK REL="Next"  HREF="000282.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[deepamehta-devel] PROPERTY_UNIQUE_TOPIC_NAMES</H1>
+    <B>Enrico Schnepel</B> 
+    <A HREF="mailto:deepamehta-devel%40lists.berlios.de?Subject=Re%3A%20%5Bdeepamehta-devel%5D%20PROPERTY_UNIQUE_TOPIC_NAMES&In-Reply-To=%3C48EDF9E6.5070807%40randomice.net%3E"
+       TITLE="[deepamehta-devel] PROPERTY_UNIQUE_TOPIC_NAMES">enrico.schnepel at randomice.net
+       </A><BR>
+    <I>Thu Oct  9 14:32:38 CEST 2008</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000280.html">[deepamehta-devel] PROPERTY_UNIQUE_TOPIC_NAMES
+</A></li>
+        <LI>Next message: <A HREF="000282.html">[deepamehta-devel] [Bug #14721] recipientlist has no caption
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#281">[ date ]</a>
+              <a href="thread.html#281">[ thread ]</a>
+              <a href="subject.html#281">[ subject ]</a>
+              <a href="author.html#281">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
+
+Hello Torsten,
+
+comments below...
+
+Torsten Ziegler schrieb:
+&gt;<i> Dear deepamehta developers
+</I>&gt;<i>
+</I>&gt;<i> i've got a short question (feel free to answer also shortly):
+</I>&gt;<i> The check field &quot;Unique Topic Names&quot; in the &quot;Topic Type&quot;
+</I>&gt;<i> is it used anywhere ?
+</I>&gt;<i> I haven't found any implementation for this (yet) in trunk 354
+</I>the property describes how the topic map imort handles duplicates. if
+it is set to true and an internal and the imported topic with the same
+type (I think so) have the same name - they are merged.
+
+&gt;<i> background (longer explanation):
+</I>&gt;<i>
+</I>&gt;<i> As some of you might know i am working on
+</I>&gt;<i> using deepamehta for explaining the chinese medicine.
+</I>&gt;<i>
+</I>&gt;<i> For this I am missing some kind of hierarchical structuring
+</I>&gt;<i> of data in DeepaMehta. So right now I am experimenting
+</I>&gt;<i> with the implementation of new topic types that allow to
+</I>&gt;<i> categorize topics not only by implementing new subtypes
+</I>&gt;<i> (as this would have to be done in the Type Builder)
+</I>&gt;<i> but by associating them to certain categories (this should be
+</I>&gt;<i> done on the &quot;normal&quot; Topic Map)
+</I>&gt;<i> And for these features I am also looking in how to make
+</I>&gt;<i> topic names unique throughout the corporate memory
+</I>&gt;<i> (or at least the part of cm associated to one user, or maybe
+</I>&gt;<i> a part of the cm associated to one grand category)
+</I>&gt;<i>
+</I>&gt;<i> To illustrate what I am looking for try to imagine this example.
+</I>&gt;<i> I think you all know the actors and movies example from the
+</I>&gt;<i> DeepaMehta installation.
+</I>&gt;<i> If I add to this example a new Information about the role of an
+</I>&gt;<i> actor in a movie there will be the three topic types
+</I>&gt;<i> -actor
+</I>&gt;<i> -role
+</I>&gt;<i> -movie
+</I>&gt;<i>
+</I>&gt;<i> while it is easy to associate actors with movies it gets complicated
+</I>&gt;<i> if you want to specify the role of an actor in a movie.
+</I>&gt;<i> Given there are
+</I>&gt;<i> actor A -  role 1 -  movie x
+</I>&gt;<i> actor B -  role 1 -  movie y
+</I>&gt;<i> actor A -  role 1 -  movie z
+</I>&gt;<i> actor A -  role 2 -  movie z
+</I>&gt;<i>
+</I>&gt;<i> as role 1 (e.g. the gardener) appears several times it has to be
+</I>&gt;<i> cloned for each movie, so the example would look like
+</I>&gt;<i> actor A -  role 1 in movie x -  movie x
+</I>&gt;<i> actor B -  role 1 in movie y -  movie y
+</I>&gt;<i> actor A -  role 1 in movie z -  movie z
+</I>&gt;<i> actor A -  role 2 in movie z -  movie z
+</I>&gt;<i> this leads to a naming scheme that uses very long names
+</I>&gt;<i>
+</I>&gt;<i> what I am looking in right now is to
+</I>&gt;<i> split the associations to:
+</I>&gt;<i> actor A -  role 1
+</I>&gt;<i> actor A -  movie x
+</I>&gt;<i> role 1 -  movie x
+</I>&gt;<i> ....
+</I>&gt;<i> and then modify the search for related topics so that
+</I>&gt;<i> you can get from
+</I>&gt;<i> from actor to role and movie and vice versa,
+</I>&gt;<i> but you should be also be able to find all actors playing the gardener
+</I>&gt;<i> in any film.
+</I>&gt;<i>
+</I>&gt;<i> For sure this needs then a top category attached to it,
+</I>&gt;<i> as the gardener has different aspects in movies (e.g. the assassin)
+</I>&gt;<i> as in agriculture. But for sure it also has some common aspects,
+</I>&gt;<i> so the gardener should be unique throughout the corporate memory.
+</I>&gt;<i>
+</I>&gt;<i> If you have any thoughts on this problem
+</I>&gt;<i> I am very curious to see other aspects of this problem
+</I>&gt;<i> or insights in side effects of my proposal.
+</I>This sounds more like the need for a tertiary association. With DM
+this is not supported, but it could be emulated with a topic which
+connects the actor, the movie and the role.
+
+
+actor A - play
+movie x - play
+role  1 - play
+
+Regards
+
+Enrico
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.9 (Cygwin)
+Comment: Using GnuPG with Mozilla - <A HREF="http://enigmail.mozdev.org">http://enigmail.mozdev.org</A>
+
+iEYEARECAAYFAkjt+eYACgkQ2n08vWt9IjcflQCggM8oh0AujZy+Xyh7jd4Sopvq
+HIoAnA8HUYxpIoqqboqnjWI9Axxw1CJJ
+=S+oO
+-----END PGP SIGNATURE-----
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000280.html">[deepamehta-devel] PROPERTY_UNIQUE_TOPIC_NAMES
+</A></li>
+	<LI>Next message: <A HREF="000282.html">[deepamehta-devel] [Bug #14721] recipientlist has no caption
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#281">[ date ]</a>
+              <a href="thread.html#281">[ thread ]</a>
+              <a href="subject.html#281">[ subject ]</a>
+              <a href="author.html#281">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/deepamehta-devel">More information about the deepamehta-devel
+mailing list</a><br>
+</body></html>

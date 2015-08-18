@@ -1,0 +1,166 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [deepamehta-devel] further developments
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/deepamehta-devel/2013-November/index.html" >
+   <LINK REL="made" HREF="mailto:deepamehta-devel%40lists.berlios.de?Subject=Re%3A%20%5Bdeepamehta-devel%5D%20further%20developments&In-Reply-To=%3C5281FA9F.6050803%40ziegi.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000432.html">
+   <LINK REL="Next"  HREF="000434.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[deepamehta-devel] further developments</H1>
+    <B>Torsten Ziegler</B> 
+    <A HREF="mailto:deepamehta-devel%40lists.berlios.de?Subject=Re%3A%20%5Bdeepamehta-devel%5D%20further%20developments&In-Reply-To=%3C5281FA9F.6050803%40ziegi.de%3E"
+       TITLE="[deepamehta-devel] further developments">torsten at ziegi.de
+       </A><BR>
+    <I>Tue Nov 12 10:53:35 CET 2013</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000432.html">[deepamehta-devel] Release planning - 2 more petitions
+</A></li>
+        <LI>Next message: <A HREF="000434.html">[deepamehta-devel] Release planning - 2 more petitions
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#433">[ date ]</a>
+              <a href="thread.html#433">[ thread ]</a>
+              <a href="subject.html#433">[ subject ]</a>
+              <a href="author.html#433">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi J&#246;rg et. al,
+
+first thanks for the fast work,
+I see there has been a huge improvement the last weeks
+with the usability.
+
+I want to comment on two emails and points that
+concern me, first (still) click detection and second
+usability, see below:
+
+Am 11.11.2013 20:23, schrieb Juergen Neumann:
+&gt;<i> a) Show pictures/thumbnails per instance
+</I>while this is no major topic for me
+I see the problem with pictures with translucent areas
+and the rectangular bounding box the dom model uses
+for click detection. (please correct me if i am wrong with this)
+
+&gt;<i> b) Display the name of the Association(Type) on the Canvas... - not to
+</I>&gt;<i> dream about b&#233;zier-curved arrows ... ;-)
+</I>YESSS, this would have been the next step for me too.
+Arrows to associations and displaying a title, to represent more
+information on the canvas (e.g. part of, child, parent etc.)
+I would favor to display the title horizontally
+BUT this brings my thoughts back to the click detection.
+Will an association also be clickable on the arrow head or on the
+title? (I prefer yes) and what happens if the title overlaps some
+other canvas elements? Will placement of the association title
+be dynamic so it will adjust itself to find a good spot along the
+association?
+
+As the associations are canvas drawn, how can we interact with
+dom to be aware of the placement of the different things?
+
+Two more points on the placement and click detection:
+
+a) I think of restricting the move process of a topic on the canvas.
+So when a user drags a topic with the mouse and it will bump into
+another topic and shadow it it should be placed nearby (rubber band
+like behavior) until the dragging leaves the shadowed topic again.
+So it will be not possible for topics to overlap on the canvas.
+
+b) Another dream of mine would be to render an association or
+a topic together with an association as a cloud
+-&gt; see attached image and excuse the bad drawing
+
+
+Am 31.10.2013 20:55, schrieb Malte Rei&#223;ig:
+&gt;<i> Nach folgenden &#196;u&#223;erungen von Jri, noch etwas zum Map-only Client:
+</I>&gt;&gt;<i> Au&#195;&#159;erdem m&#195;&#182;chte ich das Webclient-Layout grundlegend ver&#195;&#164;ndern. Wiederum aufgrund eurer Inputs. Nicht nur Thilo und Malte w&#195;&#188;rden das Detail Panel gerne abschaffen und die Topic-Details stattdessen *innerhalb* der Topicmap anzeigen.
+</I>&gt;<i> Die Aussage stimmt so nicht (mehr), bzw. w&#252;rde ich in Kontext dieser
+</I>&gt;<i> Vision nicht so sagen, das nur f&#252;r's Protokoll. Das PagePanel hat seine
+</I>&gt;<i> Berechtigung und gerade f&#252;r ein &quot;Integrated Work Environment&quot; ist dies
+</I>&gt;<i> nicht wegzudenken. Ich sehe es &#252;beraus kritisch jetzt aus dem DeepaMehta
+</I>&gt;<i> Webclient, gedacht als Arbeitsumgebung, eine
+</I>&gt;<i> Arbeits-/Hybrid-Pr&#228;sentations- und Explorationinterface zu zimmern, die
+</I>&gt;<i> beiden letzteren Varianten eines Webclients sind aus Design-Sicht
+</I>&gt;<i> Spezialf&#228;lle welche gesonderte Design erfordern. Der Webclient als
+</I>&gt;<i> Autoren und Arbeitsumgebung hat momentan andere Anforderungen, einen
+</I>&gt;<i> Teil davon habe ich oben in meinen Tickets benannt.
+</I>&gt;<i>
+</I>&gt;&gt;<i> Das ist im Prinzip eine gute Idee, die u.a. den Vorteil hat, da&#195;&#159; man
+</I>&gt;<i> die Details mehrerer Topics nebeneinander legen und *gleichzeitig* sehen
+</I>&gt;<i> kann. Als alleiniges GUI Konzept reicht das aber nicht aus.
+</I>&gt;<i>
+</I>&gt;&gt;<i> Ich habe jetzt eine Idee wie man beide Ans&#195;&#164;tze -- In-Topicmap-Details
+</I>&gt;<i> und Property Panel -- vereinen kann: standardm&#195;&#164;&#195;&#159;ig werden Topic-Details
+</I>&gt;<i> In-Topicmap angezeigt, auch mehrere aufeinmal.
+</I>&gt;<i>
+</I>&gt;<i> ..
+</I>&gt;<i> Jri hat aus meiner Sicht hier einen Misch-Masch im Visier
+</I>&gt;<i> (&quot;Webclient-Layout grundlegend ver&#228;ndern&quot;, &quot;In Topicmap Details&quot; &lt; siehe
+</I>&gt;<i> mein Kommentar dazu oben). Er m&#246;chte gerne Arbeits- und
+</I>&gt;<i> Pr&#228;sentationsumgebung vereinen, ich w&#252;nsche mir das er f&#252;r den Webclient
+</I>&gt;<i> erstmal weiter den Fokus hin zu einer Arbeitsumgebung (Integrated Work
+</I>&gt;<i> Environment) beh&#228;lt, einfach weil in naher Zukunft dann die meisten
+</I>&gt;<i> Use-Cases davon profitieren w&#252;rden. Das sind eher Business-Style
+</I>&gt;<i> Anforderungen an GUI-Elemente (siehe Select-Listen, evtl.
+</I>&gt;<i> JavaScript-Optimierungen,
+</I>&gt;<i>
+</I>I agree with Malte,
+for me it is most important to enhance the current environment
+and this means the usability of the detail pane.
+This means instant editing, useful (this has to be discussed further)
+representation of the associations and associated topics.
+If the detail pane gets coded in a way that its contents can be easily
+reused in another location this would open up the way to use it in a way
+like the CoolPreviews Firefox Extension to show additional (smaller) 
+detail panes
+on mouse over on the canvas with the possibility to make them sticky
+(see <A HREF="https://addons.mozilla.org/en-US/firefox/addon/coolpreviews/">https://addons.mozilla.org/en-US/firefox/addon/coolpreviews/</A>)
+
+
+Just my 2 cents,
+thanks for reading and keep on the good work,
+Torsten
+
+-- 
+Torsten Ziegler www.ziegi.de www.chin-med.de
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: clouds.jpg
+Type: image/jpeg
+Size: 32544 bytes
+Desc: not available
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/deepamehta-devel/attachments/20131112/2a71a67c/attachment-0001.jpg">https://lists.berlios.de/pipermail/deepamehta-devel/attachments/20131112/2a71a67c/attachment-0001.jpg</A>&gt;
+</PRE>
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000432.html">[deepamehta-devel] Release planning - 2 more petitions
+</A></li>
+	<LI>Next message: <A HREF="000434.html">[deepamehta-devel] Release planning - 2 more petitions
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#433">[ date ]</a>
+              <a href="thread.html#433">[ thread ]</a>
+              <a href="subject.html#433">[ subject ]</a>
+              <a href="author.html#433">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/deepamehta-devel">More information about the deepamehta-devel
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,93 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [deepamehta-devel] WebSockets
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/deepamehta-devel/2014-January/index.html" >
+   <LINK REL="made" HREF="mailto:deepamehta-devel%40lists.berlios.de?Subject=Re%3A%20%5Bdeepamehta-devel%5D%20WebSockets&In-Reply-To=%3C7257EDDD-AF71-4402-B122-B34F1413D465%40deepamehta.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000454.html">
+   <LINK REL="Next"  HREF="000457.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[deepamehta-devel] WebSockets</H1>
+    <B>J&#246;rg Richter</B> 
+    <A HREF="mailto:deepamehta-devel%40lists.berlios.de?Subject=Re%3A%20%5Bdeepamehta-devel%5D%20WebSockets&In-Reply-To=%3C7257EDDD-AF71-4402-B122-B34F1413D465%40deepamehta.de%3E"
+       TITLE="[deepamehta-devel] WebSockets">jri at deepamehta.de
+       </A><BR>
+    <I>Sun Jan 12 22:52:21 CET 2014</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000454.html">[deepamehta-devel] WebSockets
+</A></li>
+        <LI>Next message: <A HREF="000457.html">[deepamehta-devel] suscribe only to events to specific items	(topic/assoc)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#455">[ date ]</a>
+              <a href="thread.html#455">[ thread ]</a>
+              <a href="subject.html#455">[ subject ]</a>
+              <a href="author.html#455">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>
+On Jan 12, 2014, at 19:55, J&#246;rn Wei&#223;enborn wrote:
+
+&gt;<i> I see some problems in this implementation. As I see it, multiple plugins using websockets would both receive all events and respond. This would confuse possible clients, which would maybe want to talk with only one of those plugins.
+</I>
+The dm4-websockets plugin separates user-written plugins properly. One plugin does not see the messages bound to other plugins. Not on client-side and not on server-side. (The plugin would not know how to interpret these messages.)
+
+At client-side:
+- when you invoke the WebSocket constructor you MUST specify your plugin's URI as the 2nd argument. The URI is received by the server while the connection handshake. So each WebSocket connection is associated with the plugin that initiated that connection.
+
+At server-side:
+- the framework invokes the websocketTextMessage() hook only for the plugin associated with the connection through which the message has arrived.
+- when you call the WebSocketsService's broadcast() method you must specify your plugin's URI as the 1st argument. The framework then broadcasts the message only through the connections associated with that plugin.
+
+These conditions are illustrated by the dm4-websockets-example application.
+
+&gt;<i> Also I might want, e.g. when a client requests something, to be able to send it to this particular client.
+</I>
+When the client *requests* something it might be more natural to do a regular HTTP request. You don't necessarily need WebSockets then.
+
+Anyway, one case is actually not yet supported by the dm4-websockets plugin: *pushing* a message to a *particular* client (instead of broadcasting).
+
+I will extend the dm4-websockets plugin soon, in order to support pushing to a particular client.
+
+&gt;<i> Another thing is, that if one implements a plugin to use websockets, one is basically writing an API for DeepaMehta, at least in my humble opinion.
+</I>
+No. A plugin using WebSockets contains only application-specific logic (in contrast to framework-level logic). Also the message format and protocol are application-specific. The underlying generic message format and protocol is WebSockets.
+
+Cheers,
+J&#246;rg
+
+</PRE>
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000454.html">[deepamehta-devel] WebSockets
+</A></li>
+	<LI>Next message: <A HREF="000457.html">[deepamehta-devel] suscribe only to events to specific items	(topic/assoc)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#455">[ date ]</a>
+              <a href="thread.html#455">[ thread ]</a>
+              <a href="subject.html#455">[ subject ]</a>
+              <a href="author.html#455">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/deepamehta-devel">More information about the deepamehta-devel
+mailing list</a><br>
+</body></html>

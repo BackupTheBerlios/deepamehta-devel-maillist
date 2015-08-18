@@ -1,0 +1,174 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [deepamehta-devel] custom renderer question
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/deepamehta-devel/2013-September/index.html" >
+   <LINK REL="made" HREF="mailto:deepamehta-devel%40lists.berlios.de?Subject=Re%3A%20%5Bdeepamehta-devel%5D%20custom%20renderer%20question&In-Reply-To=%3C19EF8FE6-B3AC-4CBE-823C-8D5FBCE979BA%40deepamehta.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000411.html">
+   <LINK REL="Next"  HREF="000413.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[deepamehta-devel] custom renderer question</H1>
+    <B>J&#246;rg Richter</B> 
+    <A HREF="mailto:deepamehta-devel%40lists.berlios.de?Subject=Re%3A%20%5Bdeepamehta-devel%5D%20custom%20renderer%20question&In-Reply-To=%3C19EF8FE6-B3AC-4CBE-823C-8D5FBCE979BA%40deepamehta.de%3E"
+       TITLE="[deepamehta-devel] custom renderer question">jri at deepamehta.de
+       </A><BR>
+    <I>Sat Sep 21 22:03:05 CEST 2013</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000411.html">[deepamehta-devel] custom renderer question
+</A></li>
+        <LI>Next message: <A HREF="000413.html">[deepamehta-devel] custom renderer question
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#412">[ date ]</a>
+              <a href="thread.html#412">[ thread ]</a>
+              <a href="subject.html#412">[ subject ]</a>
+              <a href="author.html#412">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>
+Hi Torsten,
+
+sorry for the late response.
+I felt you're on the right track. To start with copying/adapting the default renderer and transfer your custom code to the new hooks, once they are introduced, seems reasonable to me. I'm happy to find you in a mood for experimentation :-)
+
+
+On Sep 15, 2013, at 14:25, Torsten Ziegler wrote:
+
+&gt;<i> Actually I realized that I do not need the HTML Node,
+</I>&gt;<i> but am happy to draw directly on the canvas.
+</I>
+That's good to know!
+It will make my things more easy for a start.
+
+&gt;<i> (And also I fear that using HTML nodes on the canvas
+</I>&gt;<i> will make the mouse interaction slower, as we might
+</I>&gt;<i> to have go through the DOM to find the clicked object)
+</I>
+(Not necessarily. Performant clicked object detection on a Canvas requires reasonable effort too. And that is code YOU or I have to write as it's not done by the browser.)
+
+&gt;<i> I guess the hooks will be in the
+</I>&gt;<i> default_topicmap_renderer.js
+</I>&gt;<i> in the functions draw_topics and draw_associations ?
+</I>
+Exactly.
+I plan to equip the default topicmap renderer with a &quot;draw_topic&quot; hook. That hook will receive a view-topic and a Canvas drawing context. Your plugin is free to paint the view-topic on the canvas then.
+
+&gt;<i> I would also like to interfere with the topic selection
+</I>&gt;<i> in default_topicmap_viemodel.js in the functions
+</I>&gt;<i> find_topic and find_association
+</I>
+Yes, when you do custom topic rendering you should also supply a corresponding &quot;topic click detector&quot;. I plan to introduce another hook for that.
+
+&gt;<i> and with the mouse event functions in the default_topicmap_renderer.js
+</I>
+Do you want e.g. handle &quot;topic clicked&quot; events in your own fashion (and suppress the standard behavior which is &quot;show topic details in the detail panel&quot;)?
+That sounds reasonable to me. I would introduce another hook for that.
+What else events do want to interfere with?
+
+&gt;<i> I think a good start for me ist to first rewrite a copy of the default renderer
+</I>&gt;<i> to see how things are working out and then communicate with you
+</I>&gt;<i> about which hooks are needed and if the things i do seem usefull for others.
+</I>&gt;<i> Then I am willing to adapt the code I write to the hooks you provide
+</I>&gt;<i> along with the ticket 505.
+</I>
+That sounds very good to me.
+
+
+
+On Sep 21, 2013, at 19:22, Torsten Ziegler wrote:
+
+&gt;<i> I have one question regarding the replacement of
+</I>&gt;<i> the standard default renderer.
+</I>&gt;<i> 
+</I>&gt;<i> I started to write a plugin that implements a new
+</I>&gt;<i> topicmap renderer (yet a mere copy of the default renderer,
+</I>&gt;<i> based on the topicmap-renderer branch as of this morning,
+</I>&gt;<i> see attached zip for implementation)
+</I>&gt;<i> 
+</I>&gt;<i> This works fine but it gets used only on newly created topicmaps
+</I>&gt;<i> that are created to be used with this renderer.
+</I>&gt;<i> And as soon as I remove the plugin the topicmap can no longer
+</I>&gt;<i> be displayed as obviously the renderer is missing.
+</I>&gt;<i> 
+</I>&gt;<i> Actually this behaviour is not what I like to have.
+</I>&gt;<i> I would prefer to replace the default renderer and
+</I>&gt;<i> in case my new render is not available to fall back to the
+</I>&gt;<i> default renderer.
+</I>&gt;<i> 
+</I>&gt;<i> I tried to use the uri dm4.webclient.default_topicmap_renderer to
+</I>&gt;<i> replace the default  renderer but run into problems maybe due to
+</I>&gt;<i> the framework not initializing the renderer properly as it thinks it is
+</I>&gt;<i> still the old one.
+</I>&gt;<i> Also using js.extend to overwrite the webclient's CanvasRenderer
+</I>&gt;<i> and CavasView did not work due to mising initialization.
+</I>&gt;<i> 
+</I>&gt;<i> Is there any way to replace the default renderer or is this
+</I>&gt;<i> not the desired way to go for deepamehta ??
+</I>
+Yes, I understand.
+In general it is not possible to switch the renderer for an existing topicmap, because the topicmap viewmodels might not be compatible. It makes no sense e.g. to render a Geomap with the default Canvas renderer. The default viewmodel loader would fail as a default topicmap has another DB layout as a Geomap.
+
+If, on the other hand, the topicmap viewmodels *are* compatible you probably would *not* implement a complete topicmap renderer but use the upcoming hooks to customize the rendering. With the new rendering hooks you'll be able to selectively render certain topics or all topics, and you'll be able to suppress the default rendering as well. Maintenance would be easier as you would have no redundant/copied code.
+
+However, this is not the complete answer to your question. We *could* imagine dynamic assignment between topicmap and renderer. We would need then a facility for maintaining what are compatible views for a certain viewmodel.
+
+&gt;<i> I can think of a migration to change the dm4.topicmaps.topicmap_renderer_uri
+</I>&gt;<i> for all topicmaps using the default renderer, but this seems quite ugly,
+</I>&gt;<i> doesnt it ?
+</I>
+See above.
+
+
+Just some general hints about the (new) topicmap renderer framework:
+
+Concept: proper separation of model, viewmodel, and view.
+    - A **model** contains the domain data (Topics).
+    - A **viewmodel** contains the domain data to be displayed, enriched by view data (e.g. color values, coordinates). A viewmodel is agnostic to a specific renderer technology. A viewmodel class is responsible for loading a viewmodel from the server/DB and for writing changes back.
+    - A **view** renders a (compatible) viewmodel through a specific renderer technology, e.g. Canvas, HTML, SVG.
+    - A **topicmap renderer** binds a viewmodel to a view. A topicmap renderer class implements the TopicmapRenderer interface and is responsible for consistently updating the viewmodel and the view.
+    - Each **topicmap** is assigned to the responsible topicmap renderer
+
+The same viewmodel can the rendered through different views (that are compatible with that viewmodel). That is e.g. a SVG renderer with the same look and feel as the default Canvas renderer would utilize the standard TopicmapViewmodel and must not implement its own (with all the server/DB code). Its *View* code would be different of course.
+
+
+I think we are on a good track and I'm keen to advance things further.
+
+Can you tell me about your application? What data do you want render on the canvas? How interaction should work? Do you utilize a custom topicmap viewmodel?
+
+Cheers,
+J&#246;rg
+
+</PRE>
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000411.html">[deepamehta-devel] custom renderer question
+</A></li>
+	<LI>Next message: <A HREF="000413.html">[deepamehta-devel] custom renderer question
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#412">[ date ]</a>
+              <a href="thread.html#412">[ thread ]</a>
+              <a href="subject.html#412">[ subject ]</a>
+              <a href="author.html#412">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/deepamehta-devel">More information about the deepamehta-devel
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,109 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [deepamehta-devel] custom renderer
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/deepamehta-devel/2013-October/index.html" >
+   <LINK REL="made" HREF="mailto:deepamehta-devel%40lists.berlios.de?Subject=Re%3A%20%5Bdeepamehta-devel%5D%20custom%20renderer&In-Reply-To=%3C0EFDD257-2E0D-462B-B9F2-7F906B0322AD%40deepamehta.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000422.html">
+   <LINK REL="Next"  HREF="000427.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[deepamehta-devel] custom renderer</H1>
+    <B>J&#246;rg Richter</B> 
+    <A HREF="mailto:deepamehta-devel%40lists.berlios.de?Subject=Re%3A%20%5Bdeepamehta-devel%5D%20custom%20renderer&In-Reply-To=%3C0EFDD257-2E0D-462B-B9F2-7F906B0322AD%40deepamehta.de%3E"
+       TITLE="[deepamehta-devel] custom renderer">jri at deepamehta.de
+       </A><BR>
+    <I>Sun Oct 27 21:06:38 CET 2013</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000422.html">[deepamehta-devel] custom renderer
+</A></li>
+        <LI>Next message: <A HREF="000427.html">[deepamehta-devel] custom renderer
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#425">[ date ]</a>
+              <a href="thread.html#425">[ thread ]</a>
+              <a href="subject.html#425">[ subject ]</a>
+              <a href="author.html#425">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>
+Hi J&#252;rgen,
+
+sorry for breaking the Box Renderer installation!
+
+The Box Renderer plugin is now split into 2 separate projects:
+	<A HREF="https://github.com/jri/dm4-box-renderer-canvas.git">https://github.com/jri/dm4-box-renderer-canvas.git</A>
+	<A HREF="https://github.com/jri/dm4-box-renderer-dom-git">https://github.com/jri/dm4-box-renderer-dom-git</A>
+
+Both realize Torsten's new Look&amp;Feel, one via Canvas rendering, the other via DOM based rendering.
+The corresponding Maven artifacts are
+	de.deepamehta/deepamehta-box-renderer-canvas
+	de.deepamehta/deepamehta-box-renderer-dom
+
+The former &quot;deepamehta-boxrenderer&quot; and &quot;deepamehta-box-renderer&quot; artifacts are obsolete and can be removed.
+
+I updated the Jenkins jobs accordingly. There are 2 Box Renderer jobs now.
+As Post Steps I entered (but not sure if this is correct):
+	/usr/local/bin/ci_copy_plugin.sh dm4-box-renderer-canvas
+	/usr/local/bin/ci_copy_plugin.sh dm4-box-renderer-dom
+
+Both plugins could but should not be installed at the same time. For our nightly build demo server I would recommend to deploy the dm4-box-renderer-dom project as this is the new one with cool DOM rendering. Testing this is appreciated.
+
+Many Thanks + Cheers,
+J&#246;rg
+
+
+On Oct 27, 2013, at 15:52, Juergen Neumann wrote:
+
+&gt;<i> The installation of this plugin (or any other plugin) is script based.
+</I>&gt;<i> The update of the nightly build demo includes a list of plugins to
+</I>&gt;<i> install.
+</I>&gt;<i> 
+</I>&gt;&gt;<i> It would be great if you could update the Box Renderer plugin.
+</I>&gt;&gt;<i> Meanwhile users can select individual topic colors. There is a new &quot;Set
+</I>&gt;&gt;<i> Color&quot; command in the topic context menu.
+</I>&gt;<i> 
+</I>&gt;<i> I looks like you have changed the name of the plugin twice:
+</I>&gt;<i> =&gt; <A HREF="http://download.deepamehta.de/nightly/">http://download.deepamehta.de/nightly/</A>
+</I>&gt;<i> 
+</I>&gt;<i> If you change the name, the automatic installation fails, because it is
+</I>&gt;<i> based on that name. Please tell me the file name of the plugin you want
+</I>&gt;<i> to be installed.
+</I>&gt;<i> 
+</I>&gt;<i> Thanks,
+</I>&gt;<i> 
+</I>&gt;<i> JuergeN
+</I>
+</PRE>
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000422.html">[deepamehta-devel] custom renderer
+</A></li>
+	<LI>Next message: <A HREF="000427.html">[deepamehta-devel] custom renderer
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#425">[ date ]</a>
+              <a href="thread.html#425">[ thread ]</a>
+              <a href="subject.html#425">[ subject ]</a>
+              <a href="author.html#425">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/deepamehta-devel">More information about the deepamehta-devel
+mailing list</a><br>
+</body></html>

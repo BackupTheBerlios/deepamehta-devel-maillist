@@ -1,0 +1,93 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [deepamehta-devel] [Bug #14005] Old collection classes are used,	e.g. Vector, Hashtable
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/deepamehta-devel/2008-June/index.html" >
+   <LINK REL="made" HREF="mailto:deepamehta-devel%40lists.berlios.de?Subject=Re%3A%20%5Bdeepamehta-devel%5D%20%5BBug%20%2314005%5D%20Old%20collection%20classes%20are%20used%2C%0A%09e.g.%20Vector%2C%20Hashtable&In-Reply-To=%3C200806101928.m5AJSfvn021855%40unicorn.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000178.html">
+   <LINK REL="Next"  HREF="000180.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[deepamehta-devel] [Bug #14005] Old collection classes are used,	e.g. Vector, Hashtable</H1>
+    <B>admin at berlios.de</B> 
+    <A HREF="mailto:deepamehta-devel%40lists.berlios.de?Subject=Re%3A%20%5Bdeepamehta-devel%5D%20%5BBug%20%2314005%5D%20Old%20collection%20classes%20are%20used%2C%0A%09e.g.%20Vector%2C%20Hashtable&In-Reply-To=%3C200806101928.m5AJSfvn021855%40unicorn.berlios.de%3E"
+       TITLE="[deepamehta-devel] [Bug #14005] Old collection classes are used,	e.g. Vector, Hashtable">admin at berlios.de
+       </A><BR>
+    <I>Tue Jun 10 21:28:41 CEST 2008</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000178.html">[deepamehta-devel] [Feature #4180] Licence file
+</A></li>
+        <LI>Next message: <A HREF="000180.html">[deepamehta-devel] deistically gerenuk
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#179">[ date ]</a>
+              <a href="thread.html#179">[ thread ]</a>
+              <a href="subject.html#179">[ subject ]</a>
+              <a href="author.html#179">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Bug #14005, was updated on 2008-Jun-10 14:26
+Here is a current snapshot of the bug.
+
+Project: DeepaMehta
+Category: None
+Status: Open
+Resolution: None
+Bug Group: None
+Priority: 1
+Submitted by: jri
+Assigned to : url
+Summary: Old collection classes are used, e.g. Vector, Hashtable
+
+Details: Note: the following is not actually a bug report but the description of a sourcecode maintenance task.
+
+Since the DeepaMehta project started before the Java Collections Framework was introduced in Java 1.2 the DeepaMehta sourcecode makes heavy use of the now obsolete collection classes &quot;Vector&quot;, &quot;Hashtable&quot;, and &quot;Enumeration&quot;. This is not a problem at all, but new developers will probably use the current incarnations, such as &quot;ArrayList&quot;, &quot;HashMap&quot;, and &quot;Iterator&quot;. In order to avoid confusion and for the sake of &quot;beauty&quot; it is preferred not mix the old and the new style.
+
+So: the complete DeepaMehta sourcecode should incrementally transformed to the canonical style of the Java Collections Framework. That is to make the following replacements of classes:
+
+Vector -&gt; ArrayList
+Hashtable -&gt; HashMap
+Enumeration -&gt; Iterator
+
+This task should be seen as formal and non-creative work. In particular, no checks/assertions and no logic should be added. Just replacements, no additions. There are hundreds, if not thousands, spots to transform. Trying to combine this uniform task with the ambition of quality improvements woud probably render this an endless endeavour. The current code is running well and is well understood. Logical changes/additions would not necessarily improve the quality of code but possibly reduce the level of understanding among the present developers.
+
+So: this task is suited to novice developers or to people who want to return to Java-practice after a phase of non-programming.
+
+Important: all DeepaMehta sourcecode must compile and run in Java 1.4. Therefore we can't use the newer Java concept of Generics and the new loop syntaxes as introduced in Java 1.5.
+
+
+For detailed info, follow this link:
+<A HREF="http://developer.berlios.de/bugs/?func=detailbug&amp;bug_id=14005&amp;group_id=5174">http://developer.berlios.de/bugs/?func=detailbug&amp;bug_id=14005&amp;group_id=5174</A>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000178.html">[deepamehta-devel] [Feature #4180] Licence file
+</A></li>
+	<LI>Next message: <A HREF="000180.html">[deepamehta-devel] deistically gerenuk
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#179">[ date ]</a>
+              <a href="thread.html#179">[ thread ]</a>
+              <a href="subject.html#179">[ subject ]</a>
+              <a href="author.html#179">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/deepamehta-devel">More information about the deepamehta-devel
+mailing list</a><br>
+</body></html>

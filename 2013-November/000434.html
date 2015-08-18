@@ -1,0 +1,200 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [deepamehta-devel] Release planning - 2 more petitions
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/deepamehta-devel/2013-November/index.html" >
+   <LINK REL="made" HREF="mailto:deepamehta-devel%40lists.berlios.de?Subject=Re%3A%20%5Bdeepamehta-devel%5D%20Release%20planning%20-%202%20more%20petitions&In-Reply-To=%3C52822367.8020407%40deepamehta.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000433.html">
+   <LINK REL="Next"  HREF="000435.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[deepamehta-devel] Release planning - 2 more petitions</H1>
+    <B>Malte Rei&#223;ig</B> 
+    <A HREF="mailto:deepamehta-devel%40lists.berlios.de?Subject=Re%3A%20%5Bdeepamehta-devel%5D%20Release%20planning%20-%202%20more%20petitions&In-Reply-To=%3C52822367.8020407%40deepamehta.de%3E"
+       TITLE="[deepamehta-devel] Release planning - 2 more petitions">mre at deepamehta.de
+       </A><BR>
+    <I>Tue Nov 12 13:47:35 CET 2013</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000433.html">[deepamehta-devel] further developments
+</A></li>
+        <LI>Next message: <A HREF="000435.html">[deepamehta-devel] label associations - Re: Release planning - 2 more petitions
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#434">[ date ]</a>
+              <a href="thread.html#434">[ thread ]</a>
+              <a href="subject.html#434">[ subject ]</a>
+              <a href="author.html#434">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>
+Hi Juergen, (Hi all DM-visionaries)!
+
+Two objections about rendering AssocType info on the canvas and one
+objection about implement rendering more details in-map (as part of the
+upcoming core/webclient) release.
+
+Please don't get me wrong, I really appreciate your input and I try to
+express my support to your initative and wishes with the sketch
+attached, maybe this way we can get on with the discussion towards a
+Assoc-Label (tradeoff-) solution for the next release?
+
+Wrapping it up, may render the state-of-discussion here easier than it
+sounds in the rest of my mail:
+
+* Expert users like me don't want to clutter their canvas with
+additional AssociationType-Labels (optionally, OK).
+
+* We dont' have a way yet for getting Association-Labels right since
+we're not including &quot;Role Types&quot; into the discussion (yet).
+
+* There is a generic &quot;Text&quot; available to set for each Association
+already, why not start with rendering this next to an Association? This
+would leave it up to users to set labels in the canvas on Assocations.
+
+In the following my detailed reply to your input:
+
+On 11.11.2013 20:23, Juergen Neumann wrote:
+&gt;<i> Hey J&#246;rg,
+</I>&gt;<i> 
+</I>&gt;<i> as far as I understand it we plan to focus on usability and beautifying
+</I>&gt;<i> with 4.1.3 and focus on PAX, Websockets, push messages, core optimazion,
+</I>&gt;<i> etc. (and maybe public/shared/private workspace) in 4.1.4. 
+</I>&gt;<i> 
+</I>&gt;<i> Agreed on that I have two more petitions for 4.1.3:
+</I>&gt;<i> 
+</I>&gt;<i> a) Show pictures/thumbnails per instance - e.g. a person (or any other
+</I>&gt;<i> complex topic type) can have a picture. If picture exists, it is shown
+</I>&gt;<i> as a thumbnail on the canvas. Maybe you can use a thumbnail library
+</I>&gt;<i> which also displays thumbnails for various other mime types (PDF, DOC,
+</I>&gt;<i> PNG, etc.)
+</I>
+I think that's a bit much to ask for now (&quot;any complex-type&quot;), mainly
+because I can't even wrap my head around it (with picture you mean
+&quot;File&quot;, right?). Maybe to concentrate an in-map &quot;Profile Picture&quot; for
+each &quot;User Account&quot; would be a first step? And this thumbnail-library
+things sounds a bit like a feature you want for all &quot;File&quot;-Topics, if I
+get you right. Though I find this file content-preview thumbnails of
+limited use in my day-to-day work (for example if compared to sorting
+&quot;Folder contents&quot; to &quot;Last modified&quot;).
+
+&gt;<i> b) Display the name of the Association(Type) on the Canvas - from my
+</I>&gt;<i> understanding the new view model plugin should allow to have more
+</I>&gt;<i> possibilities for the display of associations, too, right? So it would
+</I>&gt;<i> be very nice if the name of the association type is displayed along with
+</I>&gt;<i> the association (same color, small letters along the line) - not to
+</I>&gt;<i> dream about b&#233;zier-curved arrows ... ;-)
+</I>&gt;<i> 
+</I>&gt;<i> I just went through this with Carolina. We fully agree that there should
+</I>&gt;<i> be more information displayed on the canvas already. So to display the
+</I>&gt;<i> name of the type of association on the canvas, too, would be exactly the
+</I>&gt;<i> right step in the same direction. :)
+</I>
+(Despite the wonderful idea for bezier-curves,) I have to object here:
+
+First:
+&quot;So it would be very nice if the name of the association type is
+displayed along with the association (same color, small letters along
+the line).&quot;
+
+&gt;<i>From my point of view the Association Type is already clearly coded in
+</I>the AssociationColor, expert users like me don't want this information
+written onto the canvas, it costs a lot of (precious) space. (I can just
+imagine it to be useful if I want to print out a Topicmap for
+publication and present my map to an audience new to deepamehta). If
+this will get into the core than one *must* be able to turn it &quot;on&quot; and
+&quot;off&quot;, otherwise we start banging our heads against each other. Right
+now I would favor much more to display &quot;Association text&quot; on the canvas
+(which users can optionally already set in the page panel) instead of
+additionally displaying the AssociationType. Probably this is part of
+the struggle trying to serve one DeepaMehta for first-time users,
+intermediates and experts at the same time, but maybe I get you two
+wrong on why you want to render the Type-Info there?
+
+Second: Because of the question if such a label is going to be rendered
+&quot;horizontally next to the line&quot; or &quot;directly on the line&quot;, I really
+don't know yet (the former may be more readable for potential readers of
+the map but it will also take much more space of the canvas.)
+
+But what I know is we must think harder on what is an &quot;Association
+label&quot;, since we *already have 4 potential texts* eligible to become
+displayed as &quot;Association label&quot; (1. name of &quot;Role Type 1&quot;, 2. name of
+&quot;Role Type 2&quot;, 3. name of &quot;Association Type&quot; and 4. text at
+&quot;Assocation&quot;), or?
+
+See attached sketch with the respective numbers asking for correction,
+rendering a &quot;fully labeled&quot; relation of type &quot;Association&quot;.
+
+Third:
+&quot;We fully agree that there should be more information displayed on the
+canvas already.&quot; -
+
+If you ask me, Jri made already great progress with enabling
+plugin-developers to interfere with the webclient canvas rendering /
+customizing in-map details (Ticket #505). This means, now a plugin-dev
+can (even selectively see Ticket #522) extend e.g. the &quot;User Account&quot;
+in-map rendering about _just_ a related &quot;Profile Picture&quot;. So from my
+perspective, jri is clearly done here for now. The framework itself now
+allows such stuff. Even a map displayin &quot;all&quot; childs of a topic is
+already do-able for plugin developers now (as proposed by jri in his
+mail on displaying full topic details in the map side-by-side).
+
+Please consider the following:
+There are probably going to come many variations of what is rendered in
+the canvas, and everyone wants to have a different type of rendering (as
+assoc-labels show us already). Also, this is a super nice 1-2-day
+development effort for (new) plugin developers. Also its worth noting
+that someone else than jri uses this new core-interfaces in practice,
+trying to implement new renderer. Out of my recent experience, just this
+pushes the implementation of the DM-framework into usable areas. If jri
+develops this type of features while at the same time laying out the
+core-ground for his own, ordinary plugin-devs like me will have
+difficulties to find effective use in DM.
+
+Additionally the plugin-dev can build upon the following work:
+<A HREF="https://github.com/jri/dm4-box-renderer-dom">https://github.com/jri/dm4-box-renderer-dom</A> to realize this wish.
+
+On your topics listed for 4.1.14, all features related to enabling
+collaborative usage of DM (e.g. Acl.READ, Private + Public Workspaces)
+do completely match my expectations for February/March 2014.
+
+Cheers!
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: 4_assoc_labels.png
+Type: image/png
+Size: 16931 bytes
+Desc: not available
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/deepamehta-devel/attachments/20131112/b3aa0b50/attachment-0001.png">https://lists.berlios.de/pipermail/deepamehta-devel/attachments/20131112/b3aa0b50/attachment-0001.png</A>&gt;
+</PRE>
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000433.html">[deepamehta-devel] further developments
+</A></li>
+	<LI>Next message: <A HREF="000435.html">[deepamehta-devel] label associations - Re: Release planning - 2 more petitions
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#434">[ date ]</a>
+              <a href="thread.html#434">[ thread ]</a>
+              <a href="subject.html#434">[ subject ]</a>
+              <a href="author.html#434">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/deepamehta-devel">More information about the deepamehta-devel
+mailing list</a><br>
+</body></html>

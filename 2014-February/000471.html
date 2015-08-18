@@ -1,0 +1,113 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [deepamehta-devel] Question About the Webclients Controller
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/deepamehta-devel/2014-February/index.html" >
+   <LINK REL="made" HREF="mailto:deepamehta-devel%40lists.berlios.de?Subject=Re%3A%20%5Bdeepamehta-devel%5D%20Question%20About%20the%20Webclients%20Controller&In-Reply-To=%3C52EF71DF.3090001%40dagnu.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   
+   <LINK REL="Next"  HREF="000472.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[deepamehta-devel] Question About the Webclients Controller</H1>
+    <B>Danny Gr&#228;f</B> 
+    <A HREF="mailto:deepamehta-devel%40lists.berlios.de?Subject=Re%3A%20%5Bdeepamehta-devel%5D%20Question%20About%20the%20Webclients%20Controller&In-Reply-To=%3C52EF71DF.3090001%40dagnu.de%3E"
+       TITLE="[deepamehta-devel] Question About the Webclients Controller">deep at dagnu.de
+       </A><BR>
+    <I>Mon Feb  3 11:39:27 CET 2014</I>
+    <P><UL>
+        
+        <LI>Next message: <A HREF="000472.html">[deepamehta-devel] Round-table for DeepaMehta developers, Berlin, 6th February
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#471">[ date ]</a>
+              <a href="thread.html#471">[ thread ]</a>
+              <a href="subject.html#471">[ subject ]</a>
+              <a href="author.html#471">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi J&#246;rn,
+
+There are several possibilities to implement additional web based 
+clients on DeepaMehta. The first and most simply is to load static files 
+like HTML pages, scripts and styles directly as resources over the file 
+plugin. The second one is an ordinary DeepaMehta plugin that contains 
+static resources. A more dynamic approach to the latter is the web 
+activator that provides a template engine, see 
+<A HREF="https://github.com/jri/dm4-webactivator">https://github.com/jri/dm4-webactivator</A>
+
+The last in-line option is a fully dynamic client like Digital MemeX, 
+that provides bootstrap code and a thin integration layer to load web 
+applications directly from the corporate memory, see 
+<A HREF="https://github.com/dgf/dmx-webclient">https://github.com/dgf/dmx-webclient</A>
+
+In all of these approaches you can use your own REST service routes to 
+simplify the access to commonly used topic list. You can find this 
+pattern in nearly all existing 3rd party plugins, e.g. list of images, 
+mail auto-complete search, campaign recipients and so on. In most of 
+these cases you want a context specific traversing filter and not only 
+the list of all related topics. An implementation of such a query can be 
+done on the server and the client side.
+
+If you develop a DeepeMehta WebClient plugin, then you will gain access 
+to the global `dm4c` object. It defines higher abstracting methods like 
+`dm4c.selected_object.id` and `dm4c.do_reveal_related_topic(...)`. The 
+underlying RESTClient is public available as `dm4c.restc`. In additional 
+web resources that served by a DeepaMehta instance you can create an own 
+RESTClient instance. This is exactly what the Digital Memex client 
+bootstraps:
+
+```
+define('dm4rest', 
+['/de.deepamehta.webclient/script/util/rest_client.js'], function () {
+     return new RESTClient('/core') // wrap DeepaMehta 4 REST client utility
+})
+```
+
+With the REST client you can synchronously call general query methods 
+like `dm4rest.get_topic_related_topics(topicId, { ... filter ... })` to 
+get and map a list of topics. To call resources in an asynchronous way 
+you have to use the completely generic `dm4rest.request(...)` method 
+with a callback function parameter.
+
+The usage of DeepaMehta as a storage layer is a complete different 
+thing. Unfortunately the actual RESTClient isn't designed for external 
+integration. To access the REST interface from outside, you have to 
+authenticate and manage a session. I'm confronted with this some times 
+and I implemented a little helper for Node.js. It uses a HTTP and REST 
+client library to interact with the DeepeMehta REST API and it could be 
+a good starting point for further development, see 
+<A HREF="https://github.com/dgf/dm4client">https://github.com/dgf/dm4client</A>
+
+Regards, Danny
+</PRE>
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	
+	<LI>Next message: <A HREF="000472.html">[deepamehta-devel] Round-table for DeepaMehta developers, Berlin, 6th February
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#471">[ date ]</a>
+              <a href="thread.html#471">[ thread ]</a>
+              <a href="subject.html#471">[ subject ]</a>
+              <a href="author.html#471">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/deepamehta-devel">More information about the deepamehta-devel
+mailing list</a><br>
+</body></html>

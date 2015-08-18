@@ -1,0 +1,184 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [deepamehta-devel] click detection
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/deepamehta-devel/2013-September/index.html" >
+   <LINK REL="made" HREF="mailto:deepamehta-devel%40lists.berlios.de?Subject=Re%3A%20%5Bdeepamehta-devel%5D%20click%20detection&In-Reply-To=%3C524482D8.7010501%40ziegi.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000414.html">
+   
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[deepamehta-devel] click detection</H1>
+    <B>Torsten Ziegler</B> 
+    <A HREF="mailto:deepamehta-devel%40lists.berlios.de?Subject=Re%3A%20%5Bdeepamehta-devel%5D%20click%20detection&In-Reply-To=%3C524482D8.7010501%40ziegi.de%3E"
+       TITLE="[deepamehta-devel] click detection">torsten at ziegi.de
+       </A><BR>
+    <I>Thu Sep 26 20:54:16 CEST 2013</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000414.html">[deepamehta-devel] click detection
+</A></li>
+        
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#415">[ date ]</a>
+              <a href="thread.html#415">[ thread ]</a>
+              <a href="subject.html#415">[ subject ]</a>
+              <a href="author.html#415">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi all,
+
+I just want to share my latest experiences,
+as I will be offline and busy with other things
+the next (3-4) weeks.
+
+I found out that the whole subject of the click
+detection (along with caching) is non trivial
+(i guess you knew this before me)
+
+Working with multidimensional arrays that act as a
+lookup table for the whole canvas slows down
+everything a lot.
+The usual html5 game code uses a second canvas
+with a color code given to all objects for click detection.
+While the translation of the topic.id to the 3 eight bit
+rgb values seems possible this will still not allow for
+overlapping objects.
+
+What I am working with now is to give each
+topic on the topicmap (=TopicView) two own
+in memory canvases.
+Two because I want to have two different
+areas where I want to perform the click detection.
+(one for opening the detail pane, one for starting
+an association)
+All rendering of those canvases is done in the init
+function.
+In the draw function I just copy the in memory canvases
+to the output canvas using drawImage.
+(I first tried to cache only the imageData but this
+does not allow for transparency)
+This proved to be very fast.
+In the find_position function for click detection I still
+test for the bounding box of the topics but then also
+query the in memory canvas about the alpha of the image
+at the given position.
+Here I will have to do more optimization..
+
+Sorry, no fully working code at the moment,
+I just wanted to share my 2cents and will get
+back to you end of octobre.
+
+Torsten
+
+
+Am 24.09.2013 10:31, schrieb Torsten Ziegler:
+&gt;<i> Hi J&#246;rg and all GUI developers,
+</I>&gt;<i>
+</I>&gt;<i> I am about to implement a new click detection for my renderer
+</I>&gt;<i> and seek for some advice, respectively am looking for a common
+</I>&gt;<i> ground of my development and the default renderer.
+</I>&gt;<i>
+</I>&gt;<i> Right now the click detection in the functions
+</I>&gt;<i> find_topic_by_position and .._association_..
+</I>&gt;<i> implements &quot;a a second drawing process&quot;
+</I>&gt;<i> - all calculation is done over again on each mouse event
+</I>&gt;<i> - possible all but one objects on the canvas have to be examined
+</I>&gt;<i> - right now works only with rectangular bounding boxes of shapes
+</I>&gt;<i> (clicking on the &quot;not painted corner&quot; of the standard note ball will
+</I>&gt;<i> counted as click on the icon itself)
+</I>&gt;<i> - topics are always preferred over associations
+</I>&gt;<i> - topics first painted are preferred over the other ones in case of 
+</I>&gt;<i> overlap
+</I>&gt;<i> (without repecting that visibility is the other way round)
+</I>&gt;<i>
+</I>&gt;<i> What I would like to implement:
+</I>&gt;<i> - a lookup table to find the object without new calculations
+</I>&gt;<i> - non rectangular areas to reflect the transparent portions of an icon,
+</I>&gt;<i> or irregular shapes
+</I>&gt;<i> - allow for certain areas of one topic to react differently to the 
+</I>&gt;<i> mouse interaction
+</I>&gt;<i> - allow more advanced detection of overlapped objects:
+</I>&gt;<i> -- certain objects might know that its not them to react but the lower 
+</I>&gt;<i> one
+</I>&gt;<i> -- if unsure ask the user which one he/she tries to click
+</I>&gt;<i> (as it is just so nasty to move a topic accidently over another and
+</I>&gt;<i> suddenly you are not able to select it any more, but have to work your 
+</I>&gt;<i> way
+</I>&gt;<i> through the selectable ones till you reach the one you would like to 
+</I>&gt;<i> have selected
+</I>&gt;<i> in the beginning)
+</I>&gt;<i>
+</I>&gt;<i> I see 2(3) ways to do this and here I would like your input:
+</I>&gt;<i>
+</I>&gt;<i> 1. using a muldimensional array to keep track of all the objects and 
+</I>&gt;<i> desired action on the canvas
+</I>&gt;<i> (object_canvas[x][y]=[{&quot;id&quot;:id,&quot;action&quot;:action},..] &lt;- each point 
+</I>&gt;<i> holds an array of one or many object ids and actions,
+</I>&gt;<i> empty points may be removed from the array ?speed vs. memory use?)
+</I>&gt;<i> - on drawing each object registers itself to this array (object_id + 
+</I>&gt;<i> action(show detail pane, start association, bring to front etc.))
+</I>&gt;<i> - for unregular shapes or icons with alpha a helper function
+</I>&gt;<i> -- is provided with the smallest possible bounding box that includes 
+</I>&gt;<i> the object
+</I>&gt;<i> -- does a bitmap compare of the canvas region bevore and after drawing
+</I>&gt;<i> -- calculates the visible parts that should be registered in the array
+</I>&gt;<i> - on a mouse event only the array has to be queried and all possible 
+</I>&gt;<i> objects are directly accessible by lookup of their id
+</I>&gt;<i>
+</I>&gt;<i> 2. using the KineticJS (<A HREF="http://kinetikjs.com">http://kinetikjs.com</A>)
+</I>&gt;<i> - implement the whole drawing and click detection using the kineticjs 
+</I>&gt;<i> framework
+</I>&gt;<i> - pro: less code as drawing, caching, event handling is allready 
+</I>&gt;<i> implented (using a second canvas for hit detection)
+</I>&gt;<i> - contra: overlapping objects are not supported, topmost rules
+</I>&gt;<i>
+</I>&gt;<i> 3. wait till browsers implement the HTML5 HitRegion
+</I>&gt;<i> - this may take a while
+</I>&gt;<i>
+</I>&gt;<i> Inspired by the KineticJS I would also like to look into caching of 
+</I>&gt;<i> the objects,
+</I>&gt;<i> if this makes sense for the yet simple objects.
+</I>&gt;<i> It works the way that the object is drawn only once but then saved as 
+</I>&gt;<i> an image that is
+</I>&gt;<i> drawn to the canvas later on.
+</I>&gt;<i>
+</I>&gt;<i> What do you think?
+</I>&gt;<i> torsten
+</I>&gt;<i>
+</I>
+
+-- 
+Torsten Ziegler
+<A HREF="https://lists.berlios.de/mailman/listinfo/deepamehta-devel">torsten at ziegi.de</A>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000414.html">[deepamehta-devel] click detection
+</A></li>
+	
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#415">[ date ]</a>
+              <a href="thread.html#415">[ thread ]</a>
+              <a href="subject.html#415">[ subject ]</a>
+              <a href="author.html#415">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/deepamehta-devel">More information about the deepamehta-devel
+mailing list</a><br>
+</body></html>

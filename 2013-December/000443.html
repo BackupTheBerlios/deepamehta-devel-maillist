@@ -1,0 +1,125 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [deepamehta-devel] a blog post on how to create a plugin and a question
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/deepamehta-devel/2013-December/index.html" >
+   <LINK REL="made" HREF="mailto:deepamehta-devel%40lists.berlios.de?Subject=Re%3A%20%5Bdeepamehta-devel%5D%20a%20blog%20post%20on%20how%20to%20create%20a%20plugin%20and%20a%0A%20question&In-Reply-To=%3C52BE1BD3.8010809%40sindominio.net%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000442.html">
+   <LINK REL="Next"  HREF="000444.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[deepamehta-devel] a blog post on how to create a plugin and a question</H1>
+    <B>carolina</B> 
+    <A HREF="mailto:deepamehta-devel%40lists.berlios.de?Subject=Re%3A%20%5Bdeepamehta-devel%5D%20a%20blog%20post%20on%20how%20to%20create%20a%20plugin%20and%20a%0A%20question&In-Reply-To=%3C52BE1BD3.8010809%40sindominio.net%3E"
+       TITLE="[deepamehta-devel] a blog post on how to create a plugin and a question">carolina at sindominio.net
+       </A><BR>
+    <I>Sat Dec 28 01:31:15 CET 2013</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000442.html">[deepamehta-devel] a blog post on how to create a plugin and a	question
+</A></li>
+        <LI>Next message: <A HREF="000444.html">[deepamehta-devel] a blog post on how to create a plugin and a	question
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#443">[ date ]</a>
+              <a href="thread.html#443">[ thread ]</a>
+              <a href="subject.html#443">[ subject ]</a>
+              <a href="author.html#443">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
+
+Hi!
+
+&gt;<i> 
+</I>&gt;&gt;<i> And while repeating the creation of the plugin everything has 
+</I>&gt;&gt;<i> worked, or at least I don't see any error messages, but when 
+</I>&gt;&gt;<i> running DM and accessing through the browser I don't see in the 
+</I>&gt;&gt;<i> create menu the new topic (event).
+</I>&gt;<i> 
+</I>&gt;<i> Have you add your plugin to DM's hot deployment list? Look here: 
+</I>&gt;<i> <A HREF="https://trac.deepamehta.de/wiki/PluginDevelopmentGuide#SetupforHot-Deployment">https://trac.deepamehta.de/wiki/PluginDevelopmentGuide#SetupforHot-Deployment</A>
+</I>
+oh
+&gt;<i>
+</I>&gt;<i> 
+</I>yes!! that was it, I had forgotten about DM pom.xml O:-)
+
+&gt;<i> Once you've done this DM must be restarted. Now, after reloading
+</I>&gt;<i> the browser window, your type should appear in the Create menu.
+</I>
+:<i>-) I see it now in the Create menu :)))
+</I>
+&gt;<i> From now on your plugin is automatically redeployed each time you 
+</I>&gt;<i> compile it (mvn clean package).
+</I>&gt;<i> 
+</I>&gt;<i> BTW: to get a list of installed plugins type &quot;lb&quot; (list bundles)
+</I>&gt;<i> in the Gogo shell (running in the terminal where you started DM).
+</I>&gt;<i> Your plugin is supposed to appear there.
+</I>
+cool!! nice to know
+
+&gt;&gt;<i> I've written a post explaining the steps of how to create a very 
+</I>&gt;&gt;<i> simple plugin in DM
+</I>&gt;&gt;<i> 
+</I>&gt;&gt;<i> <A HREF="http://abriraqui.net/2013/12/27/creating-a-plugin-in-deepamehta-hackership/">http://abriraqui.net/2013/12/27/creating-a-plugin-in-deepamehta-hackership/</A>
+</I>&gt;<i>
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> 
+</I>&gt;<i> That's great! After a quick view I can say it looks very good! I
+</I>&gt;<i> like the clear language and the considered use of screenshots, ER
+</I>&gt;<i> diagram, and further illustrations. The article might be a good
+</I>&gt;<i> help for new DM developers. And it can grow along with your
+</I>&gt;<i> upcoming development experiences. In case I find any error I'll
+</I>&gt;<i> post a comment there. Thank you very much!
+</I>
+:<i>-)
+</I>
+best
+C
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.11 (GNU/Linux)
+Comment: Using GnuPG with Thunderbird - <A HREF="http://www.enigmail.net/">http://www.enigmail.net/</A>
+
+iQEcBAEBAgAGBQJSvhvKAAoJEOQV1Jy26HIvBBoH/0WuDHRmsZQMEtdT6+anOvYu
+0GOHO4L1rZ35S63GTe4tzlWHI4IkvTN8h+oM1gcUG4YdGylWKzIxjFbq25jCim61
+kEvRH6GDmGU8uURJSWCPMQ+wwmFSFH1QVVdN0uPk03nmjcqh7pc2Gyh0kaF2UTcV
+WejWJhFDs+MgLKAjWee1epjD38ePGmI7JVzLAJ+/egzmVk7ta2PnFN2LxcAK+e/l
+4+XzWgmT6XmfsMlMpK5Mw7lhGY0vDqjc1VluVBEvF32tHK61xuPWwjqH28Dw+j4h
+jzmepWWIfqiBaFuE6HnDgsJmAmk9xWXxuDBjkBbL8PbN96XkC6l5nFzZuTSbW3Y=
+=psFi
+-----END PGP SIGNATURE-----
+</PRE>
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000442.html">[deepamehta-devel] a blog post on how to create a plugin and a	question
+</A></li>
+	<LI>Next message: <A HREF="000444.html">[deepamehta-devel] a blog post on how to create a plugin and a	question
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#443">[ date ]</a>
+              <a href="thread.html#443">[ thread ]</a>
+              <a href="subject.html#443">[ subject ]</a>
+              <a href="author.html#443">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/deepamehta-devel">More information about the deepamehta-devel
+mailing list</a><br>
+</body></html>

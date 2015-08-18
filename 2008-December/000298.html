@@ -1,0 +1,201 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [deepamehta-devel] M&#246;gliches Entwicklertreffen
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/deepamehta-devel/2008-December/index.html" >
+   <LINK REL="made" HREF="mailto:deepamehta-devel%40lists.berlios.de?Subject=Re%3A%20%5Bdeepamehta-devel%5D%20%3D%3Futf-8%3Fq%3FM%3DC3%3DB6gliches_Entwicklertreffen%3F%3D&In-Reply-To=%3C49354B1D.9010702%40deepamehta.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   
+   <LINK REL="Next"  HREF="000303.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[deepamehta-devel] M&#246;gliches Entwicklertreffen</H1>
+    <B>Malte Rei&#223;ig</B> 
+    <A HREF="mailto:deepamehta-devel%40lists.berlios.de?Subject=Re%3A%20%5Bdeepamehta-devel%5D%20%3D%3Futf-8%3Fq%3FM%3DC3%3DB6gliches_Entwicklertreffen%3F%3D&In-Reply-To=%3C49354B1D.9010702%40deepamehta.de%3E"
+       TITLE="[deepamehta-devel] M&#246;gliches Entwicklertreffen">mre at deepamehta.de
+       </A><BR>
+    <I>Tue Dec  2 15:50:05 CET 2008</I>
+    <P><UL>
+        
+        <LI>Next message: <A HREF="000303.html">[deepamehta-devel] M&#246;gliches Entwicklertreffen
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#298">[ date ]</a>
+              <a href="thread.html#298">[ thread ]</a>
+              <a href="subject.html#298">[ subject ]</a>
+              <a href="author.html#298">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hallo liebe Entwickler und DeepaMehta Freunde,
+
+ich f&#228;nde es sch&#246;n wenn wir uns dieses Jahr nochmal alle treffen
+k&#246;nnten. Damit sind eigentlich alle die gemeint, die schon etwas
+DeepaMehta Entwicklungserfahrung haben und uns bei der Konzeption von
+einem m&#246;gl. Import Feature helfen k&#246;nnten. Uns scheint ein Teil dieses
+Feature mit moderatem Aufwand umsetzbar zu sein und es wurde schon
+wiederholt das Bed&#252;rfnis zum Import von Daten ge&#228;u&#223;ert.
+
+So wie es aktuell aussieht, k&#246;nnte die Entwicklung von zwei
+verschiedenen Anwendungsf&#228;lle getragen und somit mit &quot;Spirit&quot; unter
+f&#252;ttert werden. Einen davon hat Matthias M. bereits beschrieben, diesen
+Text habe ich unten zur Orientierung mal angeh&#228;ngt. J&#246;rg und ich w&#252;rden
+gerne mit euch zusammen in gem&#252;tlicher Runde durchsprechen inwiefern
+solch eine Erweiterung dazu beitragen kann in Zukunft generell bessere
+Grundlagen f&#252;r den Datenimport aufzubauen und wie erste konkrete
+Schritte dahin aussehen m&#252;ssten.
+
+Wer Lust hat gibt doch bitte R&#252;ckmeldung wann daf&#252;r bei Ihm Zeit w&#228;re.
+Mir passt es am besten in der Woche vom 15.12 bis zum 19.12 des Abends
+am liebsten oder aber schon in der n&#228;chsten Woche, des Abends am 8.12
+oder 9.12.
+
+
+F&#252;r den 16. haben wir noch ein Community Meeting im Store geplant um die
+Agenda vom letzten Mal nachzuholen, da gab es n&#228;mlich eine spontane
+Einf&#252;hrungsveranstaltung. Mehr zu dem Termin unter
+<A HREF="http://deepamehta.newthinking.net/wiki/en/Community_Agenda.">http://deepamehta.newthinking.net/wiki/en/Community_Agenda.</A> Das folgende
+Developer Meeting k&#246;nnten wir an der Stelle ebenfalls vorbereiten,
+bietet sich ja an. 
+
+Ich freue mich auf weitere Vorschl&#228;ge von euch.
+
+Lieben Gru&#223;
+
+Malte
+
+
+Als Anhang nochmal die bisherigen &#220;berlegungen von Matthias und J&#246;rg f&#252;r
+alle zum mitlesen...
+
+--
+&gt;<i> An Fragen, die diskutiert werden m&#252;ssen, sehe ich z.B.:
+</I>&gt;<i>
+</I>&gt;<i> - Was passiert beim Importieren von bereits vorhandenen Topics?
+</I>&gt;<i> Werden diese &#252;berschrieben? Und wie kann erkannt werden, ob ein
+</I>&gt;<i> Topic bereits vorhanden ist?
+</I>
+Es spricht m. E. nichts dagegen, hier die auch sonst in DeepaMehta
+verwendete Logik zu nutzen: Abh&#228;ngig von dem Flag &quot;unique Topicname&quot;
+(oder wie das hei&#223;t) &#252;berschreiben oder neu hinzuf&#252;gen. Beim Szenario
+als einzelne Mindmap-/ Conceptmap-Extension wird es relativ selten
+vorkommen, dass jemand den Zusammenhang mit dem vorhandenen
+Datenbestand braucht. Wenn umgekehrt das &#220;berschreiben als zu gro&#223;es
+Risiko angesehen wird, h&#228;te ich nichts gegen einen Abbriuch des Imports
+mit Fehlermeldung, so dass man im Import-Wizard die Ascii-Daten noch
+weiter bearbeiten kann und den Import nochmal probiert. Die Vorbereitung
+des Inputs (vern&#252;nftig kurze und aussagekr&#228;ftige Labels, vern&#252;nftig
+detaillierte Abstracts aus dem Rohmaterial erzeugen), die braucht
+vermutlich sowieso mehrere Schritte mit Iteration. &#196;hnlich wie bei MS
+Access.
+
+&gt;<i> - Wie k&#246;nnen verkn&#252;pfte Topics importiert werden? Z.B. Film-Topics
+</I>&gt;<i> die jeweils mehreren Schaupieler-Topics assoziiert sind.
+</I>
+1. Verln&#252;pfungen mit schon vorhandenen Topics w&#228;ren (wie oben angedeutet)
+nicht wichtig.
+
+2. *Hierarchische* Verkn&#252;pfungen des neuen Inputs w&#228;ren eine sch&#246;ne erste
+Ausbaustufe: Zum Beispiel die Semtech2008 Sessions zu Tracks
+gruppieren, wie ich es auch irgendwo im UserGuide mit dem roten Topictype
+&quot;major&quot; angedeutet habe (analog rot eingezeichneten St&#228;dten in einer
+Landkarte neben grauen D&#246;rfern). Da diese Zuordnung aber schon in CSV
+schwierig ist, (siehe
+<A HREF="http://www.rzuser.uni-heidelberg.de/~x28/anke/text/#4.3.2.">http://www.rzuser.uni-heidelberg.de/~x28/anke/text/#4.3.2.</A> )
+m&#252;sste dies der Wizard interaktiv anbieten. Ein bisschen Handarbeit
+ist da m. E. zumutbar, da es sich wohl in der Regel h&#246;chstens um 100 - 200
+Topics handelt.
+
+Wenn man sich das typische Beispiel einen Konferenz mit Sessions und Tracks
+anschaut, oder Aufs&#228;tze mit Sammelb&#228;nden, dann ist meist der Input aus
+einer
+lieblos formatierten HTML-Tabelle zu entnehmen, da ist man froh, wenn man
+&#252;berhaupt die unterste Ebene ohne Copy und Paste &#252;bernommen bekommt
+(Copy &amp; Paste ist auch inhaltlich ein Problem, weil man dabei der
+Versuchung
+unterliegt, schon eine erste voreilige Filterung vorzunehmen, um
+Handarbeit zu
+sparen).
+
+F&#252;r die zweite bzw. die Gruppierungs-Ebene ist das etwas anderes. Zum
+Beispiel
+k&#246;nnte man diese mit in die zweispaltige Tabelle mit einreihen (Labels,
+Descriptions)
+und einfach als &quot;major&quot; markieren. Wenn dann das vom Import-Wizard erzeute
+Auto-Layout die Gruppen schon mal optisch trennt (Mutter1, Kind1a, Kind1b,
+Abstand, Mutter2, Kind2a, Kind2b, Kind2c, Abstand, Mutter3, ..) dann ist es
+kein Problem, die Zuordnungs-Associations in dem Moment zu machen, wo man
+auch inhaltlich die Topics verarbeitet, z. B. Fulltext-Descriptions
+liest und per
+Fettsatz annotiert.
+
+(Sch&#246;n w&#228;re es an dieser Stelle nat&#252;rlich, wenn dabei eine farblich
+st&#228;rkere Linie
+der Standard w&#228;re, damit das unauff&#228;lligere Grau der Generic Association
+f&#252;r die
+Querverweise reserviert bliebe, die zus&#228;tzlich zu den
+Hierarchie-Relationen dazu
+kommen).
+
+3. Viele nichthierarchische Verkn&#252;pfungen wie Movies/Actors w&#228;ren erst eine
+dritte Ausbaustufe. Die w&#228;re erstens nicht mehr soo wichtig - da w&#228;ren
+andere
+flankierende Verbesserungen wichtiger, um die Mapping Anwendung weiter
+publik zu machen (etwa bei Chuck Frey oder gar Richard MacManus) , z. B.
+eine anonyme Sandbox und ein bisschen Abrundung der Usability.
+
+Zweitens k&#246;nnte ein Import von komplexeren Verkn&#252;pfungen nicht mehr
+mit viel Interaktivit&#228;t in einem Wizard ablaufen, weil die reichere
+Funktionalit&#228;t
+die Nutzer verwirren w&#252;rde.
+
+Hier k&#228;me deshalb eher infrage, ein bestimmtes XML-Format komplett
+umzusetzen, etwas die RDF-Datei der Semtech2008 Sessions, oder, aus
+dem Literaturbereich, etwas wie Beluga-Output
+ <A HREF="http://beluga.sub.uni-hamburg.de/">http://beluga.sub.uni-hamburg.de/</A> , n&#228;mlich IMS/Scorm-Pakete, oder
+vielleicht gibt es bei Endnote auch Schnittstellen zum Anzapfen. Oder auch
+Concept-Maps von Novaks Cmap <A HREF="http://cmap.ihmc.us/conceptmap.html">http://cmap.ihmc.us/conceptmap.html</A>
+Aber das w&#228;re eigentlich schon fast Mashup und nicht mehr nur
+pers&#246;nliches Knowledge Management (und irgendwann w&#228;re sowas bestimmt
+eher eine Seminararbeit f&#252;r Informatikstudenten?)
+
+Soweit der Import-Ablauf betroffen ist, w&#228;re hier wahrscheinlich eine
+Transaktions-Logik das Sauberste, ganz oder gar nicht, ein neues Topic
+mit allen Associations oder Abbruch.
+
+Aber, ob es sich &#252;berhaupt lohnt, &#252;ber die dritte Ausbausufe so intensiv
+nachzudenken, das entscheidet sich e. E, erst, wenn die erste Stufe
+Usability-m&#228;&#223;ig vertrauenerweckend aussieht. So viel erstmal f&#252;r heute.
+-- 
+
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	
+	<LI>Next message: <A HREF="000303.html">[deepamehta-devel] M&#246;gliches Entwicklertreffen
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#298">[ date ]</a>
+              <a href="thread.html#298">[ thread ]</a>
+              <a href="subject.html#298">[ subject ]</a>
+              <a href="author.html#298">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/deepamehta-devel">More information about the deepamehta-devel
+mailing list</a><br>
+</body></html>

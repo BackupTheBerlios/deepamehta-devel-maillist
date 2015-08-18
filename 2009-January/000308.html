@@ -1,0 +1,174 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [deepamehta-devel] PDF Topic Preview
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/deepamehta-devel/2009-January/index.html" >
+   <LINK REL="made" HREF="mailto:deepamehta-devel%40lists.berlios.de?Subject=Re%3A%20%5Bdeepamehta-devel%5D%20PDF%20Topic%20Preview&In-Reply-To=%3C4962A4E7.1040904%40deepamehta.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000307.html">
+   <LINK REL="Next"  HREF="000309.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[deepamehta-devel] PDF Topic Preview</H1>
+    <B>Malte Rei&#223;ig</B> 
+    <A HREF="mailto:deepamehta-devel%40lists.berlios.de?Subject=Re%3A%20%5Bdeepamehta-devel%5D%20PDF%20Topic%20Preview&In-Reply-To=%3C4962A4E7.1040904%40deepamehta.de%3E"
+       TITLE="[deepamehta-devel] PDF Topic Preview">mre at deepamehta.de
+       </A><BR>
+    <I>Tue Jan  6 01:25:11 CET 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000307.html">[deepamehta-devel] M&#246;gliches Entwicklertreffen
+</A></li>
+        <LI>Next message: <A HREF="000309.html">[deepamehta-devel] PDF Topic Preview
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#308">[ date ]</a>
+              <a href="thread.html#308">[ thread ]</a>
+              <a href="subject.html#308">[ subject ]</a>
+              <a href="author.html#308">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Guten Abend liebe Entwickler!
+
+Jetzt wollte ich neben den andere Infos des heutigen Abends, einfach um
+nun doch noch etwas Klarheit zur PDF Komponente im aktuellen Thin Client
+zu schaffen, etwas konkretes posten. Ganz im Gegenteil zur etwas
+&#252;berfl&#252;ssigen Desktop Aufnahme von dem PDFTopic, die noch im Wiki steht.
+
+Die Weiterentwicklung habe ich seitdem letzten mal nicht weiter
+verfolgt, einfach weil ich einerseits stecken geblieben bin und sich
+zudem neue Fragen ergeben haben, die ich auch im Vorfeld neuer
+Bem&#252;hungen gerne mit euch diskutieren w&#252;rde. Um die bisherigen
+Bem&#252;hungen doch noch kurzfristig fruchten zu lassen, bitte ich euch
+jetzt erstmal um Mithilfe oder Anregungen. Wenn wir da zusammen in
+dieser Woche noch eine L&#246;sung finden k&#246;nnten, w&#252;rde ich mir gerne noch 1
+bis 2 Abende daf&#252;r Zeit nehmen. So w&#228;ren wir zum n&#228;chsten Treffen auch
+schon etwas weiter.
+
+Ich hab etwas Schwierigkeiten bei dem konvertieren des DataInputStream,
+via String, in einen ByteBuffer. Is komisch, ick wee&#223;, steht hier aber
+so :). Das Problem liegt wohl bei mir oder im String und jetzt frag ich
+mich ob das alles soo &#252;berhaupt noch umzusetzen ist. Weiter mit dem
+trockenen Teil:
+
+Beim auslesen ist der String von dm her gesetzt und einen ByteBuffer
+l&#228;sst sich entweder &#252;ber einzelne bytes, ein byte[], char[] oder auch
+numerisch? f&#252;llen. Zumindest sind dass die verf&#252;gbaren Methoden, wenn
+man nicht gerade einen InputStream zur Verf&#252;gung hat. Das mit dem
+char[], dachte ich, m&#252;sste eigentlich klappen aber leider Pustekuchen!
+
+Tja, bei allen M&#246;glichkeiten kann ich den Inhalt beim laden der Property
+aus der DB nicht erfolgreich in einen ByteBuffer konvertieren. Der
+PdfRenderer meckert, der Datenstrom aus dem Property w&#228;re keine PDFFile.
+Da h&#228;ngt's momentan. Hat jemand etwas mehr Verst&#228;ndnis f&#252;r den Ansatz
+mit den Bytes in der DB? Ich bin nat&#252;rlich f&#252;r jeden Hinweis dankbar!
+
+Gru&#223;,
+
+Malte
+
+Ps. Ich versuche mich hier noch in weiterer Beschreibung des aktuellen
+Problems und mit einem  Vorschlag die Dokumente doch direkt aus dem
+Repository zu lesen.
+
+---
+
+Mittels readChar() dachte ich k&#246;nnte ich die Bytes in einem String
+konservieren und wieder in einen ByteBuffer stopfen, funzt aber leider
+nicht.
+     ...
+     [java] *** PDFTopic: written pageData into TopicProp &quot;Page&quot;, with
+readChar()
+     [java] 05.01.2009 21:04:18
+de.deepamehta.client.PropertyPanel$PropertyField setText
+     [java] SCHWERWIEGEND: null
+     [java] java.io.IOException: This may not be a PDF File
+     [java]     at com.sun.pdfview.PDFFile.parseFile(PDFFile.java:878)
+     ...
+
+Alle meine versuche resultieren in derselben Fehlermeldung der pdf-api.
+
+Jetzt wei&#223; ich gerad nicht wie ich sonst die Bytes aus dem InputStream
+im String ablegen und aus diesem dann wieder einen ByteBuffer zaubern
+k&#246;nnte?
+
+---
+
+Einen PDFFile Objekt ben&#246;tigt unbedingt einen ByteBuffer, deshalb ist
+ein anderer Ansatz vielleicht etwas einfacher und l&#228;sst das Problem
+links liegen. Man k&#246;nnte das Dokument aus dem Documents Repository ohne
+die Bytes in der DB zu hinterlegen laden. Dieser L&#246;sungsansatz w&#252;rde
+allerdings gleich zwei Bereiche des Clients adressieren die dabei
+gelockert werden m&#252;ssten. Deshalb tendiere ich ja eher dazu, das
+FileProperty doppelt zum Topic in der DB zu hinterlegen und dann f&#252;r das
+eine Prop. die &quot;FileChooser&quot; Visualisierung auszuw&#228;hlen und f&#252;r das
+andere Property den &quot;PageRenderer&quot; einzustellen. Die Properties w&#228;ren
+sozusagen gespiegelt, einmal der Dokument-Pfad zum editieren und einmal
+der Dokument-Pfad zum &quot;r&#228;ndern&quot;. Naja, nur so eine Idee, die alle
+bisherigen Dokumente die schon vorhanden sind in den DeepaMehta
+Installation integrieren w&#252;rde. W&#228;re das m&#246;glich und vielleich schon
+ausreichend?
+
+
+
+Malte Rei&#223;ig wrote on 15.12.2008 19:59:
+&gt;<i> Hey liebe Leute,
+</I>&gt;<i>
+</I>&gt;<i> da ich ja irgendwie st&#228;ndig am re-searchen bin, hat's mich gerade so in
+</I>&gt;<i> den Fingern gekitzelt bald nun endlich auch meine PDF's direkt in
+</I>&gt;<i> DeepaMehta zu verarbeiten.
+</I>&gt;<i>
+</I>&gt;<i> Nun habe ich mal im Wiki eine Vorschau gepostet wie PDF's zuk&#252;nftig in
+</I>&gt;<i> DeepaMehta angezeigt werden k&#246;nnten. Da gibt es jetzt eine Aufnahme im
+</I>&gt;<i> .ogg Format.
+</I>&gt;<i>
+</I>&gt;<i> <A HREF="http://deepamehta.newthinking.net/wiki/en/Image:pdf-preview.ogg">http://deepamehta.newthinking.net/wiki/en/Image:pdf-preview.ogg</A>
+</I>&gt;<i>
+</I>&gt;<i> F&#252;r diese habe ich wie gewohnt, einen verwirrenden &quot;Laber-Style&quot; einfach
+</I>&gt;<i> mit Musik &#252;berspielt, am besten Ihr schaltet einfach auf Stumm und
+</I>&gt;<i> sperrt die Augen auf ;)
+</I>&gt;<i>
+</I>&gt;<i> Ich freue mich nat&#252;rlich &#252;ber weiteren Austausch der dazu entstehen mag,
+</I>&gt;<i> vorerst aber bleibt das wohl nur f&#252;r Entwickler interessant.
+</I>&gt;<i>
+</I>&gt;<i> Lieben Gru&#223;,
+</I>&gt;<i>
+</I>&gt;<i> Malte
+</I>&gt;<i>
+</I>&gt;<i> _______________________________________________
+</I>&gt;<i> deepamehta-devel mailing list
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/deepamehta-devel">deepamehta-devel at lists.berlios.de</A>
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/deepamehta-devel">https://lists.berlios.de/mailman/listinfo/deepamehta-devel</A>
+</I>&gt;<i>   
+</I>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000307.html">[deepamehta-devel] M&#246;gliches Entwicklertreffen
+</A></li>
+	<LI>Next message: <A HREF="000309.html">[deepamehta-devel] PDF Topic Preview
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#308">[ date ]</a>
+              <a href="thread.html#308">[ thread ]</a>
+              <a href="subject.html#308">[ subject ]</a>
+              <a href="author.html#308">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/deepamehta-devel">More information about the deepamehta-devel
+mailing list</a><br>
+</body></html>

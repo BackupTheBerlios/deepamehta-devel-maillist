@@ -1,0 +1,95 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [deepamehta-devel] SVN durcheinandergeraten?
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/deepamehta-devel/2007-July/index.html" >
+   <LINK REL="made" HREF="mailto:deepamehta-devel%40lists.berlios.de?Subject=Re%3A%20%5Bdeepamehta-devel%5D%20SVN%20durcheinandergeraten%3F&In-Reply-To=%3C75476fd86f2bae7a75020d3caf06d6b0%40deepamehta.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000027.html">
+   <LINK REL="Next"  HREF="000029.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[deepamehta-devel] SVN durcheinandergeraten?</H1>
+    <B>J&#246;rg Richter</B> 
+    <A HREF="mailto:deepamehta-devel%40lists.berlios.de?Subject=Re%3A%20%5Bdeepamehta-devel%5D%20SVN%20durcheinandergeraten%3F&In-Reply-To=%3C75476fd86f2bae7a75020d3caf06d6b0%40deepamehta.de%3E"
+       TITLE="[deepamehta-devel] SVN durcheinandergeraten?">jri at deepamehta.de
+       </A><BR>
+    <I>Wed Jul  4 23:34:59 CEST 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000027.html">[deepamehta-devel] [Bug #11504] Lacking access control for &quot;Set	Standard Workspace&quot; command
+</A></li>
+        <LI>Next message: <A HREF="000029.html">[deepamehta-devel] GESUCHT: Praktikanten / Diplomanden /	Softwareentwickler
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#28">[ date ]</a>
+              <a href="thread.html#28">[ thread ]</a>
+              <a href="subject.html#28">[ subject ]</a>
+              <a href="author.html#28">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>
+Liebe Entwickler,
+
+kennt sich jemand gut mit SVN aus?
+
+Ich hab' ein komisches Problem: ich w&#252;rde gerne ein neues Verzeichnis 
+(&quot;dm-topicmapviewer&quot;) in das repository aufnehmen. &quot;svn -u status&quot; 
+zeigt an, da&#223; das Verzeichnis noch nicht unter version control ist:
+
+	?                   install/examples/dm-topicmapviewer
+
+... was auch mit der WebSVN-Anzeige &#252;bereinstimmt:
+<A HREF="http://svn.berlios.de/wsvn/deepamehta/trunk/install/examples/?rev=0&amp;sc=0">http://svn.berlios.de/wsvn/deepamehta/trunk/install/examples/?rev=0&amp;sc=0</A>
+
+Trotzdem kann ich das Verzeichnis nicht adden, weil es angeblich schon 
+unter version control ist:
+
+	localhost:~/Projects/DeepaMehta/trunk jri$ svn add 
+install/examples/dm-topicmapviewer
+	svn: warning: 'install/examples/dm-topicmapviewer' is already under 
+version control
+
+Irgendwie scheint die repository-Verwaltung durcheinandergekommen zu 
+sein.
+=&gt; Wer hat eine Idee?
+
+Bei dem Verzeichnis handelt es sich um die neue 
+Beispiel-DeepaMehta-Webanwendung &quot;dm-topicmapviewer&quot;, mit der Topic 
+Maps ins Web publiziert werden k&#246;nnen (ohne Java). Ich hab' das beim 
+letzten Community-Treffen gezeigt.
+
+Gr&#252;&#223;e
+J&#246;rg
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000027.html">[deepamehta-devel] [Bug #11504] Lacking access control for &quot;Set	Standard Workspace&quot; command
+</A></li>
+	<LI>Next message: <A HREF="000029.html">[deepamehta-devel] GESUCHT: Praktikanten / Diplomanden /	Softwareentwickler
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#28">[ date ]</a>
+              <a href="thread.html#28">[ thread ]</a>
+              <a href="subject.html#28">[ subject ]</a>
+              <a href="author.html#28">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/deepamehta-devel">More information about the deepamehta-devel
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,105 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [deepamehta-devel] DeepaMehta Patch-Politik (was: cm-2.17-patch)
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/deepamehta-devel/2007-September/index.html" >
+   <LINK REL="made" HREF="mailto:deepamehta-devel%40lists.berlios.de?Subject=Re%3A%20%5Bdeepamehta-devel%5D%20DeepaMehta%20Patch-Politik%20%28was%3A%20cm-2.17-patch%29&In-Reply-To=%3Ccd35d96d31e928b08dd1be9a01168bc4%40deepamehta.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   
+   <LINK REL="Next"  HREF="000036.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[deepamehta-devel] DeepaMehta Patch-Politik (was: cm-2.17-patch)</H1>
+    <B>J&#246;rg Richter</B> 
+    <A HREF="mailto:deepamehta-devel%40lists.berlios.de?Subject=Re%3A%20%5Bdeepamehta-devel%5D%20DeepaMehta%20Patch-Politik%20%28was%3A%20cm-2.17-patch%29&In-Reply-To=%3Ccd35d96d31e928b08dd1be9a01168bc4%40deepamehta.de%3E"
+       TITLE="[deepamehta-devel] DeepaMehta Patch-Politik (was: cm-2.17-patch)">jri at deepamehta.de
+       </A><BR>
+    <I>Sat Sep  1 16:59:16 CEST 2007</I>
+    <P><UL>
+        
+        <LI>Next message: <A HREF="000036.html">[deepamehta-devel] Computermanufaktur-DeepaMehta-Treffen
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#35">[ date ]</a>
+              <a href="thread.html#35">[ thread ]</a>
+              <a href="subject.html#35">[ subject ]</a>
+              <a href="author.html#35">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>
+On 31.08.2007, at 07:55, Enrico Schnepel wrote:
+
+&gt;<i> ich hab letztens die sachen vom dev-treffen eingesheckt. ich hab mir 
+</I>&gt;<i> auch mal
+</I>&gt;<i> den 2.17 patch angeschaut. soll der eigentlich in die normale 
+</I>&gt;<i> install-routine
+</I>&gt;<i> eingebaut werden oder soll der einfach am schluss zus&#228;tzlich ausgef&#252;hrt
+</I>&gt;<i> werden? hast du eingent lich dann noch sachen, die f&#252;r den 2.17-patch
+</I>&gt;<i> notwendig sind oder ist der jetzt fertig? ich w&#252;rde die wenigen 
+</I>&gt;<i> mysql-sachen
+</I>&gt;<i> in den patch integrieren. und dann (sp&#228;ter) f&#252;r relation-type einen 
+</I>&gt;<i> neuen
+</I>&gt;<i> patch (2.18) aufmachen.
+</I>
+
+Hallo Enrico,
+
+danke f&#252;r Deine Frage!
+Ich m&#246;chte die Gelegenheit nutzen, und die allgemeine DeepaMehta 
+Patch-Politik beschreiben.
+
+Die Patches werden immer in die normale Install-Routine (&quot;cm.sql&quot; und 
+ggf. z.B. &quot;db_tables_mysql.sql&quot;) integriert. Die Patches werden also 
+nur bei einem DeepaMehta-Update eingespielt, und nicht bei einer 
+Erst-Installation.
+
+Hinweise zur Patch-Integration: cm.sql soll nur INSERT-Statements 
+enthalten. Wenn ein Patch UPDATE oder DELETE-Statements enth&#228;lt, m&#252;ssen 
+die INSERT-Statements in cm.sql entsprechend ge&#228;ndert oder gel&#246;scht 
+werden. Neue INSERT-Statements sollen so in cm.sql eingef&#252;gt werden, 
+da&#223; die Gliederung erhalten bleibt (erst Topictypen, dann 
+Assoziationstypen, usw.). Wenn der Patch &#196;nderungen an der 
+Datendefinition durchf&#252;hrt (ALTER TABLE) m&#252;ssen diese auch in die 
+entsprechenden Install-Skripte (z.B. &quot;db_tables_mysql.sql&quot;) integriert 
+werden, durch &#196;nderung der CREATE TABLE-Statements.
+
+Den 2.17-Patch hab' ich gerade nochmal committed, und Du k&#246;nntest Deine 
+Teile hinzuf&#252;gen und mit der Integration in die normale Install-Routine 
+beginnen. Evt. kommen noch kleinere Erg&#228;nzungen zum 2.17-Patch hinzu, 
+die dann in cm.sql nachgetragen werden m&#252;ssen. F&#252;r das Relation-Type 
+Feature kannst Du gerne einen neuen Patch beginnen (cm-2.18.sql)
+
+Danke und Gr&#252;&#223;e
+J&#246;rg
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	
+	<LI>Next message: <A HREF="000036.html">[deepamehta-devel] Computermanufaktur-DeepaMehta-Treffen
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#35">[ date ]</a>
+              <a href="thread.html#35">[ thread ]</a>
+              <a href="subject.html#35">[ subject ]</a>
+              <a href="author.html#35">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/deepamehta-devel">More information about the deepamehta-devel
+mailing list</a><br>
+</body></html>

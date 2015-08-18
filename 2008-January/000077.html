@@ -1,0 +1,213 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [deepamehta-devel] DeepaMehta Entwicklungsrichtlinien
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/deepamehta-devel/2008-January/index.html" >
+   <LINK REL="made" HREF="mailto:deepamehta-devel%40lists.berlios.de?Subject=Re%3A%20%5Bdeepamehta-devel%5D%20DeepaMehta%20Entwicklungsrichtlinien&In-Reply-To=%3C47946825.9060707%40zertificon.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000076.html">
+   <LINK REL="Next"  HREF="000078.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[deepamehta-devel] DeepaMehta Entwicklungsrichtlinien</H1>
+    <B>Stefan Lischke</B> 
+    <A HREF="mailto:deepamehta-devel%40lists.berlios.de?Subject=Re%3A%20%5Bdeepamehta-devel%5D%20DeepaMehta%20Entwicklungsrichtlinien&In-Reply-To=%3C47946825.9060707%40zertificon.com%3E"
+       TITLE="[deepamehta-devel] DeepaMehta Entwicklungsrichtlinien">s.lischke at zertificon.com
+       </A><BR>
+    <I>Mon Jan 21 10:38:45 CET 2008</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000076.html">[deepamehta-devel] DeepaMehta Entwicklungsrichtlinien
+</A></li>
+        <LI>Next message: <A HREF="000078.html">[deepamehta-devel] DeepaMehta Entwicklungsrichtlinien
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#77">[ date ]</a>
+              <a href="thread.html#77">[ thread ]</a>
+              <a href="subject.html#77">[ subject ]</a>
+              <a href="author.html#77">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi DeepaMehta-community,
+
+Ich lausche schon seit l&#228;ngerer Zeit auf eurer Liste, denn ich finde DeepaMehta immer noch spannend,
+kann aber leider aus zeitmangels nicht viel beitragen. Lasst mich eine Anmerkung zu J&#246;rgs Mail
+machen. Ich bin in meinen OpenSource und Industrie-Projekte sehr oft am gleichen Punkt wie ihr
+angekommen. Der Code ist produktiv, aber eine Weiterentwicklung soll und muss weiter unkompliziert
+m&#246;glich sein.
+
+Das irgendwann mal ein solches Problem wie hier sehr sch&#246;n beschrieben auftritt ist fast nicht
+auszuschliessen. Gewisse Entwicklungsrichtlinien sind wichtig, aber sie beschr&#228;nken und
+&quot;ver&#228;ngstigen&quot; auch die Entwickler. Ich kann mich an ein Projekt erinnern, da haben wir einmal im
+Monat deployed und danach haben die Entwickler gezittert und darauf gewartet dass es &#196;rger vom
+Kunden und Chef gab, wenn ein indirekter Fehler (eine Stelle an der man nicht gearbeitet hat, die
+aber irgendwie davon abh&#228;ngig war) auftrat.
+
+Ein Entwickler sollte nur in gewissem Ma&#223;e zur Verantwortung gezogen werden.
+
+In der Industrie &#252;bernimmt dieser Part das Testmanagement der QM. F&#252;r ein OpenSource Projekt jedoch
+wirkt ein extensives automatisches Testsystem schon manchmal Wunder. In letzter Zeit verwende ich in
+meinen Java-Projekten das Paradigma des Test-driven development[1] mit Junit und erziele damit gro&#223;e
+Erfolge. Das Testsystem ist in den Build-Prozess integriert und eine Neuentwicklung beginnt mit der
+Erstellung der TestCases und Interfaces. Die Entwicklung hangelt sich dann entlang der Tests,
+erf&#252;llt sie durch die richtige Implementierung und erweitert oder &#228;ndert die Tests entsprechend.
+
+
+[1] <A HREF="http://en.wikipedia.org/wiki/Test-driven_development">http://en.wikipedia.org/wiki/Test-driven_development</A>
+
+Gr&#252;&#223;e
+
+Stefan Lischke
+
+
+
+J&#246;rg Richter wrote:
+&gt;<i> Liebe Entwickler,
+</I>&gt;<i> 
+</I>&gt;<i> beim letzten Dev-Treffen am 21.12. hatte ich auf einen schwerwiegenden 
+</I>&gt;<i> Bug hingewiesen, der seit vielen Jahren behoben war, seit einigen 
+</I>&gt;<i> Monaten aber erneut auftrat: Inhalte, die in das Property Panel 
+</I>&gt;<i> eingegeben wurden und die ein einfaches Anf&#252;hrungszeichen (') 
+</I>&gt;<i> enthielten, wurden nicht gespeichert und gingen verloren! Ursache waren 
+</I>&gt;<i> fehlerhafte SQL Queries, da die Ersetzung von ' durch \', die in 
+</I>&gt;<i> RelationalCorporateMemory.quote() vorgenommen wird, nicht mehr 
+</I>&gt;<i> funktionierte. Dieser Fehler ist jetzt behoben und ich habe 
+</I>&gt;<i> rekonstruiert, warum der Fehler erneut auftrat. Mit dem Ziel, unsere 
+</I>&gt;<i> Effektivit&#228;t bei der DeepaMehta Entwicklung zu steigern, m&#246;chte ich 
+</I>&gt;<i> diese Gelegenheit nutzen, um Entwicklungsrichtlinien f&#252;r alle 
+</I>&gt;<i> DeepaMehta Entwickler auszusprechen.
+</I>&gt;<i> 
+</I>&gt;<i> Rekonstruktion der Fehlerursache: Sp&#228;testens seit Revision 228, die 
+</I>&gt;<i> etwa 3 Monate zur&#252;ckliegt, hat Entwickler X die 15-zeilige 
+</I>&gt;<i> Implementierung von DeepaMehtaUtils.replace() durch eine 1-zeilige 
+</I>&gt;<i> Implementierung ersetzt, unter Verwendung von String.replaceAll(). Die 
+</I>&gt;<i> Absicht war offenbar eine Code-Optimierung. Durch die Verwendung von 
+</I>&gt;<i> String.replaceAll(), die mit regul&#228;ren Ausdr&#252;cken arbeitet, ist 
+</I>&gt;<i> DeepaMehtaUtils.replace() aber nicht mehr 100%ig aufrufkompatibel zur 
+</I>&gt;<i> vorherigen Implementierung, die mit einfachen Java Strings und 
+</I>&gt;<i> Charachtern arbeitete. Da der Code in den meisten F&#228;llen funktionierte, 
+</I>&gt;<i> fiel der Fehler zun&#228;chst nicht auf. Der Fehler tritt erst zutage, wenn 
+</I>&gt;<i> der Ersatzstring ein Backslash (\) enth&#228;lt. In einem Java String mu&#223; ja 
+</I>&gt;<i> ein Backslash, wiederum durch Backslash gequotet werden: &quot;\\&quot;. 
+</I>&gt;<i> Innerhalb eines regul&#228;reren Ausdruck nun aber, mu&#223; jeder Backslash 
+</I>&gt;<i> wiederum gequotet werden: &quot;\\\\&quot;.
+</I>&gt;<i> 
+</I>&gt;<i> Folge: Bei den 2 wichtigsten DeepaMehta-Kunden sind im Moment 
+</I>&gt;<i> Anwendungen deployt, die einen schwerwiegenden Fehler enthalten.
+</I>&gt;<i> 
+</I>&gt;<i> Fehlerbehebung: Ich h&#228;tte den Fehler beheben k&#246;nnen, indem ich in 
+</I>&gt;<i> RelationalCorporateMemory.quote()
+</I>&gt;<i> 	DeepaMehtaUtils.replace(str, '\'', &quot;\\'&quot;);
+</I>&gt;<i> durch
+</I>&gt;<i> 	DeepaMehtaUtils.replace(str, '\'', &quot;\\\\'&quot;);
+</I>&gt;<i> ersetzt h&#228;tte. Au&#223;erdem h&#228;tten alle weiteren Aufrufe von 
+</I>&gt;<i> DeepaMehtaUtils.replace() -- im DeepaMehta-Framework UND in allen 
+</I>&gt;<i> DeepaMehta-Anwendungen -- auf diese Aufrufinkompatibilit&#228;t hin 
+</I>&gt;<i> untersucht, und ggf. angepasst werden m&#252;ssen. Ich habe mich daher 
+</I>&gt;<i> entschlossen, die alte Aufrufsemantik beizubehalten, und habe die alte 
+</I>&gt;<i> Implementierung von DeepaMehtaUtils.replace() wiederhergestellt.
+</I>&gt;<i> 
+</I>&gt;<i> Entwickler X hatte vorgeschlagen, der ganzen Quoting-Thematik aus dem 
+</I>&gt;<i> Weg zu gehen, indem DeepaMehta nur mit SQL Prepared Statements 
+</I>&gt;<i> arbeitet. Technisch gesehen ist das nat&#252;rlich ein guter Vorschlag, 
+</I>&gt;<i> nicht zuletzt um besser gegen SQL Injection-Angriffe gesch&#252;tzt zu sein, 
+</I>&gt;<i> aber organisatorisch gesehen scheint mir das kein gutes Vorgehen zu 
+</I>&gt;<i> sein. Wer bei der Erf&#252;llung einer Aufagbe unn&#246;tige Nebenbaustellen 
+</I>&gt;<i> er&#246;ffnet, und w&#228;hrend der Arbeit auf der Nebenbaustelle weitere 
+</I>&gt;<i> Nebenbaustellen er&#246;ffnet, der verleiert m&#246;glicherweise sein 
+</I>&gt;<i> urspr&#252;ngliches Ziel aus dem Blick und f&#228;llt fr&#252;her oder sp&#228;ter in die 
+</I>&gt;<i> selbstgegrabenen L&#246;cher. Das ist uns hier passiert. In dem Film 
+</I>&gt;<i> &quot;Brazil&quot; beschreibt Sam Lowry's 80-j&#228;hrige Mutter, die sich einer 
+</I>&gt;<i> Sch&#246;nheitsoperation nach der anderen unterzieht, diese bodenlose 
+</I>&gt;<i> Situation mit den Worten:
+</I>&gt;<i> 
+</I>&gt;<i> 	&quot;Der Arzt sagt: Die Komplikation hatte eine Komplikation&quot;
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> Mit dem Ziel, die Koordination des DeepaMehta-Entwicklungsproze&#223; zu 
+</I>&gt;<i> verbessern und die Qualit&#228;t des Codes zu sichern, spreche ich folgende 
+</I>&gt;<i> Richtlinien aus:
+</I>&gt;<i> 
+</I>&gt;<i> 	=&gt; Committe nur Code deren Auswirkungen auf den DeepaMehta-Kern UND 
+</I>&gt;<i> auf die DeepaMehta-Anwendungen Du verstehst.
+</I>&gt;<i> 
+</I>&gt;<i> 	=&gt; Mache keine &quot;Optimierungen&quot; am DeepaMehta-Kern, die f&#252;r die 
+</I>&gt;<i> Erf&#252;llung der aktuellen Aufgabe nicht notwendig sind.
+</I>&gt;<i> 
+</I>&gt;<i> 	=&gt; Mache keine Versuche, einen Fehler durch Einf&#252;hrung neuer Methoden 
+</I>&gt;<i> zu beheben, bevor Du nicht die Fehlerursache verstanden hast.
+</I>&gt;<i> 
+</I>&gt;<i> 	=&gt; Konzentriere Dich auf das Ziel Deiner Aufgabe und nehme keine neuen 
+</I>&gt;<i> Aufgaben in Angriff, bevor die alte Aufgabe abgeschlossen ist.
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> Andererseits ist es gerade Entwickler X's Dynamik zu verdanken -- er 
+</I>&gt;<i> hat in letzter Zeit viel f&#252;r DeepaMehta gearbeitet und wesentliche 
+</I>&gt;<i> Verbesserungen beigetragen --, da&#223; wir immer st&#228;rker gezwungen werden 
+</I>&gt;<i> uns mit den organisatorischen Fragen zu besch&#228;ftigen, denen sich jedes 
+</I>&gt;<i> Open Source Projekt, das erfolgreich wachsen m&#246;chte, stellen mu&#223;: Wie 
+</I>&gt;<i> kann freiwilliges Engagement gef&#246;rdert und gleichzeitig die Qualit&#228;t 
+</I>&gt;<i> der Ergebnisse sichergestellt werden?
+</I>&gt;<i> 
+</I>&gt;<i> Gr&#252;&#223;e
+</I>&gt;<i> J&#246;rg
+</I>&gt;<i> 
+</I>&gt;<i> _______________________________________________
+</I>&gt;<i> deepamehta-devel mailing list
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/deepamehta-devel">deepamehta-devel at lists.berlios.de</A>
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/deepamehta-devel">https://lists.berlios.de/mailman/listinfo/deepamehta-devel</A>
+</I>&gt;<i> 
+</I>
+
+-- 
+Zertificon Solutions GmbH
+Landsberger Allee 117, 10407 Berlin, Germany
+GF: Herbert Nebel, Dr. Burkhard Wiegel
+HRB 94059, AG Berlin-Charlottenburg
+
+<A HREF="http://www.zertificon.com">http://www.zertificon.com</A>
+<A HREF="https://www.globaltrustpoint.com/get?email=s.lischke@zertificon.com">https://www.globaltrustpoint.com/get?email=s.lischke@zertificon.com</A>
++49 (0)30-5900 300-0 (fax -99)
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+&quot;Z1 SecureMail&quot; by Zertificon
+...the leading server solutions for Secure &amp; Trustable E-Mail
+Try our Policy controlled S/MIME &amp; OpenPGP &amp; HTTPS Messaging!!
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: smime.p7s
+Type: application/x-pkcs7-signature
+Size: 5276 bytes
+Desc: not available
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/deepamehta-devel/attachments/20080121/58db5a1c/attachment.bin">https://lists.berlios.de/pipermail/deepamehta-devel/attachments/20080121/58db5a1c/attachment.bin</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000076.html">[deepamehta-devel] DeepaMehta Entwicklungsrichtlinien
+</A></li>
+	<LI>Next message: <A HREF="000078.html">[deepamehta-devel] DeepaMehta Entwicklungsrichtlinien
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#77">[ date ]</a>
+              <a href="thread.html#77">[ thread ]</a>
+              <a href="subject.html#77">[ subject ]</a>
+              <a href="author.html#77">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/deepamehta-devel">More information about the deepamehta-devel
+mailing list</a><br>
+</body></html>

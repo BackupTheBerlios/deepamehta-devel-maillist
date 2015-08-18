@@ -1,0 +1,103 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [deepamehta-devel] &quot;URL&quot; as Identifier - Index Mode KEY
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/deepamehta-devel/2011-August/index.html" >
+   <LINK REL="made" HREF="mailto:deepamehta-devel%40lists.berlios.de?Subject=Re%3A%20%5Bdeepamehta-devel%5D%20%22URL%22%20as%20Identifier%20-%20Index%20Mode%20KEY&In-Reply-To=%3CD85AC85B-9BB0-47A3-A9B0-67AB81706C38%40deepamehta.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000347.html">
+   
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[deepamehta-devel] &quot;URL&quot; as Identifier - Index Mode KEY</H1>
+    <B>J&#246;rg Richter</B> 
+    <A HREF="mailto:deepamehta-devel%40lists.berlios.de?Subject=Re%3A%20%5Bdeepamehta-devel%5D%20%22URL%22%20as%20Identifier%20-%20Index%20Mode%20KEY&In-Reply-To=%3CD85AC85B-9BB0-47A3-A9B0-67AB81706C38%40deepamehta.de%3E"
+       TITLE="[deepamehta-devel] &quot;URL&quot; as Identifier - Index Mode KEY">jri at deepamehta.de
+       </A><BR>
+    <I>Sat Aug 13 16:23:14 CEST 2011</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000347.html">[deepamehta-devel] &quot;URL&quot; as Identifier - Index Mode KEY
+</A></li>
+        
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#348">[ date ]</a>
+              <a href="thread.html#348">[ thread ]</a>
+              <a href="subject.html#348">[ subject ]</a>
+              <a href="author.html#348">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>
+Thank you for reporting this issue!
+
+This is fixed now. Index mode &quot;dm4.core.key&quot; has been added to the &quot;URL&quot; type.
+For usage info see
+<A HREF="https://trac.deepamehta.de/ticket/55">https://trac.deepamehta.de/ticket/55</A>
+
+Hint: to find out the format of the REST API requests see the @Path annotations of the core service calls:
+<A HREF="https://github.com/jri/deepamehta/blob/master/deepamehta-core/src/main/java/de/deepamehta/core/impl/service/EmbeddedService.java">https://github.com/jri/deepamehta/blob/master/deepamehta-core/src/main/java/de/deepamehta/core/impl/service/EmbeddedService.java</A>
+
+Cheers,
+J&#246;rg
+
+
+On Aug 13, 2011, at 4:26, Malte Rei&#223;ig wrote:
+
+&gt;<i> hey dear jiri, good morning old devel-list!
+</I>&gt;<i> 
+</I>&gt;<i> i have an issue with querying a dm4-server for existing URL-Topics via a GET Request and it suddenly struck me that the URL's TopicType Definition may not have yet set it's index_mode like needed (~&quot;dm4.core.key&quot;) to enable such a query for an existing topic -
+</I>&gt;<i> 
+</I>&gt;<i> So, if a TopicType can have several index_modes (please correct me if i am wrong with this) i would be happy if you could add the &quot;dm4.core.key&quot; index_mode_uri for the upcoming release to your current URL-TopicType-Definition - I also appended an examplary query, justin case my request is constructed badly.
+</I>&gt;<i> 
+</I>&gt;<i> Thanks for your help!
+</I>&gt;<i> 
+</I>&gt;<i> Cheers,
+</I>&gt;<i> Malte
+</I>&gt;<i> 
+</I>&gt;<i> ###  Example Query
+</I>&gt;<i> 
+</I>&gt;<i> In a &quot;getTopicByTypeAndValue(uri, value)&quot; i construct the following GET Request for the discussed URL but despite i do have the following URL already bookmarked there is no topic returned as a response to my query.
+</I>&gt;<i> 
+</I>&gt;<i> curl &quot;<A HREF="http://localhost:8080/core/topic/dm4.webbrowser.url/value/https%3A%2%2Fgithub.com%2Fjri%2Fdeepamehta%2Fblob%2Fmaster%2Fdeepamehta-webbrowser%2Fsrc%2Fmain%2Fresources%2Fmigrations%2Fmigration1.json">http://localhost:8080/core/topic/dm4.webbrowser.url/value/https%3A%2%2Fgithub.com%2Fjri%2Fdeepamehta%2Fblob%2Fmaster%2Fdeepamehta-webbrowser%2Fsrc%2Fmain%2Fresources%2Fmigrations%2Fmigration1.json</A>&quot;
+</I>&gt;<i> curl &quot;<A HREF="http://localhost:8080/core/topic/dm4.webbrowser.url/value/https%3A%2F%2Fgithub.com%2Fjri%2Fdeepamehta%2Fblob%2Fmaster%2Fdeepamehta-webbrowser%2Fsrc%2Fmain%2Fresources%2Fmigrations%2Fmigration1.json">http://localhost:8080/core/topic/dm4.webbrowser.url/value/https%3A%2F%2Fgithub.com%2Fjri%2Fdeepamehta%2Fblob%2Fmaster%2Fdeepamehta-webbrowser%2Fsrc%2Fmain%2Fresources%2Fmigrations%2Fmigration1.json</A>&quot;
+</I>&gt;<i> 
+</I>&gt;<i> see also:
+</I>&gt;<i> <A HREF="https://github.com/jri/deepamehta/blob/master/deepamehta-webbrowser/src/main/resources/migrations/migration1.json">https://github.com/jri/deepamehta/blob/master/deepamehta-webbrowser/src/main/resources/migrations/migration1.json</A>
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> _______________________________________________
+</I>&gt;<i> deepamehta-devel mailing list
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/deepamehta-devel">deepamehta-devel at lists.berlios.de</A>
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/deepamehta-devel">https://lists.berlios.de/mailman/listinfo/deepamehta-devel</A>
+</I>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000347.html">[deepamehta-devel] &quot;URL&quot; as Identifier - Index Mode KEY
+</A></li>
+	
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#348">[ date ]</a>
+              <a href="thread.html#348">[ thread ]</a>
+              <a href="subject.html#348">[ subject ]</a>
+              <a href="author.html#348">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/deepamehta-devel">More information about the deepamehta-devel
+mailing list</a><br>
+</body></html>

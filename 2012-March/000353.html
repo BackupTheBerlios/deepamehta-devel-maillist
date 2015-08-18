@@ -1,0 +1,222 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [deepamehta-devel] DeepaMehta Anwendungsf&#228;lle
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/deepamehta-devel/2012-March/index.html" >
+   <LINK REL="made" HREF="mailto:deepamehta-devel%40lists.berlios.de?Subject=Re%3A%20%5Bdeepamehta-devel%5D%20%3D%3Fiso-8859-15%3Fq%3FDeepaMehta_Anwendungsf%3DE4lle%3F%3D&In-Reply-To=%3C4F552F8B.5050707%40ziegi.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   
+   <LINK REL="Next"  HREF="000354.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[deepamehta-devel] DeepaMehta Anwendungsf&#228;lle</H1>
+    <B>Torsten Ziegler</B> 
+    <A HREF="mailto:deepamehta-devel%40lists.berlios.de?Subject=Re%3A%20%5Bdeepamehta-devel%5D%20%3D%3Fiso-8859-15%3Fq%3FDeepaMehta_Anwendungsf%3DE4lle%3F%3D&In-Reply-To=%3C4F552F8B.5050707%40ziegi.de%3E"
+       TITLE="[deepamehta-devel] DeepaMehta Anwendungsf&#228;lle">torsten at ziegi.de
+       </A><BR>
+    <I>Mon Mar  5 22:26:35 CET 2012</I>
+    <P><UL>
+        
+        <LI>Next message: <A HREF="000354.html">[deepamehta-devel] DeepaMehta Anwendungsf&#228;lle
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#353">[ date ]</a>
+              <a href="thread.html#353">[ thread ]</a>
+              <a href="subject.html#353">[ subject ]</a>
+              <a href="author.html#353">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hallo J&#246;rg und Team
+
+inspiriert von der DMLounge letzte Woche mag ich mal
+mal einen typischen Anwendungsfall von mir beschreiben,
+wie er real aussieht, was nach meinem Wissen derzeit in
+DeepaMehta m&#246;glich ist, und wie meine Traum dazu aussieht.
+
+Der Einfachheit schreibe ich es hier auf der Entwickler Liste auf deutsch.
+Versteht das bitte nicht als unm&#246;glichen Feature Request,
+sondern eher als Brainstorming dazu, welche Features und
+Strukturen eine f&#252;r mich n&#252;tzliche Wissensmanagement-Software
+so braucht.
+Das ist alles sehr ins blaue Geschrieben, und vielleicht ist es
+schlicht und ergreifend nicht m&#246;glich das so zu benutzen ?
+
+1. Meine typische Arbeitsumgebung:
+a) 1 offenes Dokument in dem ich editiere (derzeit: Sematik Media Wiki, 
+<A HREF="http://semantic-mediawiki.org/">http://semantic-mediawiki.org/</A>)
+b) ein Stapel B&#252;cher und mehrere offene Webbrowser
+c) diverse Notizzettel (ebenfalls im Mediawiki)
+d) Marker f&#252;r Textstellen in B&#252;chern/PDFs (Notizfunktion vom AdobeReader)
+
+2.1. Was ich in Deepamehta (ohne viel Aufwand machen) kann
+a) editieren
+   Obwohl Deepamheta es per Definition nicht vorsieht zwei Topics
+   gleichzeitig im Detail zu &#246;ffnen ist dies durch die Benutzung mehrerer
+   Webbrowserfenster m&#246;glich. F&#252;r meine praktische Anwendung ist es einfach
+   unumg&#228;nglich einen Text vor Augen zu haben um meine Gedanken dazu
+   in einen anderen Text schreiben zu k&#246;nnen.
+b) B&#252;cher, Webseiten, zueinander in Beziehung setzen
+c) neue Topics anlegen, die meine Notizen erfassen
+
+2.2 Was noch nicht geht
+d) Stellen in einzelnen Dokumenten verlinken, markieren etc.
+- Fu&#223;noten (bitte zum hin und wieder zur&#252;ckspringen)
+   das l&#228;&#223;t sich mit HTML im Detailfenster erledigen, sch&#246;ner w&#228;re, wenn 
+die Fu&#223;note
+   ein verlinktes Topic ist zum wiederverwerten
+- Zitate (nat&#252;rlich mit Link und R&#252;cksprung zum Original)
+   (im &quot;Semantic Media Wiki&quot; gibt es die Funktion der Transclusion, also 
+der Einbettung
+   eines Teils vom Originaltext)
+- Randnotizen: Bemerkungen zu einem Satz, Wort, Abschnitt
+- Semantische Aussagen: &quot;In diesem Satz heiratet Karl und Lisa&quot;
+   -&gt; Link zur Assoziation vom Typ Heirat zwischen Karl und Lisa
+   wichtig: wenn ich daf&#252;r 15 Mausklicks brauche ist das zu Zeitaufw&#228;ndig.
+   (im Sematic Media Wiki geht das mit &quot;properties&quot; die einfach in den 
+Text geschrieben
+   werden und die sp&#228;ter eine Aussage darstellen die beliebig benutzt 
+werden kann)
+
+
+Um es bildlich auszudr&#252;cken:
+DeepaMehta kennt bisher nur geschlossene B&#252;cher, keine offene.
+
+
+3. Was ein Wissensmanagement f&#252;r mich haben sollte:
+3.1 Offene B&#252;cher
+3.1.1 Das impliziert mit hoher Wahrscheinlichkeit ein Vielzahl von 
+Verkn&#252;pfungen
+   zwischen zwei Dokumenten, die a) je nach offenem oder geschlossenem 
+Zustand
+   eines Buches unterschiedlich dargestellt werden m&#252;ssen und b) auf 
+geeignete
+   Art und Weise vom Benutzer &quot;gebrowst&quot; werden k&#246;nnen m&#252;ssen.
+3.1.2 Das wirft das Problem auf wie innerhalb von Dokumenten 
+referenziert werden kann,
+   mein erster Vorschlag w&#228;re hierzu sich bei HTML Dokumenten auf Anker 
+und bei PDFs
+   auf Seitenzahlen/Titel zu beschr&#228;nken. Nat&#252;rlich kann man sich 
+Gedanken &#252;ber Wort und
+   Zeichen/Pixel genaue Referenzierung und andere Dateitypen (Zeit bei 
+Audio und Videoformaten)
+   machen und kommt dann zum Dilemma, da&#223; sich Dokumente &#228;ndern k&#246;nnen.
+3.2 Grafisch/semantische M&#246;glichkeiten das Wissen (in DeepaMehta die 
+Topicmap) zu gestalten
+
+   Ich denke da daran Wolken von Topics zu bilden (das ist bisher nur 
+&#252;ber Assoziationen zu einem
+   gemeinsamen &quot;Wolkentopic&quot; m&#246;glich und ist grafisch eher verwirrend) 
+den Hintergrund der
+   Map &quot;bedeutungsvoll&quot; einzuf&#228;rben.
+   (Bisher kann ich ein Hintergrundbild daf&#252;r benutzen, es hat jedoch 
+keine semantisch auswertbare Bedeutung)
+   In DM 2 gab es ja mal den Kompetenzstern - so etwas stelle ich mir 
+als Beispiel vor - wenn solche
+   Strukturen auf einer Topicmap vom Benutzer einfach angelegt werden 
+k&#246;nnten
+   (und dann auch semantisch ausgwertet) das w&#228;re sch&#246;n.
+3.2.1 Semantische Abfragen mit Auswertung von Eigenschaften der Assoziation:
+  &quot;Zeige mir alle Topics vom Typ Mensch die &#228;lter als 20 sind und die 
+mit dem Topic Fahrrad (mit 3 G&#228;ngen) verbunden sind und mehr als 3 St&#252;ck 
+besitzen&quot;
+    Und das Ergebnis so einer Abfrage h&#228;tte ich dann gerne im Detailtext 
+eines Topics benutzt und nicht
+   nur in einer Tonne auf der TopicMap.
+
+4. zu guter Letzt:
+Und dann stellt sich f&#252;r mich wieder die alte Frage nach den 
+verschachtelten Topicmaps, also
+eine Map auf eine Map, workspaces auf Maps etc.
+4.1. weil das Dropdown Menu mit den TopicMaps bei t&#228;glicher Benutzung 
+schon am zweiten Tag
+   zu lang wird
+4.2. Dazu die vielleicht philosophische Frage ob die Trennung in 
+TopicMap und Detailansicht gut ist:
+- fr&#252;her war das zum einen die Diskussion Topic-Assoziation vs. Property 
+die dadurch ausgel&#246;st wurde,
+   das gibt es ja heute nicht mehr so, aber ist das Problem schon gel&#246;st ?
+Wieder mal ein Bild dazu:
+Meine Detailansichten, also die editierbaren Texte auf der rechten 
+Bildschirmseiten enthalten
+gerne mal etliche nicht deutsche W&#246;rter, die ich gerne wiederum mit 
+Notizzettelchen versorge
+die - da ist wichtig - wiederbenutzbar sein sollten:
+
+Also w&#228;re es eigentlich angebracht den Text komplett in W&#246;rter / Zeichen 
+/ Wort-Zeichen-Kombinationen
+herunterzubrechen und als einzelne Topics auf der Map darzustellen. Dann 
+kann ich einfach
+die assoziierten &#220;bersetzungen aufklappen.
+Hierzu w&#228;re es allerdings n&#246;tig &quot;Schreibfunktionalit&#228;t&quot; auf der Map zu 
+implementieren,
+Das Detail-Fenster w&#228;re dann selbst eine TopicMap.
+
+
+So, genug der aufgeworfenen Fragen,
+danke falls ihr bis hierher Euch durchgek&#228;mpft habt,
+und ich bin gespannt falls Euch was dazu einf&#228;llt.
+
+Liebe Gr&#252;&#223;e
+Torsten
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/deepamehta-devel/attachments/20120305/b71a2fef/attachment.html">https://lists.berlios.de/pipermail/deepamehta-devel/attachments/20120305/b71a2fef/attachment.html</A>&gt;
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: not available
+Type: image/png
+Size: 206310 bytes
+Desc: not available
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/deepamehta-devel/attachments/20120305/b71a2fef/attachment.png">https://lists.berlios.de/pipermail/deepamehta-devel/attachments/20120305/b71a2fef/attachment.png</A>&gt;
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: not available
+Type: image/png
+Size: 218360 bytes
+Desc: not available
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/deepamehta-devel/attachments/20120305/b71a2fef/attachment-0001.png">https://lists.berlios.de/pipermail/deepamehta-devel/attachments/20120305/b71a2fef/attachment-0001.png</A>&gt;
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: giddbhgb.png
+Type: image/png
+Size: 100100 bytes
+Desc: not available
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/deepamehta-devel/attachments/20120305/b71a2fef/attachment-0002.png">https://lists.berlios.de/pipermail/deepamehta-devel/attachments/20120305/b71a2fef/attachment-0002.png</A>&gt;
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: agafdjaj.png
+Type: image/png
+Size: 134859 bytes
+Desc: not available
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/deepamehta-devel/attachments/20120305/b71a2fef/attachment-0003.png">https://lists.berlios.de/pipermail/deepamehta-devel/attachments/20120305/b71a2fef/attachment-0003.png</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	
+	<LI>Next message: <A HREF="000354.html">[deepamehta-devel] DeepaMehta Anwendungsf&#228;lle
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#353">[ date ]</a>
+              <a href="thread.html#353">[ thread ]</a>
+              <a href="subject.html#353">[ subject ]</a>
+              <a href="author.html#353">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/deepamehta-devel">More information about the deepamehta-devel
+mailing list</a><br>
+</body></html>

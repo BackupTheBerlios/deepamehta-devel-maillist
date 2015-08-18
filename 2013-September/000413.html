@@ -1,0 +1,129 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [deepamehta-devel] custom renderer question
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/deepamehta-devel/2013-September/index.html" >
+   <LINK REL="made" HREF="mailto:deepamehta-devel%40lists.berlios.de?Subject=Re%3A%20%5Bdeepamehta-devel%5D%20custom%20renderer%20question&In-Reply-To=%3C52414D95.2020202%40ziegi.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000412.html">
+   <LINK REL="Next"  HREF="000399.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[deepamehta-devel] custom renderer question</H1>
+    <B>Torsten Ziegler</B> 
+    <A HREF="mailto:deepamehta-devel%40lists.berlios.de?Subject=Re%3A%20%5Bdeepamehta-devel%5D%20custom%20renderer%20question&In-Reply-To=%3C52414D95.2020202%40ziegi.de%3E"
+       TITLE="[deepamehta-devel] custom renderer question">torsten at ziegi.de
+       </A><BR>
+    <I>Tue Sep 24 10:30:13 CEST 2013</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000412.html">[deepamehta-devel] custom renderer question
+</A></li>
+        <LI>Next message: <A HREF="000399.html">[deepamehta-devel] type qualifying question
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#413">[ date ]</a>
+              <a href="thread.html#413">[ thread ]</a>
+              <a href="subject.html#413">[ subject ]</a>
+              <a href="author.html#413">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi J&#246;rg,
+I got one coment
+and some Infos see below...
+
+also i will start a new thread about click detectecion...
+
+Am 21.09.2013 22:03, schrieb J&#246;rg Richter:
+&gt;<i>   
+</I>&gt;<i> In general it is not possible to switch the renderer for an existing topicmap, because the topicmap viewmodels might not be compatible. It makes no sense e.g. to render a Geomap with the default Canvas renderer. The default viewmodel loader would fail as a default topicmap has another DB layout as a Geomap.
+</I>&gt;<i>
+</I>&gt;<i> If, on the other hand, the topicmap viewmodels *are* compatible you probably would *not* implement a complete topicmap renderer but use the upcoming hooks to customize the rendering. With the new rendering hooks you'll be able to selectively render certain topics or all topics, and you'll be able to suppress the default rendering as well. Maintenance would be easier as you would have no redundant/copied code.
+</I>&gt;<i>
+</I>&gt;<i> Just some general hints about the (new) topicmap renderer framework:
+</I>&gt;<i>
+</I>&gt;<i> Concept: proper separation of model, viewmodel, and view.
+</I>&gt;<i>      - A **model** contains the domain data (Topics).
+</I>&gt;<i>      - A **viewmodel** contains the domain data to be displayed, enriched by view data (e.g. color values, coordinates). A viewmodel is agnostic to a specific renderer technology. A viewmodel class is responsible for loading a viewmodel from the server/DB and for writing changes back.
+</I>&gt;<i>      - A **view** renders a (compatible) viewmodel through a specific renderer technology, e.g. Canvas, HTML, SVG.
+</I>&gt;<i>      - A **topicmap renderer** binds a viewmodel to a view. A topicmap renderer class implements the TopicmapRenderer interface and is responsible for consistently updating the viewmodel and the view.
+</I>&gt;<i>      - Each **topicmap** is assigned to the responsible topicmap renderer
+</I>&gt;<i>
+</I>&gt;<i> The same viewmodel can the rendered through different views (that are compatible with that viewmodel). That is e.g. a SVG renderer with the same look and feel as the default Canvas renderer would utilize the standard TopicmapViewmodel and must not implement its own (with all the server/DB code). Its *View* code would be different of course.
+</I>
+So wouldn't it be the better way to assign the topicmap to a viewmodel
+and not the renderer ?
+Then every renderer that is impementing the viemodel is allowed to render
+the topicmap.
+This would allow switch between compatible renderers and to share
+topicmaps between differnt render technologies.
+One application for this could be:
+- create a topicmap in some kind of default renderer (on a desktop computer)
+- present it in a &quot;presentation renderer&quot; with differnt user interface
+customized to the needs of a lecturer (on a projection screen)
+
+I would like to go this way...
+
+&gt;<i> Can you tell me about your application? What data do you want render on the canvas? How interaction should work? Do you utilize a custom topicmap viewmodel?
+</I>Right now I am using the standard viemodel
+and am working on more information centered canvas,
+see attached image.
+I will introduce
+a) to render topic labels in specific shapes
+For this I will need new properties in the Topic to store (and select)
+shapes (oval, square, star etc.) and colours.
+I think I can read this information through the standard viemodel
+while rendering the view. Or would it be better to implement a new 
+viewmodel?
+I would happy to use the standard viewmodel and have the functionality
+that using my advanced renderer the topics will be shown with the new 
+features
+and using the standard renderer will be shown without shape but the big 
+icon.
+
+What to you think?
+
+Thanks,
+Torsten
+
+-- 
+Torsten Ziegler
+<A HREF="https://lists.berlios.de/mailman/listinfo/deepamehta-devel">torsten at ziegi.de</A>
+
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: Bildschirmfoto_dm4_enhancedrenderer_2013_09_24.png
+Type: image/png
+Size: 142659 bytes
+Desc: not available
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/deepamehta-devel/attachments/20130924/4ded8747/attachment-0001.png">https://lists.berlios.de/pipermail/deepamehta-devel/attachments/20130924/4ded8747/attachment-0001.png</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000412.html">[deepamehta-devel] custom renderer question
+</A></li>
+	<LI>Next message: <A HREF="000399.html">[deepamehta-devel] type qualifying question
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#413">[ date ]</a>
+              <a href="thread.html#413">[ thread ]</a>
+              <a href="subject.html#413">[ subject ]</a>
+              <a href="author.html#413">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/deepamehta-devel">More information about the deepamehta-devel
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,82 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [deepamehta-devel] custom renderer question
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/deepamehta-devel/2013-September/index.html" >
+   <LINK REL="made" HREF="mailto:deepamehta-devel%40lists.berlios.de?Subject=Re%3A%20%5Bdeepamehta-devel%5D%20custom%20renderer%20question&In-Reply-To=%3C8C7B7D94-49A3-4D86-B8CA-AB04F4EE9323%40deepamehta.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000405.html">
+   <LINK REL="Next"  HREF="000409.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[deepamehta-devel] custom renderer question</H1>
+    <B>J&#246;rg Richter</B> 
+    <A HREF="mailto:deepamehta-devel%40lists.berlios.de?Subject=Re%3A%20%5Bdeepamehta-devel%5D%20custom%20renderer%20question&In-Reply-To=%3C8C7B7D94-49A3-4D86-B8CA-AB04F4EE9323%40deepamehta.de%3E"
+       TITLE="[deepamehta-devel] custom renderer question">jri at deepamehta.de
+       </A><BR>
+    <I>Sat Sep  7 23:03:30 CEST 2013</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000405.html">[deepamehta-devel] custom renderer question
+</A></li>
+        <LI>Next message: <A HREF="000409.html">[deepamehta-devel] custom renderer question
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#407">[ date ]</a>
+              <a href="thread.html#407">[ thread ]</a>
+              <a href="subject.html#407">[ subject ]</a>
+              <a href="author.html#407">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>
+On Sep 6, 2013, at 17:30, J&#246;rg Richter wrote:
+
+&gt;<i> When you want a custom **HTML** rendering for a topic the default topicmap renderer would not be suitable as it is Canvas based (it's just a bitmap, there is no DOM for the individual topics/associations).
+</I>&gt;<i> 
+</I>&gt;<i> In this case I would no longer recommend to equip the default topicmap renderer with further extension points (my job) but to implement a custom topicmap renderer (your job).
+</I>
+
+Hi Torsten,
+
+Meanwhile I see a 3rd option which I like to propose here.
+
+We can *combine* the HTML5 Canvas rendering (which is still useful for rendering the associations) with customizable DOMs for each topic. The Canvas (that displays the associations) would be overlayed by the individual topic DOMs. (In fact this hybrid approach was used by an old version of DM as Canvas Text was not supported by the browsers back then). This way you must not implement an entire (e.g. SVG based) Topicmap Renderer. Instead I would provide you with customization hooks for the Default Topicmap Renderer. I sketched out my possible work in ticket #505:
+<A HREF="https://trac.deepamehta.de/ticket/505">https://trac.deepamehta.de/ticket/505</A>
+
+Tell me if this fits your needs.
+If so, I would start implementing the customization hooks.
+
+Cheers,
+J&#246;rg
+
+</PRE>
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000405.html">[deepamehta-devel] custom renderer question
+</A></li>
+	<LI>Next message: <A HREF="000409.html">[deepamehta-devel] custom renderer question
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#407">[ date ]</a>
+              <a href="thread.html#407">[ thread ]</a>
+              <a href="subject.html#407">[ subject ]</a>
+              <a href="author.html#407">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/deepamehta-devel">More information about the deepamehta-devel
+mailing list</a><br>
+</body></html>

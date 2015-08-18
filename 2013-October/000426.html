@@ -1,0 +1,189 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [deepamehta-devel] custom renderer question
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/deepamehta-devel/2013-October/index.html" >
+   <LINK REL="made" HREF="mailto:deepamehta-devel%40lists.berlios.de?Subject=Re%3A%20%5Bdeepamehta-devel%5D%20custom%20renderer%20question&In-Reply-To=%3CB2B56CDF-E887-46C9-AABE-37B685A852B1%40deepamehta.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000421.html">
+   <LINK REL="Next"  HREF="000423.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[deepamehta-devel] custom renderer question</H1>
+    <B>J&#246;rg Richter</B> 
+    <A HREF="mailto:deepamehta-devel%40lists.berlios.de?Subject=Re%3A%20%5Bdeepamehta-devel%5D%20custom%20renderer%20question&In-Reply-To=%3CB2B56CDF-E887-46C9-AABE-37B685A852B1%40deepamehta.de%3E"
+       TITLE="[deepamehta-devel] custom renderer question">jri at deepamehta.de
+       </A><BR>
+    <I>Sun Oct 27 21:07:11 CET 2013</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000421.html">[deepamehta-devel] Fwd:  custom renderer question
+</A></li>
+        <LI>Next message: <A HREF="000423.html">[deepamehta-devel] Demonstrating in-topicmap data manipulation
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#426">[ date ]</a>
+              <a href="thread.html#426">[ thread ]</a>
+              <a href="subject.html#426">[ subject ]</a>
+              <a href="author.html#426">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>
+On Oct 26, 2013, at 21:48, J&#246;rn Wei&#223;enborn wrote:
+
+&gt;<i> 2013/10/25 J&#246;rg Richter &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/deepamehta-devel">jri at deepamehta.de</A>&gt;
+</I>&gt;<i> 
+</I>&gt;<i> HTML based topic rendering BREAKTHROUGH (#505).
+</I>&gt;<i> 
+</I>&gt;<i> HTML based topic rendering has reached a crucial state. It can now friendly coexist with Canvas based topic rendering. A DM View Customizer can be HTML-based, or Canvas-based, or hybrid. Various View Customizers (possibly provided by different DM plugins) can be active at the same time and perform together.
+</I>&gt;<i> 
+</I>&gt;<i> Note: also with HTML based topic rendering a Canvas is always involved, mainly for drawing the associations.
+</I>&gt;<i> 
+</I>&gt;<i> For the moment a DM View Customizer provides 7 hooks (all are optional):
+</I>&gt;<i> 
+</I>&gt;<i> General:
+</I>&gt;<i>     - update_topic() -- sync the view once the model has changed (topic content change or retype)
+</I>&gt;<i> 
+</I>&gt;<i> =&gt; How is this done? Is every TopicRenderers update event is called upon every value changes in the model, regardless if its bound to the data auf the respective topic? Do I register a view instance to a specific topic ID?
+</I>
+General concept:
+A **TopicViewmodel** represents the data served by the backend. A TopicViewmodel is build upon a pure Topic and enriches it with view data. The standard topic viewmodel comprise of x/y coordinates and a visibility flag.
+
+A **TopicView** is build upon a TopicViewmodel and holds all the data/objects the customizer actually needs for rendering (and/or topic click detection in case of Canvas based rendering). This might or might not more data than contained in the underlying viewmodel. Its up to the Customizer to enrich a TopicView by this data/objects (which are typically derived from the underlying Viewmodel). This depends on both, the desired look &amp; feel and the technical rendering approach (Canvas based or DOM based).
+The Objective here is optimization. Without this (Topic)View layer e.g. geometry calculations would possibly performed over and over, e.g. each time the Canvas is refreshed or clicked.
+
+Consider the Canvas based BoxRenderer: it enriches its TopicView objects e.g. by the topic's bounding box (the framework uses it for click detection), label position, icon position, and a TextWrapper object that holds the pre-wrapped topic text (and knows how to render it on a canvas). If the Customizer would not keep (and update) these specific information it would have to recreate/calculate them over and over.
+
+The TopicView objects are **created** by the framework and then enriched/updated by the Customizers. To enable the Customizers to keep its specific rendering in sync with the underlying generic (= renderer/customizer agnostic) topic viewmodel the framework informs all Customizers when the topic viewmodel has changed. It does so by the means of these 3 hooks:
+	- update_topic(topic_view, ctx) -- topic label and/or topic type has changed.
+	- move_topic(topic_view) -- topic position has changed.
+	- update_view_properties(topic_view) -- custom view properties have changed, e.g. topic color or topic shape.
+
+The customizer is responsible for defining these hooks and update the view layer resp. the rendering according to the viewmodel change.
+
+When DOM rendering is in place the &quot;topic_view&quot; object passed to these hooks contains a &quot;dom&quot; property which holds the topic's DOM (a jQuery object). For DM based rendering see below.
+
+All 3 hooks are used for both, Canvas based and DOM based rendering. Don't be confused by the update_topic()'s &quot;ctx&quot; argument. It is there for convenience when it comes to measuring text.
+
+For each topic in a topicmap the Framework creates **one** TopicView object. That happens each time a topicmap is brought to display (that is when the Webclient displays the initial topicmap and when the user uses the topicmap selector). So the (Topic)View layer represents what is on-screen **now**. That means (Topic)View objects are discarded when another topicmap is selected. They are not cached by the Webclient but recreated when the topicmap is displayed again (this performs fast and requires no server interaction). On the other hand the Topicmap Viewmodels of all loaded Topicmaps **are** cached by the Webclient. They represent the data needed to bring a topicmap (again) on-screen without performing another server request.
+
+&gt;<i>     - move_topic() -- sync the view once the model has changed (topic position change)
+</I>&gt;<i> 
+</I>&gt;<i> =&gt; So every topic takes care that it is rendered at the exact position? Why not put a DOM over it and fix it to a location, create a child element and give the to the customizer. It makes no sense to do the coordinate handling inside a the TopicRenderer. This should all be done by the TopicmapRenderer, which should actually also dretect if a topic at a position is actually visible in the actual canvas view at given x-y coordinates and prevent rendering. This is crucial for large maps. A good testcase for performance is by the way the &gt;eduzen DM database. There you get LARGE maps. One should test how your implementation is performing in such cases.
+</I>
+The Webclient's CanvasView (part of the Webclient's default topicmap renderer, namely CanvasRenderer) supports both flavors: Canvas based topic rendering and DOM based topic rendering. (For the moment) the DM standard distro deploys Canvas based topic rendering. DOM based topic rendering can be deployed by View Customizers. That's what the &quot;dm4-box-renderer-html&quot; DM plugin does. It replaces DM's &quot;classic&quot; look &amp; feel by Torsten's modern look &amp; feel and does so by providing a DOM for each topic.
+
+When DOM based rendering is deployed the customizer can suppress Canvas based topic rendering. That's the default if customizers are installed. (DOM based customizers also can explicitly order Canvas based default rendering and &quot;decorate&quot; the Canvas-drawn topics by DOMs, that's what I called &quot;hybrid&quot; before.) Large DOM based topicmaps are like large webpages. Its up to the webbrowser to detect what's inside the current viewport. The Topicmap Renderer must not care about that.
+
+Default topic dragging behavior is implemented in the CanvasView. ###Und zwar for both: Canvas based topic rendering and DOM based topic rendering. (DOM based topic dragging is implemented by jQuery UI's &quot;Draggable&quot; interaction). DOM based Customizers are not required to define the move_topic() hook mentioned above. But if e.g. the topic coordinate is desired to be displayed along with the topic and being constantly updated while dragging than the Customizer **could** use the move_topic() hook to do so.
+
+Customizers provide topic DOMs by defining the topic_dom() hook. A generic topic DOM is **created** by the framework and is passed to this hook. The generic topic DOM created by the framework is an empty &lt;div&gt; element classed &quot;topic&quot;. Its up to the customizers to modify the generic topic DOM. This way several Customizers can build the topic DOM collaboratively.
+
+	- topic_dom(topic_view, topic_dom)
+
+Customizers which provide topic DOMs are responsible for keeping them in-sync with the underlying viewmodel by the means of the 3 general purpose hooks mentioned above. The topic's DOM can be accessed by the &quot;dom&quot; property of the passed TopicView.
+
+&gt;<i>  Canvas based:
+</I>&gt;<i>     - draw_topic() -- draw a topic on the canvas
+</I>&gt;<i>     - on_mousedown() -- intercept mouse events on the canvas
+</I>&gt;<i> 
+</I>&gt;<i> =&gt; So if I don't want canvas I can have my own eventhandling with blackjack and hookers? Great!
+</I>
+There is one caveat: DOM based Customizers should not be required to care about mousedown events triggered on the canvas as the respective default behavior (association selection, canvas dragging) is expected to perform by default. However, for the moment a DOM based Customizer is required to order the default behavior explicitly:
+
+	this.on_mousedown = function(pos, modifier) {
+		return true
+	}
+
+So, the framework as it is represents just the first step. Further revisions are required.
+
+&gt;<i> HTML based:
+</I>&gt;<i>     - topic_dom() -- provide the topic's basic DOM
+</I>&gt;<i> 
+</I>&gt;<i> =&gt; Nice.
+</I>&gt;<i>  
+</I>&gt;<i>     - topic_dom_appendix() -- modify the topic DOM once it is added to the document
+</I>&gt;<i> 
+</I>&gt;<i> =&gt; More confusing than useful. Everyone writing the rendering without canvas will know how to set DOM properties with jquery, which is always available.
+</I>
+The topic_dom_appendix() allows a Customizer to further modify a topic DOM once it is added to the document. Adding the DOM to the document is **not** the responsibility of the Customizer but the framework's one. Due to intrinsic DOM mechanics a DOM has no position and no size before it is added to the document. The topic_dom_appendix() allows Customizers to do topic DOM modifications which rely on the topic's position or size.
+
+	- topic_dom_appendix(topic_view, topic_dom)
+
+As an example see the DOM based Box Renderer plugin. It places the mini icon in the topic's lower/right corner. This is possible only when the topic's size is known.
+
+&gt;<i>     - topic_dom_draggable_handle() -- configure which part of the topic DOM initiates dragging
+</I>&gt;<i> 
+</I>&gt;<i> =&gt; As I understand it I can define a specific child DOM to fire the onDrag event on the canvas. Do I give the DOM ID as argument or the DOM object?
+</I>
+By default the entire topic DOM is draggable. A DOM based Customizer can configure which part of the topic DOM initiates dragging. As an example see how the DOM based Box Renderer plugin restricts drag initiation to the topic's label which implicitly excludes the topic's mini icon. The Box Renderer excludes the mini icon as with Torsten's modern look &amp; feel it serves another duty, namely it starts drawing an association.
+
+        this.topic_dom_draggable_handle = function(topic_dom, handles) {
+            handles.push($(&quot;.topic-label&quot;, topic_dom))
+        }
+
+The Customizer pushes a jQuery object into the passed &quot;handles&quot; array. Only one jQuery object can be pushed as this feature relies on the &quot;handle&quot; configuration property of the underlying jQuery UI &quot;Draggable&quot; interaction ###.
+
+&gt;<i> I still have the following questions:
+</I>&gt;<i> 
+</I>&gt;<i> Model binding: I still don't see how my customize view have a clean 2 way databinding. So I know I get model updates intiated by my session. But when I work with others on the same topicmap the changes are afaik not reflected on the collaborators session without manual reload. Thanks to the topicupdate event though, I can at least change the model from my customView.
+</I>
+Updating several clients together requires server push, that is the server not only responds to client requests but pushes actively data to a client or several clients (e.g. by the means of Web Sockets). For the moment server push is **not** supported by the DM standard distribution.
+
+Anyway, server push is on the DM roadmap and some preparing work has been done already: in the DM repo there is the &quot;pax-web&quot; branch which replaces the OSGi HTTP service implementation, namely Felix HTTP Jetty is replaced by OPS4J Pax Web (see #448). The latter one embeds a far more modern Jetty web server which allows for server push. The &quot;pax-web&quot; branch should be fully functional and on par with the &quot;master&quot; branch. Testing the &quot;pax-web&quot; branch is very appreciated.
+Danny has strong interest in the server push feature as well. 
+
+&gt;<i> A take-a-way word: One could think this far, that a topic must not have to be some static data. A topic could also be a function on all connected topics. Or a composit of functions. Or a full blown app. Just replace e.g. the note png with a html texteditor. And then make another note include that (and reflect changes). DeepaMehta wants to be a semantic Application Platform., as I perceived it. You could be that, the custom view is the first step. People will need their own UIs!
+</I>
+As a DOM based Customizer can create arbitrary topic DOMs, including custom event handling, it can deploy an entire application GUI. Upon certain events the Customizer can (selectively) update its topic DOM (= application DOM) and possibly underlying View objects. In this case the Customizer is resposible for:
+	- updating the underlying viewmodel. Otherwise the application state would not be restored when topicmaps are switched. Application state can be stored as custom view properties (= viewmodel extensions).
+	- updating the DB. Otherwise the application state would not be restored if e.g. the browser is closed. The topic's custom view properties could be stored in the DB as topic properties (see DM 4.1.1 Property API).
+
+Furthermore as a Customizer has full access to the DM Webclient API and REST API it can **actively** perform any kind of (client-side as well as server-side) operation.
+
+As an example see the simple GUI the Box Renderer plugin creates: a dialog box for choosing the topic color. In this case it is invoked via the topic's context menu. Once the dialog is submitted the Box Renderer actively updates the view, the viewmodel, and the DB (in this case by a single call to canvas_view.set_view_properties() which also triggers the update_view_properties() hook to allow the topic to selectively update its DOM).
+
+In general the 2 Box Renderer plugins are good examples for all the things explained above:
+
+&gt;<i> To demonstrate HTML based topic rendering the demo Box Renderer plugin is now divided into 2 plugins:
+</I>&gt;<i>     <A HREF="https://github.com/jri/dm4-box-renderer-canvas">https://github.com/jri/dm4-box-renderer-canvas</A>
+</I>&gt;<i>     <A HREF="https://github.com/jri/dm4-box-renderer-html">https://github.com/jri/dm4-box-renderer-html</A>
+</I>&gt;<i> 
+</I>&gt;<i> So the known dm4-box-renderer (which is now defunct) is actually renamed to dm4-box-renderer-canvas. The new dm4-box-renderer-html provides the very same look &amp; feel but renders topics as HTML. So you can e.g. inspect the topic DOM in the Web Console as usual.
+</I>
+Cheers,
+J&#246;rg
+
+
+</PRE>
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000421.html">[deepamehta-devel] Fwd:  custom renderer question
+</A></li>
+	<LI>Next message: <A HREF="000423.html">[deepamehta-devel] Demonstrating in-topicmap data manipulation
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#426">[ date ]</a>
+              <a href="thread.html#426">[ thread ]</a>
+              <a href="subject.html#426">[ subject ]</a>
+              <a href="author.html#426">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/deepamehta-devel">More information about the deepamehta-devel
+mailing list</a><br>
+</body></html>

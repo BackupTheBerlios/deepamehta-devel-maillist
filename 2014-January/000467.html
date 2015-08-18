@@ -1,0 +1,86 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [deepamehta-devel] Arrays in DeepaMehta
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/deepamehta-devel/2014-January/index.html" >
+   <LINK REL="made" HREF="mailto:deepamehta-devel%40lists.berlios.de?Subject=Re%3A%20%5Bdeepamehta-devel%5D%20Arrays%20in%20DeepaMehta&In-Reply-To=%3CCABHcWb%3D05oyw58YWTdEiw-nBXYsaxafFr5Jinx2XhRdQhGVwmg%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000463.html">
+   <LINK REL="Next"  HREF="000468.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[deepamehta-devel] Arrays in DeepaMehta</H1>
+    <B>J&#246;rn Wei&#223;enborn</B> 
+    <A HREF="mailto:deepamehta-devel%40lists.berlios.de?Subject=Re%3A%20%5Bdeepamehta-devel%5D%20Arrays%20in%20DeepaMehta&In-Reply-To=%3CCABHcWb%3D05oyw58YWTdEiw-nBXYsaxafFr5Jinx2XhRdQhGVwmg%40mail.gmail.com%3E"
+       TITLE="[deepamehta-devel] Arrays in DeepaMehta">joern.weissenborn at gmail.com
+       </A><BR>
+    <I>Wed Jan 29 20:18:03 CET 2014</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000463.html">[deepamehta-devel] Round-table for DeepaMehta developers, Berlin,	6th February
+</A></li>
+        <LI>Next message: <A HREF="000468.html">[deepamehta-devel] Arrays in DeepaMehta
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#467">[ date ]</a>
+              <a href="thread.html#467">[ thread ]</a>
+              <a href="subject.html#467">[ subject ]</a>
+              <a href="author.html#467">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi,
+
+what is good way of storing an array or better an (arbitrary dimensional)
+matrix in Deepamehta?
+
+As a scientist, most of my data consist of such thinks, sometimes with
+millions of entries. I think,
+the most efficient way to deal with it is storing a given array by
+converting it to a binary blob and then feed it to dm by casting it as
+string. When I later access it via a client, I need to cast it back (which
+implies that an array type topic would also need to hold information about
+how to recast, int16 or uint32 or float64).
+
+
+What do you think about this problem?
+
+
+Best,
+
+Joern
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/deepamehta-devel/attachments/20140129/0711dc14/attachment.html">https://lists.berlios.de/pipermail/deepamehta-devel/attachments/20140129/0711dc14/attachment.html</A>&gt;
+</PRE>
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000463.html">[deepamehta-devel] Round-table for DeepaMehta developers, Berlin,	6th February
+</A></li>
+	<LI>Next message: <A HREF="000468.html">[deepamehta-devel] Arrays in DeepaMehta
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#467">[ date ]</a>
+              <a href="thread.html#467">[ thread ]</a>
+              <a href="subject.html#467">[ subject ]</a>
+              <a href="author.html#467">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/deepamehta-devel">More information about the deepamehta-devel
+mailing list</a><br>
+</body></html>

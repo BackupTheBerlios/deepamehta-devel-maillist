@@ -1,0 +1,102 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [deepamehta-devel] [Bug #14881] File upload doesn't work when	client runs as applet
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/deepamehta-devel/2009-January/index.html" >
+   <LINK REL="made" HREF="mailto:deepamehta-devel%40lists.berlios.de?Subject=Re%3A%20%5Bdeepamehta-devel%5D%20%5BBug%20%2314881%5D%20File%20upload%20doesn%27t%20work%20when%0A%09client%20runs%20as%20applet&In-Reply-To=%3C200901260356.n0Q3u3fs025781%40unicorn.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000318.html">
+   <LINK REL="Next"  HREF="000320.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[deepamehta-devel] [Bug #14881] File upload doesn't work when	client runs as applet</H1>
+    <B>admin at berlios.de</B> 
+    <A HREF="mailto:deepamehta-devel%40lists.berlios.de?Subject=Re%3A%20%5Bdeepamehta-devel%5D%20%5BBug%20%2314881%5D%20File%20upload%20doesn%27t%20work%20when%0A%09client%20runs%20as%20applet&In-Reply-To=%3C200901260356.n0Q3u3fs025781%40unicorn.berlios.de%3E"
+       TITLE="[deepamehta-devel] [Bug #14881] File upload doesn't work when	client runs as applet">admin at berlios.de
+       </A><BR>
+    <I>Mon Jan 26 04:56:03 CET 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000318.html">[deepamehta-devel] [Bug #15098] Broken network connections are not	re-established
+</A></li>
+        <LI>Next message: <A HREF="000320.html">[deepamehta-devel] [Bug #14804] Import of dropped documents in	ubuntu fails
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#319">[ date ]</a>
+              <a href="thread.html#319">[ thread ]</a>
+              <a href="subject.html#319">[ subject ]</a>
+              <a href="author.html#319">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Bug #14881, was updated on 2008-Dec-06 01:08
+Here is a current snapshot of the bug.
+
+Project: DeepaMehta
+Category: Graphical Client
+Status: Closed
+Resolution: Fixed
+Bug Group: None
+Priority: 5
+Submitted by: jri
+Assigned to : jri
+Summary: File upload doesn't work when client runs as applet
+
+Details: File upload doesn't work when client runs as applet. A warning appears: &quot;File xyz not uploaded because it is missing at client side&quot;.
+
+However, file upload _does_ work when using the application client. The problem is with the applet client.
+
+
+Follow-Ups:
+
+Date: 2009-Jan-26 04:56
+By: jri
+
+Comment:
+Fixed in rev 361. Closed.
+
+Notes:
+All file operations (upload, download, open with application) work also, if the DeepaMehta client runs as applet. In particular, you can attach documents to emails. IMPORTANT: you must login via the signed applet and acknowledge the certificate.
+
+A folder &quot;deepamehta-files&quot; is created in the home directory of your local machine. This directory acts as intermediate client-side file repository.
+
+Issue 1: for the moment don't use spaces in file names. This is still a bug.
+
+Issue 2: for the moment the file operations doesn't work if you run client and server at the same machine. However, the monolithic application works fine.
+
+Please test the file operations and provide feedback. Functions in question are e.g. using document topics, open documents in local applications, share documents (a document is uploaded once a topic map is published), using custom topic icons, using custom topic map backgrounds, import topic maps, export topic maps. Probably there are still errors on certain platforms.
+
+-------------------------------------------------------
+
+For detailed info, follow this link:
+<A HREF="http://developer.berlios.de/bugs/?func=detailbug&amp;bug_id=14881&amp;group_id=5174">http://developer.berlios.de/bugs/?func=detailbug&amp;bug_id=14881&amp;group_id=5174</A>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000318.html">[deepamehta-devel] [Bug #15098] Broken network connections are not	re-established
+</A></li>
+	<LI>Next message: <A HREF="000320.html">[deepamehta-devel] [Bug #14804] Import of dropped documents in	ubuntu fails
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#319">[ date ]</a>
+              <a href="thread.html#319">[ thread ]</a>
+              <a href="subject.html#319">[ subject ]</a>
+              <a href="author.html#319">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/deepamehta-devel">More information about the deepamehta-devel
+mailing list</a><br>
+</body></html>

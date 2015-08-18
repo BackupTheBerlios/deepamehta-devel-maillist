@@ -1,0 +1,132 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [deepamehta-devel] custom renderer question
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/deepamehta-devel/2013-October/index.html" >
+   <LINK REL="made" HREF="mailto:deepamehta-devel%40lists.berlios.de?Subject=Re%3A%20%5Bdeepamehta-devel%5D%20custom%20renderer%20question&In-Reply-To=%3C9691667F-D7EF-4846-932F-778E71587A59%40deepamehta.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   
+   <LINK REL="Next"  HREF="000417.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[deepamehta-devel] custom renderer question</H1>
+    <B>J&#246;rg Richter</B> 
+    <A HREF="mailto:deepamehta-devel%40lists.berlios.de?Subject=Re%3A%20%5Bdeepamehta-devel%5D%20custom%20renderer%20question&In-Reply-To=%3C9691667F-D7EF-4846-932F-778E71587A59%40deepamehta.de%3E"
+       TITLE="[deepamehta-devel] custom renderer question">jri at deepamehta.de
+       </A><BR>
+    <I>Sat Oct  5 23:51:32 CEST 2013</I>
+    <P><UL>
+        
+        <LI>Next message: <A HREF="000417.html">[deepamehta-devel] custom renderer
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#416">[ date ]</a>
+              <a href="thread.html#416">[ thread ]</a>
+              <a href="subject.html#416">[ subject ]</a>
+              <a href="author.html#416">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>
+Hi Torsten,
+
+thank you very much for the response which is full of meat :-)
+Your suggestion to bind a topicmap to the viewmodel (not to the renderer) is very good!
+And your current development as reflected by the screenshot with the customized canvas is very inspiring to me!
+
+
+On Sep 24, 2013, at 10:30, Torsten Ziegler wrote:
+
+&gt;<i> Am 21.09.2013 22:03, schrieb J&#246;rg Richter:
+</I>&gt;&gt;<i>  In general it is not possible to switch the renderer for an existing topicmap, because the topicmap viewmodels might not be compatible. It makes no sense e.g. to render a Geomap with the default Canvas renderer. The default viewmodel loader would fail as a default topicmap has another DB layout as a Geomap.
+</I>&gt;<i> 
+</I>&gt;<i> So wouldn't it be the better way to assign the topicmap to a viewmodel and not the renderer ?
+</I>&gt;<i> Then every renderer that is impementing the viemodel is allowed to render the topicmap.
+</I>&gt;<i> This would allow switch between compatible renderers and to share topicmaps between differnt render technologies.
+</I>&gt;<i> One application for this could be:
+</I>&gt;<i> - create a topicmap in some kind of default renderer (on a desktop computer)
+</I>&gt;<i> - present it in a &quot;presentation renderer&quot; with differnt user interface customized to the needs of a lecturer (on a projection screen)
+</I>&gt;<i> 
+</I>&gt;<i> I would like to go this way...
+</I>
+
+This is a very good hint!
+Indeed, binding a topicmap to a viewmodel (not to a renderer) is the more natural and flexible approach.
+OK, lets go this way!
+
+
+&gt;&gt;<i> Can you tell me about your application? What data do you want render on the canvas? How interaction should work? Do you utilize a custom topicmap viewmodel?
+</I>&gt;<i> 
+</I>&gt;<i> Right now I am using the standard viemodel and am working on more information centered canvas, see attached image.
+</I>
+
+I like your customized canvas (and the way you present your concepts graphically) very much!
+This is decent graphic and interaction design, in particular:
+	- Making the topic label/text the most prominent item (not the icon) while retaining a (small) type icon.
+	- Not truncating the topic label/text
+	- Creating associations without (hidden) right-click or shift-key.
+The result is a higher information density on the canvas and better usability.
+I feel quite enthusiastic about this obvious improvement!
+
+Actually your screenshot was so inspiring to me that I took it as the reference when designing the Topicmap Customization Framework which I'm currently working on.
+On the basis of the current Customization Framework I created a DM plugin &quot;Box Renderer&quot; that realizes your customized canvas look&amp;feel (regarding the 3 aspects listed above). While being functional the plugin also demonstrates how to use the new Topicmap Customization Framework. 
+<A HREF="https://github.com/jri/dm4-box-renderer">https://github.com/jri/dm4-box-renderer</A>
+
+
+&gt;<i> I will introduce
+</I>&gt;<i> a) to render topic labels in specific shapes
+</I>&gt;<i> For this I will need new properties in the Topic to store (and select) shapes (oval, square, star etc.) and colours.
+</I>&gt;<i> I think I can read this information through the standard viemodel while rendering the view. Or would it be better to implement a new viewmodel?
+</I>&gt;<i> I would happy to use the standard viewmodel and have the functionality that using my advanced renderer the topics will be shown with the new features and using the standard renderer will be shown without shape but the big icon.
+</I>&gt;<i> 
+</I>&gt;<i> What to you think?
+</I>
+
+Yes, you could use the standard topicmap viewmodel and extend it on-the-fly with the additional shape and color information. You could store that view data as properties either of the topic or of the &quot;Topic Mapcontext&quot; association (for per-topicmap individual topic appearance).
+
+With topic/association properties I mean the new Property API introduced DM 4.1.1 which seems suitable here. Properties are arbitrary key-value pairs that need no explicit type definition.
+As an alternative you could explicitly define a (composite) topic type for modeling the view data (color, shape, ...).
+
+With &quot;extending on-the-fly&quot; I mean the use of the SERVICE_RESPONSE_FILTER event to manipulate a Topicmap object before it is send to the webclient. See <A HREF="https://trac.deepamehta.de/ticket/515">https://trac.deepamehta.de/ticket/515</A> in particular comment #2. In your filter you would iterate the topicmap's topics and for each one retrieve its view properties (via Property API) and place them in the topic's &quot;visualization&quot; CompositeValueModel (see comment #1 in that ticket).
+
+You would need support from my side at 2 spots: 1) The Topicmap model class (server-side) needs a public topic iterator, 2) Accessing your view properties at client-side needs support in the Topicmap Customization Framework.
+
+Please tell me if you need help/support.
+
+
+Torsten, I would love to continue in this very modus. That is, you provide actual application use cases and graphic/interaction designs. I use them as a reference case for further designing the application framework. Thus DM would benefit from your great designs/ideas and at the same time we are sure the framework will be good for real applications. This kind of co-evolution feels very fruitful and enjoyable to me.
+
+
+Cheers,
+J&#246;rg
+
+</PRE>
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	
+	<LI>Next message: <A HREF="000417.html">[deepamehta-devel] custom renderer
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#416">[ date ]</a>
+              <a href="thread.html#416">[ thread ]</a>
+              <a href="subject.html#416">[ subject ]</a>
+              <a href="author.html#416">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/deepamehta-devel">More information about the deepamehta-devel
+mailing list</a><br>
+</body></html>

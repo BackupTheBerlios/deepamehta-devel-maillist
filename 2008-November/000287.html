@@ -1,0 +1,140 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [deepamehta-devel] [Bug #13827] Deleted association still displayed
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/deepamehta-devel/2008-November/index.html" >
+   <LINK REL="made" HREF="mailto:deepamehta-devel%40lists.berlios.de?Subject=Re%3A%20%5Bdeepamehta-devel%5D%20%5BBug%20%2313827%5D%20Deleted%20association%20still%20displayed&In-Reply-To=%3C200811171247.mAHClSmv021043%40unicorn.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000286.html">
+   <LINK REL="Next"  HREF="000288.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[deepamehta-devel] [Bug #13827] Deleted association still displayed</H1>
+    <B>admin at berlios.de</B> 
+    <A HREF="mailto:deepamehta-devel%40lists.berlios.de?Subject=Re%3A%20%5Bdeepamehta-devel%5D%20%5BBug%20%2313827%5D%20Deleted%20association%20still%20displayed&In-Reply-To=%3C200811171247.mAHClSmv021043%40unicorn.berlios.de%3E"
+       TITLE="[deepamehta-devel] [Bug #13827] Deleted association still displayed">admin at berlios.de
+       </A><BR>
+    <I>Mon Nov 17 13:47:28 CET 2008</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000286.html">[deepamehta-devel] [Bug #14762] Line breaks yield paragraphs
+</A></li>
+        <LI>Next message: <A HREF="000288.html">[deepamehta-devel] [Bug #14803] Export Topicmap Hook is greedy
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#287">[ date ]</a>
+              <a href="thread.html#287">[ thread ]</a>
+              <a href="subject.html#287">[ subject ]</a>
+              <a href="author.html#287">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Bug #13827, was updated on 2008-May-18 00:07
+Here is a current snapshot of the bug.
+
+Project: DeepaMehta
+Category: None
+Status: Open
+Resolution: None
+Bug Group: None
+Priority: 5
+Submitted by: x28
+Assigned to : none
+Summary: Deleted association still displayed
+
+Details: Error scenario:
+- created Topicmaps Test1 and Test2
+- from Test1, created topics called Major, 1, 2, and 3
+- associated 1, 2, and 3 to Major
+- again from Test1, created topics 4 and 5 
+- and associated them.
+
+- In Test2, via search, revealed Major,
+- via &quot;What's related&quot;, revealed 1, 2, and 3
+- via search, revealed 4
+- via &quot;what's connected&quot;, revealed 5.
+- Then from Test2, connected 4 and 5 to Major, 
+- then DELETED association between 4 and 5.
+
+- in Test1, revealed the associations from 4 and 5 to Major, and everything shows correctly.
+- In Test2, when asking &quot;What's related&quot; with 4, the result is correct: just topic Major
+- BUT the visual map still shows two associations 
+- when the association 4 to 5 is clicked, an error message shows:
+  'Assiciation &quot;null&quot; can't execute command &quot;selectAssoc&quot; 
+  (association &quot;a-1191-1&quot; not loaded)'
+
+
+Follow-Ups:
+
+Date: 2008-Nov-17 13:47
+By: maltito
+
+Comment:
+i recognized this bug too and the current solution which worked for me is:
+
+close the map i am working in and open it again out of my personal workspace.
+
+no deleted associations are loaded again into your view.
+
+-------------------------------------------------------
+
+Date: 2008-May-18 00:24
+By: x28
+
+Comment:
+Sorry, once more:
+Error scenario:
+- created Topicmaps Test1 and Test2
+- from Test1, created topics called Major, 1, 2, and 3
+- associated 1, 2, and 3 to Major
+- again from Test1, created topics 4 and 5 
+- and associated them.
+
+- In Test2, via search, revealed Major,
+- via &quot;What's related&quot;, revealed 1, 2, and 3
+- via search, revealed 4
+- via &quot;what's connected&quot;, revealed 5.
+- Then from Test2, connected 4 and 5 to Major, 
+- then DELETED association between 4 and 5.
+
+- in Test1, revealed the associations from 4 and 5 to Major.
+- When asking &quot;What's related&quot; with 4, the result is correct: just topic Major
+- BUT the visual map still shows two associations 
+- when the association 4 to 5 is clicked, an error message shows:
+'Assiciation &quot;null&quot; can't execute command &quot;selectAssoc&quot; 
+(association &quot;a-1191-1&quot; not loaded)'
+
+-------------------------------------------------------
+
+For detailed info, follow this link:
+<A HREF="http://developer.berlios.de/bugs/?func=detailbug&amp;bug_id=13827&amp;group_id=5174">http://developer.berlios.de/bugs/?func=detailbug&amp;bug_id=13827&amp;group_id=5174</A>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000286.html">[deepamehta-devel] [Bug #14762] Line breaks yield paragraphs
+</A></li>
+	<LI>Next message: <A HREF="000288.html">[deepamehta-devel] [Bug #14803] Export Topicmap Hook is greedy
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#287">[ date ]</a>
+              <a href="thread.html#287">[ thread ]</a>
+              <a href="subject.html#287">[ subject ]</a>
+              <a href="author.html#287">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/deepamehta-devel">More information about the deepamehta-devel
+mailing list</a><br>
+</body></html>

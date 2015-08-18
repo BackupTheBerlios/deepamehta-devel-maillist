@@ -1,0 +1,84 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [deepamehta-devel] Question About the Webclients Controller
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/deepamehta-devel/2014-January/index.html" >
+   <LINK REL="made" HREF="mailto:deepamehta-devel%40lists.berlios.de?Subject=Re%3A%20%5Bdeepamehta-devel%5D%20Question%20About%20the%20Webclients%20Controller&In-Reply-To=%3CA4C3641A-46FC-43B3-B930-24D95147EEFC%40deepamehta.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000464.html">
+   <LINK REL="Next"  HREF="000466.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[deepamehta-devel] Question About the Webclients Controller</H1>
+    <B>J&#246;rg Richter</B> 
+    <A HREF="mailto:deepamehta-devel%40lists.berlios.de?Subject=Re%3A%20%5Bdeepamehta-devel%5D%20Question%20About%20the%20Webclients%20Controller&In-Reply-To=%3CA4C3641A-46FC-43B3-B930-24D95147EEFC%40deepamehta.de%3E"
+       TITLE="[deepamehta-devel] Question About the Webclients Controller">jri at deepamehta.de
+       </A><BR>
+    <I>Wed Jan 29 01:38:39 CET 2014</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000464.html">[deepamehta-devel] Question About the Webclients Controller
+</A></li>
+        <LI>Next message: <A HREF="000466.html">[deepamehta-devel] Question About the Webclients Controller
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#465">[ date ]</a>
+              <a href="thread.html#465">[ thread ]</a>
+              <a href="subject.html#465">[ subject ]</a>
+              <a href="author.html#465">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>
+On Jan 28, 2014, at 21:30, J&#246;rn Wei&#223;enborn wrote:
+
+&gt;<i> I also want to employ the assoc, topicmap and topic models of the standart client. Is there a stright forward way to e.g. get a topicmap_viewmodel in my application?
+</I>
+No. For 3rd-party DM clients the least common denominator is the RESTClient.
+
+The DM Webclient's model classes (Topic, Association, TopicmapViewmodel) are specific to it. E.g. the TopicmapViewmodel includes a single-object selection model. Your client might support multiple-object selection.
+
+However, your client might be able to use the DM Webclient's model classes to a certain degree by mocking the global dm4c object the model classes rely on:
+
+	dm4c = {}
+	dm4c.restc = new RESTClient()
+
+Note: this is not officially supported. Try it on your own.
+
+&gt;<i> How does the RestClient know where to connect?
+</I>
+The RESTClient is AJAX based. So it connects to the same host and port it was loaded from. JavaScript's same-origin policy applies. Your client's main HTML page which embeds the RESTClient must be served from a DM plugin.
+
+Cheers,
+J&#246;rg
+
+</PRE>
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000464.html">[deepamehta-devel] Question About the Webclients Controller
+</A></li>
+	<LI>Next message: <A HREF="000466.html">[deepamehta-devel] Question About the Webclients Controller
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#465">[ date ]</a>
+              <a href="thread.html#465">[ thread ]</a>
+              <a href="subject.html#465">[ subject ]</a>
+              <a href="author.html#465">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/deepamehta-devel">More information about the deepamehta-devel
+mailing list</a><br>
+</body></html>

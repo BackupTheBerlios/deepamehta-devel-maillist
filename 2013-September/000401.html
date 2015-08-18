@@ -1,0 +1,169 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [deepamehta-devel] Fwd:  custom renderer question
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/deepamehta-devel/2013-September/index.html" >
+   <LINK REL="made" HREF="mailto:deepamehta-devel%40lists.berlios.de?Subject=Re%3A%20%5Bdeepamehta-devel%5D%20Fwd%3A%20%20custom%20renderer%20question&In-Reply-To=%3CCABHcWbm0fv%2Ba%3D4cvJ614Tn%3DQbTxZDKN1xx82%2BD%2B9BcLa%3DB-dOA%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000406.html">
+   <LINK REL="Next"  HREF="000403.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[deepamehta-devel] Fwd:  custom renderer question</H1>
+    <B>J&#246;rn Wei&#223;enborn</B> 
+    <A HREF="mailto:deepamehta-devel%40lists.berlios.de?Subject=Re%3A%20%5Bdeepamehta-devel%5D%20Fwd%3A%20%20custom%20renderer%20question&In-Reply-To=%3CCABHcWbm0fv%2Ba%3D4cvJ614Tn%3DQbTxZDKN1xx82%2BD%2B9BcLa%3DB-dOA%40mail.gmail.com%3E"
+       TITLE="[deepamehta-devel] Fwd:  custom renderer question">joern.weissenborn at gmail.com
+       </A><BR>
+    <I>Wed Sep  4 21:02:41 CEST 2013</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000406.html">[deepamehta-devel] type qualifying question
+</A></li>
+        <LI>Next message: <A HREF="000403.html">[deepamehta-devel] Next developer meeting?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#401">[ date ]</a>
+              <a href="thread.html#401">[ thread ]</a>
+              <a href="subject.html#401">[ subject ]</a>
+              <a href="author.html#401">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi Thorsten,
+
+I had the same questions also, so let me share what I found out:
+
+2013/9/3 Torsten Ziegler &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/deepamehta-devel">torsten at ziegi.de</A>&gt;
+
+&gt;<i> Hi J&#246;rg et al,
+</I>&gt;<i>
+</I>&gt;<i> thanks for the good work on the new 4.1.1 release.
+</I>&gt;<i>
+</I>&gt;<i> I have one question in regard to custom renderers,
+</I>&gt;<i> not in the detail panel but on the (left hand) canvas.
+</I>&gt;<i>
+</I>&gt;<i> Is it still so, that the rendering is done by the
+</I>&gt;<i> deepamehta-client only without interaction of the
+</I>&gt;<i> topics or topicmaps except for the icon and custom title field ?
+</I>&gt;<i> I would like to adjust the rendering of just some topictypes,
+</I>&gt;<i> so I would prefer to not replace the client completly
+</I>&gt;<i> to easily stay up with future changes in the deepamehta-client.
+</I>&gt;<i>
+</I>
+First thing: there is a quite useful model of the topicmap working behind
+the scences. you can get it by a curl on the topicmaps url. Its basically a
+json containing all topics and associations displayed on the topicmap. you
+can work on it in a custom plugin. changes will automatically be reflected
+by the webpage renderer. Manipulating these is the only way to avoid
+writing an own topicmaprenderer.
+
+
+&gt;<i> Where (in which modules) would I have to look for hooks
+</I>&gt;<i> or to rewrite code to implement some of the following:
+</I>&gt;<i> - custon rendering of a topic on the canvas (e.g. no icon, frame around
+</I>&gt;<i> title)
+</I>&gt;<i>
+</I>
+no icon is easy since the webclient expects you to provide a png ressource,
+which could be just empty. Frames around the title? Not with the buildin
+renderer...
+
+
+
+&gt;<i> - custom automatic placement of topics on a special type of topicmap
+</I>&gt;<i> (triggered by a function call in the topicmaps detail pane)
+</I>&gt;<i>
+</I>
+This yould be done by be writing a plugin which is hooked up to the topic
+service (or whatever it is called), which tells you when a topic is
+created. A topics initial position is chosen on a function depending on
+proximity to where the last action happened and where is space left. You
+would need to react every time a new topic is created, lookup the
+associated topicmap and then you must apply your own x and y coordinates.
+
+
+&gt;<i> - custom rendering of mouse menu (right click on topic) for one topictype
+</I>&gt;<i> to add new functions
+</I>&gt;<i>
+</I>
+At the Moment the DM provides no way to achieve this other then writing
+your own renderer. Maybe its possible to make a descendent of the default
+renderer and override the contextmenu, but that would be ugly since the
+context menu is buried deep inside the webclients controller. Even in an
+own renderer there is no elegant way to achieve this.
+
+
+&gt;<i> - adding custom keyboard shortcuts
+</I>&gt;<i>
+</I>
+Only in an own renderer since those bindings needed to  be declared in the
+renderers scriptfile. See how javascript eventhandling works (e.g. on
+w3school.org).
+
+
+&gt;<i>
+</I>&gt;<i> thanks,
+</I>&gt;<i> Torsten
+</I>&gt;<i>
+</I>
+Sorry, but right now you would either need to do some heavy and non trivial
+development to achieve your task or wait for a better Webframework. I for
+my self think that at moment the easiest thing is to use a framework wich
+can directly bind to REST like ember.js. Since DM Provides the Topicmap via
+REST, its very easy to write an own implementation. If you are interested,
+I think it would be easy to transform my SVG renderer Plugin (
+<A HREF="https://github.com/joernweissenborn/dm4-svgrenderer">https://github.com/joernweissenborn/dm4-svgrenderer</A>) in a way that instead
+of beeing part of the webclient, it would just bind its datamodel to
+DeepaMehta's REST API. That way you are free from the limiting webclient.
+Actually I will do this anyway. Starting from there, it should be
+relatively easy for you then implement the things you want.
+
+Alternatively, copy and paste either mine or jri's tompicmaprenderer,
+rename it and adjust it as you want. That would be straightforward, I can
+be of help, just write an e-mail!
+
+Best,
+
+J&#246;rn
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/deepamehta-devel/attachments/20130904/d2cc6b7e/attachment.html">https://lists.berlios.de/pipermail/deepamehta-devel/attachments/20130904/d2cc6b7e/attachment.html</A>&gt;
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000406.html">[deepamehta-devel] type qualifying question
+</A></li>
+	<LI>Next message: <A HREF="000403.html">[deepamehta-devel] Next developer meeting?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#401">[ date ]</a>
+              <a href="thread.html#401">[ thread ]</a>
+              <a href="subject.html#401">[ subject ]</a>
+              <a href="author.html#401">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/deepamehta-devel">More information about the deepamehta-devel
+mailing list</a><br>
+</body></html>

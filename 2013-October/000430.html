@@ -1,0 +1,77 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [deepamehta-devel] Demonstrating in-topicmap data manipulation
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/deepamehta-devel/2013-October/index.html" >
+   <LINK REL="made" HREF="mailto:deepamehta-devel%40lists.berlios.de?Subject=Re%3A%20%5Bdeepamehta-devel%5D%20Demonstrating%20in-topicmap%20data%20manipulation&In-Reply-To=%3CD4C6BB17-671D-4C33-902E-B4DF4553E401%40deepamehta.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000424.html">
+   <LINK REL="Next"  HREF="000429.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[deepamehta-devel] Demonstrating in-topicmap data manipulation</H1>
+    <B>J&#246;rg Richter</B> 
+    <A HREF="mailto:deepamehta-devel%40lists.berlios.de?Subject=Re%3A%20%5Bdeepamehta-devel%5D%20Demonstrating%20in-topicmap%20data%20manipulation&In-Reply-To=%3CD4C6BB17-671D-4C33-902E-B4DF4553E401%40deepamehta.de%3E"
+       TITLE="[deepamehta-devel] Demonstrating in-topicmap data manipulation">jri at deepamehta.de
+       </A><BR>
+    <I>Tue Oct 29 20:14:24 CET 2013</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000424.html">[deepamehta-devel] Demonstrating in-topicmap data manipulation
+</A></li>
+        <LI>Next message: <A HREF="000429.html">[deepamehta-devel] Demonstrating in-topicmap data manipulation
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#430">[ date ]</a>
+              <a href="thread.html#430">[ thread ]</a>
+              <a href="subject.html#430">[ subject ]</a>
+              <a href="author.html#430">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>
+On Oct 27, 2013, at 16:25, J&#246;rn Wei&#223;enborn wrote:
+
+&gt;<i> I can only work with the data of view. At topicmap level, I only have the view model of a topic, but no model of data. Lets say I have a note: I have no means to access the title or the body in this scope. But I would need that to do something useful.
+</I>
+Consider implementing a Viewmodel Customizer. The concept is described in the #505 comments:
+<A HREF="https://trac.deepamehta.de/ticket/505">https://trac.deepamehta.de/ticket/505</A>
+
+As an example see the Box Renderer plugins:
+<A HREF="https://github.com/jri/dm4-box-renderer-canvas">https://github.com/jri/dm4-box-renderer-canvas</A>
+<A HREF="https://github.com/jri/dm4-box-renderer-dom">https://github.com/jri/dm4-box-renderer-dom</A>
+
+Both plugins use the same viewmodel extension: while fetching a topicmap from the DB the topic viewmodels are enriched by &quot;color&quot; and &quot;shape&quot; values. In this case these values are stored/fetched as Topic Properties (via Property API). Analogous you could enrich e.g. Note topics with their Text-Body values (fetched via getRelatedTopic() in this case). 
+
+Cheers,
+J&#246;rg
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000424.html">[deepamehta-devel] Demonstrating in-topicmap data manipulation
+</A></li>
+	<LI>Next message: <A HREF="000429.html">[deepamehta-devel] Demonstrating in-topicmap data manipulation
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#430">[ date ]</a>
+              <a href="thread.html#430">[ thread ]</a>
+              <a href="subject.html#430">[ subject ]</a>
+              <a href="author.html#430">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/deepamehta-devel">More information about the deepamehta-devel
+mailing list</a><br>
+</body></html>

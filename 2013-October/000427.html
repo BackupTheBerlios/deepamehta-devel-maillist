@@ -1,0 +1,106 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [deepamehta-devel] custom renderer
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/deepamehta-devel/2013-October/index.html" >
+   <LINK REL="made" HREF="mailto:deepamehta-devel%40lists.berlios.de?Subject=Re%3A%20%5Bdeepamehta-devel%5D%20custom%20renderer&In-Reply-To=%3C1382958866.2990.14.camel%40junes.haus.k9%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000425.html">
+   <LINK REL="Next"  HREF="000428.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[deepamehta-devel] custom renderer</H1>
+    <B>Juergen Neumann</B> 
+    <A HREF="mailto:deepamehta-devel%40lists.berlios.de?Subject=Re%3A%20%5Bdeepamehta-devel%5D%20custom%20renderer&In-Reply-To=%3C1382958866.2990.14.camel%40junes.haus.k9%3E"
+       TITLE="[deepamehta-devel] custom renderer">j.neumann at junes.eu
+       </A><BR>
+    <I>Mon Oct 28 12:14:26 CET 2013</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000425.html">[deepamehta-devel] custom renderer
+</A></li>
+        <LI>Next message: <A HREF="000428.html">[deepamehta-devel] custom renderer
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#427">[ date ]</a>
+              <a href="thread.html#427">[ thread ]</a>
+              <a href="subject.html#427">[ subject ]</a>
+              <a href="author.html#427">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi J&#246;rg,
+
+&gt;<i> sorry for breaking the Box Renderer installation!
+</I>
+No problem. Nothing got _broken_ in that sense.
+
+&gt;<i> The Box Renderer plugin is now split into 2 separate projects:
+</I>&gt;<i> 	<A HREF="https://github.com/jri/dm4-box-renderer-canvas.git">https://github.com/jri/dm4-box-renderer-canvas.git</A>
+</I>&gt;<i> 	<A HREF="https://github.com/jri/dm4-box-renderer-dom-git">https://github.com/jri/dm4-box-renderer-dom-git</A>
+</I>
+ok.
+
+&gt;<i> Both realize Torsten's new Look&amp;Feel, one via Canvas rendering, the other via DOM based rendering.
+</I>&gt;<i> The corresponding Maven artifacts are
+</I>&gt;<i> 	de.deepamehta/deepamehta-box-renderer-canvas
+</I>&gt;<i> 	de.deepamehta/deepamehta-box-renderer-dom
+</I>&gt;<i> 
+</I>&gt;<i> The former &quot;deepamehta-boxrenderer&quot; and &quot;deepamehta-box-renderer&quot; artifacts are obsolete and can be removed.
+</I>
+ok.
+
+&gt;<i> I updated the Jenkins jobs accordingly. There are 2 Box Renderer jobs now.
+</I>&gt;<i> As Post Steps I entered (but not sure if this is correct):
+</I>&gt;<i> 	/usr/local/bin/ci_copy_plugin.sh dm4-box-renderer-canvas
+</I>&gt;<i> 	/usr/local/bin/ci_copy_plugin.sh dm4-box-renderer-dom
+</I>
+The copy script is required to copy the plugin to the download section
+of the server. So it is needed here! But it does not mean that the
+plugin is included in the script based installation of the nightly
+builds.
+
+&gt;<i> Both plugins could but should not be installed at the same time. For
+</I>&gt;<i> our nightly build demo server I would recommend to deploy the
+</I>&gt;<i> dm4-box-renderer-dom project as this is the new one with cool DOM
+</I>&gt;<i> rendering. Testing this is appreciated.
+</I>
+I have updated the installation script. So please check here, if
+everything looks like expected:
+<A HREF="http://demo.deepamehta.de:8083/de.deepamehta.webclient">http://demo.deepamehta.de:8083/de.deepamehta.webclient</A>
+
+Cheers,
+
+JuergeN
+
+
+</PRE>
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000425.html">[deepamehta-devel] custom renderer
+</A></li>
+	<LI>Next message: <A HREF="000428.html">[deepamehta-devel] custom renderer
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#427">[ date ]</a>
+              <a href="thread.html#427">[ thread ]</a>
+              <a href="subject.html#427">[ subject ]</a>
+              <a href="author.html#427">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/deepamehta-devel">More information about the deepamehta-devel
+mailing list</a><br>
+</body></html>

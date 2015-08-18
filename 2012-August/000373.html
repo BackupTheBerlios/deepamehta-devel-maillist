@@ -1,0 +1,126 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [deepamehta-devel] Developing Third Party Clients with Access	Control Module (4.0.12-SNAPSHOT)
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/deepamehta-devel/2012-August/index.html" >
+   <LINK REL="made" HREF="mailto:deepamehta-devel%40lists.berlios.de?Subject=Re%3A%20%5Bdeepamehta-devel%5D%20Developing%20Third%20Party%20Clients%20with%20Access%0A%09Control%20Module%20%284.0.12-SNAPSHOT%29&In-Reply-To=%3CF788C16A-4DF1-4F9D-87AC-ED8DC2D7038A%40deepamehta.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000372.html">
+   <LINK REL="Next"  HREF="000374.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[deepamehta-devel] Developing Third Party Clients with Access	Control Module (4.0.12-SNAPSHOT)</H1>
+    <B>J&#246;rg Richter</B> 
+    <A HREF="mailto:deepamehta-devel%40lists.berlios.de?Subject=Re%3A%20%5Bdeepamehta-devel%5D%20Developing%20Third%20Party%20Clients%20with%20Access%0A%09Control%20Module%20%284.0.12-SNAPSHOT%29&In-Reply-To=%3CF788C16A-4DF1-4F9D-87AC-ED8DC2D7038A%40deepamehta.de%3E"
+       TITLE="[deepamehta-devel] Developing Third Party Clients with Access	Control Module (4.0.12-SNAPSHOT)">jri at deepamehta.de
+       </A><BR>
+    <I>Fri Aug 24 19:20:08 CEST 2012</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000372.html">[deepamehta-devel] Developing Third Party Clients with Access	Control Module (4.0.12-SNAPSHOT)
+</A></li>
+        <LI>Next message: <A HREF="000374.html">[deepamehta-devel] Developing Third Party Clients with Access	Control Module (4.0.12-SNAPSHOT)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#373">[ date ]</a>
+              <a href="thread.html#373">[ thread ]</a>
+              <a href="subject.html#373">[ subject ]</a>
+              <a href="author.html#373">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>
+Hi Malte,
+
+thanks for your question!
+
+I can't fully comprehend the situation you describe. With the SNAPSHOT you mention the REST API is not secured at all (just the Webclient frontend is). That is, all REST API requests should be processed without authentication, regardless of PUT or POST. Perhaps there is another problem with your PUT request, which we could investigate separately.
+
+My suggestion:
+Work with the current &quot;accesscontrol&quot; branch. That branch will be merged into master soon, and then will become the 4.0.12 release.
+Meanwhile the REST API is secured. This means each request is filtered, based on its origin and request method. The filter is controlled by 3 properties in the global POM. The default settings are:
+
+	&lt;dm4.security.read_requires_login&gt;false&lt;/dm4.security.read_requires_login&gt;
+	&lt;dm4.security.write_requires_login&gt;true&lt;/dm4.security.write_requires_login&gt;
+	&lt;dm4.security.subnet_filter&gt;127.0.0.1/32&lt;/dm4.security.subnet_filter&gt; 
+
+You see, read requests (GET) require no authentication by default, but write requests (POST, PUT, DELETE) do.
+
+For testing purposes you could temporarily set &quot;dm4.security.read_requires_login&quot; to false and restart DM. This switches the filter off and your Firefox plugin should work as before.
+
+To be compatible with DeepaMehta 4.0.12 you should implement authentication in your plugin.
+Before issuing any write request you should login. You do so by issuing a GET request:
+
+	GET /accesscontrol/login/{username}/{password}
+
+Username and password must match a DeepaMehta User Account. By default DM comes with one user account: &quot;admin&quot; with an empty password.
+The password must be SHA256 encrypted and prepended with &quot;-SHA256-&quot;
+So, to login e.g. with the default user:
+
+	GET /accesscontrol/login/admin/-SHA256-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+
+If login is successful the response consists of
+	1) the session ID in the header, e.g.
+	    Set-Cookie: JSESSIONID=3xztao4pkpgdc72vxndknef0;Path=/
+	2) a Username topic in the payload (JSON)
+
+If login fails the response is 204 No Content.
+
+Ensure the JSESSIONID cookie is included in the header of each of your subsequent requests, e.g.:
+
+	Cookie: JSESSIONID=3xztao4pkpgdc72vxndknef0
+
+For further methods see the REST API of the Access Control plugin:
+	AccessControlService.java
+	AccessControlPlugin.java
+
+That's great you're updating the Firefox plugin!
+
+Cheers,
+J&#246;rg
+
+
+On Aug 24, 2012, at 17:27, Malte Rei&#223;ig wrote:
+
+&gt;<i> hello dear developers, dear jri,
+</I>&gt;<i> 
+</I>&gt;<i> i was wondering if one of you could share with us how a third party client, e.g. the latest &quot;firefox notetaker add-on&quot; or any other proprietary JavaScript client i just started working on, will be able to send create/update and delete (writing) requests to the dm4-webservice module if the dm4-accesscontrol module is installed and active? i am running into strange issues, in which POSTing new topics does work without any authentication (introducing new Web Resources with my firefox plugin does work), but PUTting new values onto a topic (with my new JS client) is silently ignored (topic with former values is returned in response).
+</I>&gt;<i> 
+</I>&gt;<i> note: i am developing on a 4.0.12-SNAPSHOT of times prior the &quot;dm4.security.*-properties were introduced.
+</I>&gt;<i> (to be more precise, on 2f32c7d1f8b1a2ee7588015fe6fcfc044832d384 from the 8th of august).
+</I>&gt;<i> 
+</I>&gt;<i> i am in the hope that i can update the firefox extension to meet the needs of the upcoming 4.0.12 release and i would be thankful for any explanations or hints regarding this topic to implement the authentication process for users of my new JS client properly.
+</I>&gt;<i> 
+</I>&gt;<i> cheers!
+</I>&gt;<i> malte
+</I>
+</PRE>
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000372.html">[deepamehta-devel] Developing Third Party Clients with Access	Control Module (4.0.12-SNAPSHOT)
+</A></li>
+	<LI>Next message: <A HREF="000374.html">[deepamehta-devel] Developing Third Party Clients with Access	Control Module (4.0.12-SNAPSHOT)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#373">[ date ]</a>
+              <a href="thread.html#373">[ thread ]</a>
+              <a href="subject.html#373">[ subject ]</a>
+              <a href="author.html#373">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/deepamehta-devel">More information about the deepamehta-devel
+mailing list</a><br>
+</body></html>

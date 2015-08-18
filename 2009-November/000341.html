@@ -1,0 +1,253 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [deepamehta-devel] [deepamehta3] my first test of dm3
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/deepamehta-devel/2009-November/index.html" >
+   <LINK REL="made" HREF="mailto:deepamehta-devel%40lists.berlios.de?Subject=Re%3A%20%5Bdeepamehta-devel%5D%20%5Bdeepamehta3%5D%20my%20first%20test%20of%20dm3&In-Reply-To=%3C87185e321d70580b6bb161e81f222b84%40deepamehta.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000340.html">
+   
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[deepamehta-devel] [deepamehta3] my first test of dm3</H1>
+    <B>J&#246;rg Richter</B> 
+    <A HREF="mailto:deepamehta-devel%40lists.berlios.de?Subject=Re%3A%20%5Bdeepamehta-devel%5D%20%5Bdeepamehta3%5D%20my%20first%20test%20of%20dm3&In-Reply-To=%3C87185e321d70580b6bb161e81f222b84%40deepamehta.de%3E"
+       TITLE="[deepamehta-devel] [deepamehta3] my first test of dm3">jri at deepamehta.de
+       </A><BR>
+    <I>Tue Nov 10 22:33:46 CET 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000340.html">[deepamehta-devel] my first test of dm3
+</A></li>
+        
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#341">[ date ]</a>
+              <a href="thread.html#341">[ thread ]</a>
+              <a href="subject.html#341">[ subject ]</a>
+              <a href="author.html#341">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>
+Dear Thorsten,
+
+thanks for your valuable feedback!
+Here I like to help you with your issues.
+
+
+On 09.11.2009, at 13:27, Torsten Ziegler wrote:
+
+&gt;<i>  Dear J&#246;rg,
+</I>&gt;<i>
+</I>&gt;<i>  thanks for pushing DeepaMehta to the next step.
+</I>&gt;<i>  The last minutes I installed the new version from github and I found  
+</I>&gt;<i> some things that are not yet working following the Readme text.
+</I>&gt;<i>
+</I>&gt;<i>  The Readme from <A HREF="http://github.com/jri/deepamehta3">http://github.com/jri/deepamehta3</A> says:
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>  3.) Configure CouchDB for use with couchdb-lucene as described in  
+</I>&gt;&gt;<i> the README &#160;&#160;&#160;&#160;
+</I>&gt;&gt;<i>  &#160;&#160;&#160;&#160;&#160; &lt;<A HREF="http://github.com/rnewson/couchdb-lucene/">http://github.com/rnewson/couchdb-lucene/</A>&gt;
+</I>&gt;&gt;<i>
+</I>&gt;<i> This page only refers to couchdb-lucene 0.5, no word about  
+</I>&gt;<i> installation of 0.4, but I found this page:  
+</I>&gt;<i> <A HREF="http://wiki.github.com/ShiftSpace/shiftspace/installation-os-x">http://wiki.github.com/ShiftSpace/shiftspace/installation-os-x</A> that  
+</I>&gt;<i> helped me to go on.
+</I>
+Regarding the couchdb-lucene installation I've extended the README  
+meanwhile to make things more clear:
+
+4.  Install couchdb-lucene
+
+     ** Please note:** Do not install the couchdb-lucene trunk (which is  
+0.5 in progress and unstable).
+     Instead download the latest stable version, which is 0.4, from here:
+      
+&lt;<A HREF="http://cloud.github.com/downloads/rnewson/couchdb-lucene/couchdb-">http://cloud.github.com/downloads/rnewson/couchdb-lucene/couchdb-</A> 
+lucene-0.4-jar-with-dependencies.jar.gz&gt;
+
+     IMPORTANT: Follow this unpack instruction (the usual `gunzip` won't  
+work!):
+     &lt;<A HREF="http://cloud.github.com/downloads/rnewson/couchdb-lucene/README">http://cloud.github.com/downloads/rnewson/couchdb-lucene/README</A>&gt;
+
+5.  Configure CouchDB for use with couchdb-lucene as described in the  
+couchdb-lucene README for version 0.4:
+     &lt;<A HREF="http://github.com/rnewson/couchdb-lucene/tree/v0.4">http://github.com/rnewson/couchdb-lucene/tree/v0.4</A>&gt;
+
+     (You also get there from the project's main page  
+&lt;<A HREF="http://github.com/rnewson/couchdb-lucene/">http://github.com/rnewson/couchdb-lucene/</A>&gt; by choosing `v0.4` from the  
+`all tags` menu.)
+
+&gt;<i>  I am working on an ubunti 9.10 system and did put the following lines  
+</I>&gt;<i> to the file: &quot;/etc/couchdb/local.ini&quot;
+</I>&gt;<i>  these have to adjusted for your location of the couchdb-lucene  
+</I>&gt;<i> location:
+</I>&gt;<i>
+</I>&gt;<i>  [couchdb]
+</I>&gt;<i>  os_process_timeout=60000 ; 60 seconds for couchdb-lucene
+</I>&gt;<i>  [update_notification]
+</I>&gt;<i>  indexer=/usr/bin/java -Dcouchdb.url=<A HREF="http://127.0.0.1:5984">http://127.0.0.1:5984</A> -jar  
+</I>&gt;<i> /data/dokumente/projekte/deepamehta/dm3/couchdb-lucene/couchdb-lucene 
+</I>&gt;<i> -0.4-jar-with-dependencies.jar -index
+</I>&gt;<i>  [external]
+</I>&gt;<i>  fti=/usr/bin/java -jar  
+</I>&gt;<i> /data/dokumente/projekte/deepamehta/dm3/couchdb-lucene/couchdb-lucene 
+</I>&gt;<i> -0.4-jar-with-dependencies.jar -search
+</I>&gt;<i>  [httpd_db_handlers]
+</I>&gt;<i>  _fti={couch_httpd_external, handle_external_req, &lt;&lt;&quot;fti&quot;&gt;&gt;}
+</I>
+This looks correct!
+
+&gt;<i> But still the Fulltext search in dm3 brings the error message:
+</I>&gt;<i>
+</I>&gt;<i> Error while searching: {&quot;message&quot;:&quot;result is  
+</I>&gt;<i> null&quot;,&quot;fileName&quot;:&quot;<A HREF="http://localhost:5984/deepamehta3-db/_design/">http://localhost:5984/deepamehta3-db/_design/</A> 
+</I>&gt;<i> deepamehta3/index.html&quot;,&quot;lineNumber&quot;:23,&quot;stack&quot;:&quot;(\&quot;Fulltext\&quot;)@http:/ 
+</I>&gt;<i> /localhost:5984/deepamehta3-db/_design/deepamehta3/index.html: 
+</I>&gt;<i> 23\u000atrigger_hook(\&quot;search\&quot;,\&quot;Fulltext\&quot;)@  
+</I>&gt;<i> <A HREF="http://localhost:5984/deepamehta3-db/_design/deepamehta3/javascript/">http://localhost:5984/deepamehta3-db/_design/deepamehta3/javascript/</A> 
+</I>&gt;<i> deepamehta3.js:434\u000asearch([object  
+</I>&gt;<i> Object])@<A HREF="http://localhost:5984/deepamehta3-db/_design/deepamehta3/">http://localhost:5984/deepamehta3-db/_design/deepamehta3/</A> 
+</I>&gt;<i> javascript/deepamehta3.js:75\u000a([object  
+</I>&gt;<i> Object])@<A HREF="http://localhost:5984/deepamehta3-db/_design/deepamehta3/">http://localhost:5984/deepamehta3-db/_design/deepamehta3/</A> 
+</I>&gt;<i> vendor/jquery/js/jquery-1.3.2.min.js:19\u000a([object  
+</I>&gt;<i> Event])@<A HREF="http://localhost:5984/deepamehta3-db/_design/deepamehta3/">http://localhost:5984/deepamehta3-db/_design/deepamehta3/</A> 
+</I>&gt;<i> vendor/jquery/js/jquery-1.3.2.min.js:19\u000a&quot;}
+</I>&gt;<i>
+</I>&gt;<i>  while the search by time works perfectly.
+</I>
+Probably your couchdb process can't start the external couchdb-lucene  
+Java process properly.
+
+=&gt; Please check out:
+	- The user who runs your couchdb process (usually &quot;couchdb&quot;) has  
+read-access to the couchdb-lucene jar file
+	- The user who runs your couchdb process have write-access in order to  
+create the Lucene index directory
+	- The couchdb-lucene jar file has been unpacked with &quot;unpack200&quot; (part  
+of JDK1.5) as gunzip will not work. Check the integrity of the jar file  
+with &quot;unzip -t &lt;jar file&gt;&quot;
+
+=&gt; Please try this fulltext query in your browser and tell me the  
+result:
+
+	<A HREF="http://localhost:5984/deepamehta3-db/_fti/deepamehta3/search?q=hallo*">http://localhost:5984/deepamehta3-db/_fti/deepamehta3/search?q=hallo*</A>
+
+A proper result looks like this (in the browser window):
+
+{&quot;q&quot;:&quot;default: 
+hallo*&quot;,&quot;etag&quot;:&quot;12391ac1c49&quot;,&quot;view_sig&quot;:&quot;aea436d6afdba5de7244fd4cac51cc1 
+6&quot;,&quot;skip&quot;:0,&quot;limit&quot;:25,&quot;total_rows&quot;:4,&quot;search_duration&quot;: 
+21,&quot;fetch_duration&quot;:17,&quot;rows&quot;:[{&quot;id&quot;:&quot;t-1173&quot;,&quot;score&quot;: 
+0.46587268,&quot;fields&quot;:{&quot;title&quot;:&quot;Stolz  
+Rainer&quot;}},{&quot;id&quot;:&quot;t-2646&quot;,&quot;score&quot;:0.46587268,&quot;fields&quot;:{&quot;title&quot;:&quot;Hofmann  
+Martina&quot;}},{&quot;id&quot;:&quot;t-1011&quot;,&quot;score&quot;:0.40763858,&quot;fields&quot;:{&quot;title&quot;:&quot;Caroli  
+Nicola&quot;}},{&quot;id&quot;:&quot;6381d4d1e55940d157d869646b19aec2&quot;,&quot;score&quot;: 
+0.038216118,&quot;fields&quot;:{&quot;title&quot;:&quot;Poemspace Import&quot;}}]}
+
+=&gt; What does your CouchDB log say?
+If you start CouchDB in the foreground you should see the log directly.
+If you run CouchDB in the background check out this files:
+	/var/log/couchdb/couchdb.stdout
+	/var/log/couchdb/couchdb.stderr
+(log file locations might differ on your system)
+
+In the log files a proper fulltext request looks like this:
+	[info] [&lt;0.13745.18&gt;] EXTERNAL: Starting process for: fti
+	[info] [&lt;0.13745.18&gt;] COMMAND: /usr/bin/java -server -jar  
+/Users/jri/Public/couchdb-lucene-0.4-jdk14/couchdb-lucene-0.4-jdk14.jar  
+-search
+	[info] [&lt;0.13718.18&gt;] 127.0.0.1 - - 'GET'  
+/deepamehta3-db/_fti/deepamehta3/search?q=hallo* 200
+
+&gt;<i> The Readme from <A HREF="http://github.com/jri/deepamehta3">http://github.com/jri/deepamehta3</A> says in the section  
+</I>&gt;<i> DeepaMehta 3 installation
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>  2.)couchapp push --atomic <A HREF="http://localhost:5984/deepamehta3-db">http://localhost:5984/deepamehta3-db</A>
+</I>&gt;&gt;<i>
+</I>&gt;<i> first there is one command missing to initialize the local app  
+</I>&gt;<i> directory &quot;couchapp init&quot; then the up to date couchapp does atomic  
+</I>&gt;<i> inserts by default and does not know the --atomic option any more so  
+</I>&gt;<i> it should read:
+</I>&gt;<i> 	couchapp push <A HREF="http://localhost:5984/deepamehta3-db">http://localhost:5984/deepamehta3-db</A>
+</I>
+Regarding CouchApp installation I've extended the README meanwhile to  
+make things more clear:
+
+3.  Install CouchApp
+
+     ** Please note:** DeepaMehta 3 has only been tested with CouchApp  
+versions 0.3.2 to 0.3.32 so far.
+     When using the newer CouchApp versions 0.3.4 or 0.4 the DeepaMehta  
+3 installation procedure might differ from described here.
+
+&gt;<i>  What I really like is that the user gets prompted before the deletion  
+</I>&gt;<i> of nodes, as I deleted quite some data by accident in dm2
+</I>&gt;<i>
+</I>&gt;<i>  Concerning the dm2 database conversion to dm3 you describe below this  
+</I>&gt;<i> is not a major problem for me as I still dont have any &quot;production&quot;  
+</I>&gt;<i> data in dm2.
+</I>&gt;<i>
+</I>&gt;<i>  Thanks a lot for the work and hopefully the above points help a  
+</I>&gt;<i> little bit.
+</I>&gt;<i>
+</I>&gt;<i>  Cheers
+</I>&gt;<i>  Torsten
+</I>
+
+I hope I could help with your issues.
+
+Thank you again for your feedback as it helps to improve the user  
+experience.
+
+Cheers
+J&#246;rg
+
+
+&gt;<i>  J&#246;rg Richter schrieb:Dear Thorsten &quot;Ziegi&quot;,
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> a while ago you asked weather DeepaMehta 3 will be data-compatible  
+</I>&gt;&gt;<i> with
+</I>&gt;&gt;<i> DeepaMehta 2. At that time DeepaMehta 3 existed only in planing and
+</I>&gt;&gt;<i> nothing was set. Meanwhile a usable version of DeepaMehta 3 is
+</I>&gt;&gt;<i> available (see <A HREF="http://github.com/jri">http://github.com/jri</A>)
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> _______________________________________________
+</I>&gt;&gt;<i> deepamehta-devel mailing list
+</I>&gt;&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/deepamehta-devel">deepamehta-devel at lists.berlios.de</A>
+</I>&gt;&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/deepamehta-devel">https://lists.berlios.de/mailman/listinfo/deepamehta-devel</A>
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> &lt;torsten.vcf&gt;
+</I>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000340.html">[deepamehta-devel] my first test of dm3
+</A></li>
+	
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#341">[ date ]</a>
+              <a href="thread.html#341">[ thread ]</a>
+              <a href="subject.html#341">[ subject ]</a>
+              <a href="author.html#341">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/deepamehta-devel">More information about the deepamehta-devel
+mailing list</a><br>
+</body></html>

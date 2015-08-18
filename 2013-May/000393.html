@@ -1,0 +1,152 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [deepamehta-devel] Twitter Research Plugin Released
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/deepamehta-devel/2013-May/index.html" >
+   <LINK REL="made" HREF="mailto:deepamehta-devel%40lists.berlios.de?Subject=Re%3A%20%5Bdeepamehta-devel%5D%20Twitter%20Research%20Plugin%20Released&In-Reply-To=%3C51A0CFB7.3010201%40deepamehta.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000392.html">
+   <LINK REL="Next"  HREF="000394.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[deepamehta-devel] Twitter Research Plugin Released</H1>
+    <B>Malte Rei&#223;ig</B> 
+    <A HREF="mailto:deepamehta-devel%40lists.berlios.de?Subject=Re%3A%20%5Bdeepamehta-devel%5D%20Twitter%20Research%20Plugin%20Released&In-Reply-To=%3C51A0CFB7.3010201%40deepamehta.de%3E"
+       TITLE="[deepamehta-devel] Twitter Research Plugin Released">mre at deepamehta.de
+       </A><BR>
+    <I>Sat May 25 16:50:31 CEST 2013</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000392.html">[deepamehta-devel] May 22: 1st DeepaMehta Development Meeting at TU Berlin
+</A></li>
+        <LI>Next message: <A HREF="000394.html">[deepamehta-devel] Tags 1.1 Released - Now compatible with	DeepaMehta Webclient
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#393">[ date ]</a>
+              <a href="thread.html#393">[ thread ]</a>
+              <a href="subject.html#393">[ subject ]</a>
+              <a href="author.html#393">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi dear DeepaMehta Friends and Developers!
+
+Background:
+In preparation for the latest developer meeting at the TU Berlin a
+couple of days ago I wanted to connect a popular web-service to
+DeepaMehta 4. I spontaneously chose twitter as an exemplary platform to
+connect, mainly because I am planning to implement a City-Map fueled by
+the #kiezatlas-hashtag for the upcoming 10th Anniversary-Party of the
+Kiezatlas Project and I needed to get to know the Public Twitter-API anyway.
+
+Also I wanted to dive into the GUI Framework of the current DeepaMehta
+Webclient and explore it's current limitations by a working example. So
+I just released the DeepaMehta 4 Twitter Research Plugin 1.0 (Source
+Code [1]) and you can try it out, it is working fine with (a fresh)
+DeepaMehta 4.1 installation. To install this plugin, you currently first
+have to download the project and then build it from source [2].
+
+Usage &amp; Installation:
+For users: This plugin allows users of DeepaMehta to query [3] Twitters
+Public Search API [4] and start qualitative research around events based
+on the messages sent by users of twitter.com. The query basically wraps
+all meaningful options of the API (e.g. Language, Location and
+Query-Input). The &quot;Twitter Search&quot;-Topic enables to &quot;Load More Tweets&quot;
+(Paging) and to &quot;Refresh Search&quot; loading new tweets (since the last
+search).
+
+Please note when installing: The plugin just works as expected (a
+&quot;Twitter Search&quot; shows up in your &quot;Create&quot;-Menu) if you install the
+plugin during the initialization of a _new/blank/fresh_ DeepaMehta 4.1.
+Do not install this plugin into an existing DeepaMehta installation (one
+which already has content in it). To do so, you need to copy the
+&quot;twitter-research.jar&quot; into the &quot;bundle&quot; directory of your DeepaMehta
+installation and then start a fresh DeepaMehta installation for the very
+first time. This is due to an issue I just discovered and which remains
+to be investigated (see <A HREF="https://trac.deepamehta.de/ticket/465">https://trac.deepamehta.de/ticket/465</A>).
+
+The Public Twitter API makes available most (not all) tweeted contents
+from within the last 6-9 days. Once queried all tweets can be accessed
+through DeepaMehtas fulltext search (and usage of the lucene-search
+commands).
+
+The plugin also extracts &quot;Twitter Users&quot; (uniquely) and thus associates
+all tweets found across various queries with the correct twitter-user.
+Around &quot;Tweets&quot; this plugin makes avaible some of the information
+provided by twitter through their API which seems invisible in their
+web-interface, namely (&quot;Tweet Withheld in Countries&quot; and the &quot;Copyright
+Withheld&quot;-Flag).
+
+Further Development:
+This plugin is part of the deepamehta webclient and utilizes much of the
+webclients own GUI Framework, thus providing working examples for Simple
+Renderer, Multi Renderer and Commands.
+
+Noteworthy is that the Twitter Public Search API enables us to easily
+extract to URLs and Hashtags from Tweets (via the &quot;Entities&quot;-Field),
+thus making a potential tighter integration of this Twitter Search
+Plugin with the DeepaMehta Webbrowser or the DeepaMehta Tags Module (at
+some time point in the future) appear seamless for end-users and other
+applications that build on &quot;Tags&quot; and &quot;Web Resources&quot;.
+
+I would be happy to hear from other developers who are interested in
+improving this plugin because currently I have no time on significantly
+improving the featureset of this. Nonetheless I am happy to get bug
+reports and fix possible issue.
+
+Deployment:
+I would be happy if someone could introduce this plugin to our friend
+Mr. Jenkins, so a binary release of the plugin becomes available for
+end-users at <A HREF="http://download.deepamehta.de.">http://download.deepamehta.de.</A>
+
+Issues:
+There are a couple of itches when bringing this plugin but for now I'll
+leave it up to you and your feedback to point out some of the issues you
+perceive.
+
+Overall this plugin should provide a good starting point if one simply
+wants to start querying &quot;Web Resources&quot; from &quot;social bookmarking&quot;
+services or stuff alike.
+
+I hope somebody is digging it.
+
+Cheers!
+
+
+[1] <A HREF="https://github.com/mukil/twitter-research">https://github.com/mukil/twitter-research</A>
+
+[2] <A HREF="https://trac.deepamehta.de/wiki/PluginDevelopmentGuide#Buildtheplugin">https://trac.deepamehta.de/wiki/PluginDevelopmentGuide#Buildtheplugin</A>
+
+[3] <A HREF="https://dev.twitter.com/docs/using-search">https://dev.twitter.com/docs/using-search</A>
+
+[4] <A HREF="https://dev.twitter.com/docs/api/1/get/search">https://dev.twitter.com/docs/api/1/get/search</A>
+</PRE>
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000392.html">[deepamehta-devel] May 22: 1st DeepaMehta Development Meeting at TU Berlin
+</A></li>
+	<LI>Next message: <A HREF="000394.html">[deepamehta-devel] Tags 1.1 Released - Now compatible with	DeepaMehta Webclient
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#393">[ date ]</a>
+              <a href="thread.html#393">[ thread ]</a>
+              <a href="subject.html#393">[ subject ]</a>
+              <a href="author.html#393">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/deepamehta-devel">More information about the deepamehta-devel
+mailing list</a><br>
+</body></html>

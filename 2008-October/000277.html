@@ -1,0 +1,107 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [deepamehta-devel] [Bug #14516] Several bugs in feature #4299	(handling of result sets)
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/deepamehta-devel/2008-October/index.html" >
+   <LINK REL="made" HREF="mailto:deepamehta-devel%40lists.berlios.de?Subject=Re%3A%20%5Bdeepamehta-devel%5D%20%5BBug%20%2314516%5D%20Several%20bugs%20in%20feature%20%234299%0A%09%28handling%20of%20result%20sets%29&In-Reply-To=%3C200810060948.m969mwRN000450%40unicorn.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000279.html">
+   <LINK REL="Next"  HREF="000280.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[deepamehta-devel] [Bug #14516] Several bugs in feature #4299	(handling of result sets)</H1>
+    <B>admin at berlios.de</B> 
+    <A HREF="mailto:deepamehta-devel%40lists.berlios.de?Subject=Re%3A%20%5Bdeepamehta-devel%5D%20%5BBug%20%2314516%5D%20Several%20bugs%20in%20feature%20%234299%0A%09%28handling%20of%20result%20sets%29&In-Reply-To=%3C200810060948.m969mwRN000450%40unicorn.berlios.de%3E"
+       TITLE="[deepamehta-devel] [Bug #14516] Several bugs in feature #4299	(handling of result sets)">admin at berlios.de
+       </A><BR>
+    <I>Mon Oct  6 11:48:58 CEST 2008</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000279.html">[deepamehta-devel] [Feature #4299] Better handling of result sets	(DONATED feature)
+</A></li>
+        <LI>Next message: <A HREF="000280.html">[deepamehta-devel] PROPERTY_UNIQUE_TOPIC_NAMES
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#277">[ date ]</a>
+              <a href="thread.html#277">[ thread ]</a>
+              <a href="subject.html#277">[ subject ]</a>
+              <a href="author.html#277">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Bug #14516, was updated on 2008-Sep-17 15:37
+Here is a current snapshot of the bug.
+
+Project: DeepaMehta
+Category: Graphical Client
+Status: Closed
+Resolution: Fixed
+Bug Group: None
+Priority: 7
+Submitted by: jri
+Assigned to : jri
+Summary: Several bugs in feature #4299 (handling of result sets)
+
+Details: There are several bugs regarding the new search tons, in particular the result lists displayed in the property panel:
+
+a) The result list is not always sorted. It should be sorted alphabetically.
+
+b) The topic icons do not always appear in the result list (broken image). This is the case for tons obtained by a &quot;What's related?&quot; command.
+
+c) The topic icons should also be clickable and reveal the respective topic (as the hyperlinks do). This is particularily an issue for topics with no name (which are not selectable for the moment).
+
+d) The rendering of the result list is not always up-to-date. E.g. when double-clicking the ton (which triggers the search again) the result list is only up-to-date when the user selects the ton again (including deselecting it before).
+
+e) Usability: if the result of a &quot;What's related?&quot; command is a single ton, it should be selected automatically in order to let the user see the result instantly. (Note: there are cases, however, when the result set comprises several tons. This might be the case when navigating &quot;by Association Type&quot;.)
+
+f) Eventually, the tons &quot;Show result&quot; command must be disposed because it is obsolete.
+
+
+Follow-Ups:
+
+Date: 2008-Oct-06 11:48
+By: jri
+
+Comment:
+Largely fixed in rev 351-353.
+Closed.
+
+Issues a)-d) and f) are fixed.
+Issue e) remains open. This is rather a feature reqest than a bug.
+
+e) Usability: if the result of a &quot;What's related?&quot; command is a single ton, it should be selected automatically in order to let the user see the result instantly. (Note: there are cases, however, when the result set comprises several tons. This might be the case when navigating &quot;by Association Type&quot;.)
+
+-------------------------------------------------------
+
+For detailed info, follow this link:
+<A HREF="http://developer.berlios.de/bugs/?func=detailbug&amp;bug_id=14516&amp;group_id=5174">http://developer.berlios.de/bugs/?func=detailbug&amp;bug_id=14516&amp;group_id=5174</A>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000279.html">[deepamehta-devel] [Feature #4299] Better handling of result sets	(DONATED feature)
+</A></li>
+	<LI>Next message: <A HREF="000280.html">[deepamehta-devel] PROPERTY_UNIQUE_TOPIC_NAMES
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#277">[ date ]</a>
+              <a href="thread.html#277">[ thread ]</a>
+              <a href="subject.html#277">[ subject ]</a>
+              <a href="author.html#277">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/deepamehta-devel">More information about the deepamehta-devel
+mailing list</a><br>
+</body></html>

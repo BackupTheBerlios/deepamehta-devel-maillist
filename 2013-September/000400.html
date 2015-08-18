@@ -1,0 +1,145 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [deepamehta-devel] custom renderer question
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/deepamehta-devel/2013-September/index.html" >
+   <LINK REL="made" HREF="mailto:deepamehta-devel%40lists.berlios.de?Subject=Re%3A%20%5Bdeepamehta-devel%5D%20custom%20renderer%20question&In-Reply-To=%3CAF82DE0C-6318-474A-84AC-7E35B6A76270%40deepamehta.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000398.html">
+   <LINK REL="Next"  HREF="000402.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[deepamehta-devel] custom renderer question</H1>
+    <B>J&#246;rg Richter</B> 
+    <A HREF="mailto:deepamehta-devel%40lists.berlios.de?Subject=Re%3A%20%5Bdeepamehta-devel%5D%20custom%20renderer%20question&In-Reply-To=%3CAF82DE0C-6318-474A-84AC-7E35B6A76270%40deepamehta.de%3E"
+       TITLE="[deepamehta-devel] custom renderer question">jri at deepamehta.de
+       </A><BR>
+    <I>Wed Sep  4 18:14:22 CEST 2013</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000398.html">[deepamehta-devel] custom renderer question
+</A></li>
+        <LI>Next message: <A HREF="000402.html">[deepamehta-devel] custom renderer question
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#400">[ date ]</a>
+              <a href="thread.html#400">[ thread ]</a>
+              <a href="subject.html#400">[ subject ]</a>
+              <a href="author.html#400">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>
+Hi Torsten,
+
+thanks for kind feedback and questions!
+
+
+On Sep 3, 2013, at 13:59, Torsten Ziegler wrote:
+
+&gt;<i> I have one question in regard to custom renderers,
+</I>&gt;<i> not in the detail panel but on the (left hand) canvas.
+</I>
+First, you could implement and register a custom topicmap renderer. You have full control over rendering and interaction of the left panel then.
+
+As a reference you could investigate the 3 topicmap renderer implementations existing so far:
+1) The default HTML5 Canvas based renderer included in the standard distro:
+	dm4-webclient/src/main/resources/web/script/renderers/topicmap_renderers/
+2) The OpenLayers based Geomap renderer included in the standard distro:
+	dm4-geomaps/src/main/resources/web/script/topicmap_renderers/
+3) The 3rd-party SVG based topicmap renderer (unfinished) developed by J&#246;rn:
+	<A HREF="https://github.com/joernweissenborn/dm4-svgrenderer">https://github.com/joernweissenborn/dm4-svgrenderer</A>
+
+However, implementing a custom topicmap renderer is possibly overkill in your situation. As I understand your goals you rather want to do only selective changes to the default renderer (and not to reimplement all its rendering and interaction functionality).
+Probably the way to go is to equip the default renderer with extension points...
+
+&gt;<i> Is it still so, that the rendering is done by the
+</I>&gt;<i> deepamehta-client only without interaction of the
+</I>&gt;<i> topics or topicmaps except for the icon and custom title field ?
+</I>&gt;<i> I would like to adjust the rendering of just some topictypes,
+</I>&gt;<i> so I would prefer to not replace the client completly
+</I>&gt;<i> to easily stay up with future changes in the deepamehta-client.
+</I>
+Generally, DM strives for enabling external developers (like you) to extend/adapt the DM standard distro by developing plugins, that is without changing the standard distro itself. For that you rely on the extension points (hooks, events) provided by the standard distro. If the existing extension points are not sufficient we will identify/conceptualize further ones. The new extension points are implemented by the standard distro developers then.
+
+&gt;<i> Where (in which modules) would I have to look for hooks
+</I>&gt;<i> or to rewrite code to implement some of the following:
+</I>&gt;<i> - custon rendering of a topic on the canvas (e.g. no icon, frame around title)
+</I>
+Currently there is no way for a plugin to modify the topic rendering of the default topicmap renderer. I could equip the default renderer with a mechanism that allows you to hook in a custom topic renderer. This way you could override the default topic rendering (icon + label). Do you want me to do so?
+
+&gt;<i> - custom automatic placement of topics on a special type of topicmap (triggered by a function call in the topicmaps detail pane)
+</I>
+Just to clarify: do your plugin want
+1) interfere with the **standard placement strategy** that is applied when a) the user creates a new topic via the standard menu or b) when she reveals a topic via a standard detail panel link? Or
+2) place topics with explicit coordinates as response to a **custom command** provided by your plugin?
+
+In case of 1) I would have to equip the default renderer with a further extension point.
+
+In case of 2) -- that is when **your plugin** explicitly initiates the topic display -- your plugin could simply call
+	dm4c.do_create_topic() -- to create a topic in the DB and display it, or
+	dm4c.show_topic() -- to display a topic which already exists in the DB
+and pass x/y coordinates repectively.
+
+See dm4-webclient/src/main/resources/web/script/webclient.js
+
+Or (still another case) are the topics already displayed and you want move them programmatically?
+
+&gt;<i> - custom rendering of mouse menu (right click on topic) for one topictype to add new functions
+</I>
+To place additional commands in the topic context menu or detail panel (to appear as buttons below the content) your plugin can register a listener to the &quot;topic_commands&quot; event.
+
+	dm4c.add_listener(&quot;topic_commands&quot;, function(topic) {
+		...
+	}
+
+The &quot;topic_commands&quot; event is fired every time the context menu is displayed. Your handler could investigate the topic's type or add commands for all types.
+
+For examples see:
+	dm4-webclient/src/main/resources/web/script/internal_plugins/default_plugin.js
+	dm4-webbrowser/src/main/resources/web/script/plugin.js
+	dm4-files/src/main/resources/web/script/plugin.js
+
+&gt;<i> - adding custom keyboard shortcuts
+</I>
+Currently there is no special support for keyboard shortcuts.
+Lets talk about this later.
+
+So far for a first reply.
+Lets stay in touch to go more into the details.
+
+Unfortunately I can respond to your other mail not before friday.
+
+Cheers,
+J&#246;rg
+
+</PRE>
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000398.html">[deepamehta-devel] custom renderer question
+</A></li>
+	<LI>Next message: <A HREF="000402.html">[deepamehta-devel] custom renderer question
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#400">[ date ]</a>
+              <a href="thread.html#400">[ thread ]</a>
+              <a href="subject.html#400">[ subject ]</a>
+              <a href="author.html#400">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/deepamehta-devel">More information about the deepamehta-devel
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,83 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [deepamehta-devel] Developing Third Party Clients with Access	Control Module (4.0.12-SNAPSHOT)
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/deepamehta-devel/2012-August/index.html" >
+   <LINK REL="made" HREF="mailto:deepamehta-devel%40lists.berlios.de?Subject=Re%3A%20%5Bdeepamehta-devel%5D%20Developing%20Third%20Party%20Clients%20with%20Access%0A%09Control%20Module%20%284.0.12-SNAPSHOT%29&In-Reply-To=%3C956BD3B3-191D-446F-91BC-F16482314B8C%40deepamehta.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000375.html">
+   <LINK REL="Next"  HREF="000376.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[deepamehta-devel] Developing Third Party Clients with Access	Control Module (4.0.12-SNAPSHOT)</H1>
+    <B>J&#246;rg Richter</B> 
+    <A HREF="mailto:deepamehta-devel%40lists.berlios.de?Subject=Re%3A%20%5Bdeepamehta-devel%5D%20Developing%20Third%20Party%20Clients%20with%20Access%0A%09Control%20Module%20%284.0.12-SNAPSHOT%29&In-Reply-To=%3C956BD3B3-191D-446F-91BC-F16482314B8C%40deepamehta.de%3E"
+       TITLE="[deepamehta-devel] Developing Third Party Clients with Access	Control Module (4.0.12-SNAPSHOT)">jri at deepamehta.de
+       </A><BR>
+    <I>Tue Aug 28 16:06:43 CEST 2012</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000375.html">[deepamehta-devel] Developing Third Party Clients with Access	Control Module (4.0.12-SNAPSHOT)
+</A></li>
+        <LI>Next message: <A HREF="000376.html">[deepamehta-devel] Spaciousness and BaseParadigm
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#377">[ date ]</a>
+              <a href="thread.html#377">[ thread ]</a>
+              <a href="subject.html#377">[ subject ]</a>
+              <a href="author.html#377">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>
+DM's security and access control concepts are still in flux.
+What I wrote in the previous posting does NOT apply anymore:
+
+&gt;<i> After discussing the topic with Danny who knows a lot about security we come along with these directives:
+</I>&gt;<i> - Login via REST API is to be dropped. Sending the password in a GET request is bad even if it is SHA256 encoded.
+</I>&gt;<i> - Instead we focus on HTTP Basic Authentication exclusively.
+</I>&gt;<i> - In the DM webclient: when clicking the &quot;Login&quot; link, the server redirects the browser to let it bring up its login dialog.
+</I>&gt;<i> - DM's embedded webserver (Jetty) runs HTTPS by default.
+</I>
+Instead, after further discussion with Danny, we decided to keep the dual approach that currently implemented:
+1) Login via DM REST API. However, a POST request will replace the current GET request.
+2) Login via HTTP Basic Authentication.
+
+Out-of-the-box DM's webserver will run HTTP (and respond to local requests only).
+HTTPS will be an option. The admin will have to create or import a server certificate and set some config properties.
+
+So, Malte, you are actually free to choose between the 2 login approaches.
+Sorry for the changes.
+
+Cheers,
+J&#246;rg
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000375.html">[deepamehta-devel] Developing Third Party Clients with Access	Control Module (4.0.12-SNAPSHOT)
+</A></li>
+	<LI>Next message: <A HREF="000376.html">[deepamehta-devel] Spaciousness and BaseParadigm
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#377">[ date ]</a>
+              <a href="thread.html#377">[ thread ]</a>
+              <a href="subject.html#377">[ subject ]</a>
+              <a href="author.html#377">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/deepamehta-devel">More information about the deepamehta-devel
+mailing list</a><br>
+</body></html>

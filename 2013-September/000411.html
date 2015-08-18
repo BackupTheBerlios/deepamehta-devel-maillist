@@ -1,0 +1,108 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [deepamehta-devel] custom renderer question
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/deepamehta-devel/2013-September/index.html" >
+   <LINK REL="made" HREF="mailto:deepamehta-devel%40lists.berlios.de?Subject=Re%3A%20%5Bdeepamehta-devel%5D%20custom%20renderer%20question&In-Reply-To=%3C523DD5F0.70904%40ziegi.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000409.html">
+   <LINK REL="Next"  HREF="000412.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[deepamehta-devel] custom renderer question</H1>
+    <B>Torsten Ziegler</B> 
+    <A HREF="mailto:deepamehta-devel%40lists.berlios.de?Subject=Re%3A%20%5Bdeepamehta-devel%5D%20custom%20renderer%20question&In-Reply-To=%3C523DD5F0.70904%40ziegi.de%3E"
+       TITLE="[deepamehta-devel] custom renderer question">torsten at ziegi.de
+       </A><BR>
+    <I>Sat Sep 21 19:22:56 CEST 2013</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000409.html">[deepamehta-devel] custom renderer question
+</A></li>
+        <LI>Next message: <A HREF="000412.html">[deepamehta-devel] custom renderer question
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#411">[ date ]</a>
+              <a href="thread.html#411">[ thread ]</a>
+              <a href="subject.html#411">[ subject ]</a>
+              <a href="author.html#411">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi J&#246;rg,
+
+thanks for the fast work on the ticket 505,
+as I see there are a lot of things happening.
+
+I have one question regarding the replacement of
+the standard default renderer.
+
+I started to write a plugin that implements a new
+topicmap renderer (yet a mere copy of the default renderer,
+based on the topicmap-renderer branch as of this morning,
+see attached zip for implementation)
+
+This works fine but it gets used only on newly created topicmaps
+that are created to be used with this renderer.
+And as soon as I remove the plugin the topicmap can no longer
+be displayed as obviously the renderer is missing.
+
+Actually this behaviour is not what I like to have.
+I would prefer to replace the default renderer and
+in case my new render is not available to fall back to the
+default renderer.
+
+I tried to use the uri dm4.webclient.default_topicmap_renderer to
+replace the default  renderer but run into problems maybe due to
+the framework not initializing the renderer properly as it thinks it is
+still the old one.
+Also using js.extend to overwrite the webclient's CanvasRenderer
+and CavasView did not work due to mising initialization.
+
+Is there any way to replace the default renderer or is this
+not the desired way to go for deepamehta ??
+
+I can think of a migration to change the dm4.topicmaps.topicmap_renderer_uri
+for all topicmaps using the default renderer, but this seems quite ugly,
+doesnt it ?
+
+Thanks,
+Torsten
+
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: dm4-enhancedrenderer.zip
+Type: application/x-zip-compressed
+Size: 47930 bytes
+Desc: not available
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/deepamehta-devel/attachments/20130921/8783bc3c/attachment-0001.bin">https://lists.berlios.de/pipermail/deepamehta-devel/attachments/20130921/8783bc3c/attachment-0001.bin</A>&gt;
+</PRE>
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000409.html">[deepamehta-devel] custom renderer question
+</A></li>
+	<LI>Next message: <A HREF="000412.html">[deepamehta-devel] custom renderer question
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#411">[ date ]</a>
+              <a href="thread.html#411">[ thread ]</a>
+              <a href="subject.html#411">[ subject ]</a>
+              <a href="author.html#411">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/deepamehta-devel">More information about the deepamehta-devel
+mailing list</a><br>
+</body></html>

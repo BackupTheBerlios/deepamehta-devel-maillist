@@ -1,0 +1,279 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [deepamehta-devel] Java Service Wrapper
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/deepamehta-devel/2007-February/index.html" >
+   <LINK REL="made" HREF="mailto:deepamehta-devel%40lists.berlios.de?Subject=Re%3A%20%5Bdeepamehta-devel%5D%20Java%20Service%20Wrapper&In-Reply-To=%3C20070213153940.GE5965%40lilith.spinnenwerk.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   
+   <LINK REL="Next"  HREF="000003.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[deepamehta-devel] Java Service Wrapper</H1>
+    <B>Caspar Clemens Mierau</B> 
+    <A HREF="mailto:deepamehta-devel%40lists.berlios.de?Subject=Re%3A%20%5Bdeepamehta-devel%5D%20Java%20Service%20Wrapper&In-Reply-To=%3C20070213153940.GE5965%40lilith.spinnenwerk.de%3E"
+       TITLE="[deepamehta-devel] Java Service Wrapper">damokles at gmx.net
+       </A><BR>
+    <I>Tue Feb 13 16:39:40 CET 2007</I>
+    <P><UL>
+        
+        <LI>Next message: <A HREF="000003.html">[deepamehta-devel] [Feature #3184] time machine like
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2">[ date ]</a>
+              <a href="thread.html#2">[ thread ]</a>
+              <a href="subject.html#2">[ subject ]</a>
+              <a href="author.html#2">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>
+Hallo,
+
+
+ich bin gerade auf den Java Service Wrapper gesto&#223;en:
+
+<A HREF="http://wrapper.tanukisoftware.org/">http://wrapper.tanukisoftware.org/</A>
+
+Ich denke, dass sich mit dem Wrapper elegant einige DeepaMehta-Probleme
+wie das Starten/Stoppen unter Linux/Windows usw. l&#246;sen lassen. Ich
+h&#228;nge mal die About-Seite an.
+
+Gr&#252;&#223;e,
+
+ccm.
+
+
+As with any application, reading through the documentation the best way
+to get started. But realizing the desire to get your feet wet quickly,
+you should glance over this page to get a feel for what the Wrapper can
+do. 
+
+Then to get up and running , at a minimum you will need to read over
+the Integration Page. There you will be presented with 3 integration
+methods. From the overviews, choose the one that best meets your needs
+and then proceed to read over the page dedicated to that integration
+method. 
+
+The Wrapper provides a very large feature set. At some point it is
+suggested that you look over the full properties list to get a feel for
+the full power of the Java Service Wrapper. 
+
+If you run into problems or have any questions, the preferred method
+for getting help is posting a message to the wrapper-user mailing list. 
+
+Introduction
+
+
+The Java Service Wrapper is an application which has evolved out of a
+desire to solve a number of problems common to many Java applications: 
+Run as a Windows Service or Unix Daemon 
+Application Reliability 
+Standard, Out of the Box Scripting 
+On Demand Restarts 
+Flexible Configuration 
+Ease Application Installations 
+Logging 
+  Run as a Windows Service or UNIX Daemon
+
+
+The Wrapper makes it possible to install a Java Application as a
+Windows NT Service. The scripts provided with the Wrapper also make it
+very easy to install those same Java Applications as daemon processes
+on UNIX systems. 
+
+The Wrapper correctly handles user log outs under Windows, service
+dependencies, and the ability to run services which interact with the
+desktop. 
+
+  Application Reliability
+
+
+Application Reliability. As the use of Java expands, applications have
+been written to provide a variety of mission critical services. These
+services must be able to provide a high level of reliability. In an
+ideal world, only software which is 100% bug free will ever be released
+and installed. However, history has shown this not to be the case.
+Almost every application suffers from quality issues at one point or
+another during their life-cycle. Applications hang, crash, run out of
+memory or suffer from any number of problems. Where possible, problems
+are fixed quickly without significant service outages. There are times,
+however, when fixing a problem can be prohibitively expensive or
+impossible to solve in a short time period. 
+
+The Wrapper monitors a JVM process and automatically restarts it if it
+that the JVM has crashed or hung. This process takes just a few seconds
+once the Wrapper has decided there is a problem. There is also a way to
+configure the Wrapper to monitor the console output of a JVM and react
+to certain strings by restarting or shutting down the JVM. 
+
+While these features will not make every problem go away, they will
+help you to sleep easier knowing that if there is a problem, the
+Wrapper will be there to keep things up and running until you can get
+into the office to check the logs. Say goodbye to that pager!! (Or as
+so as not to date myself, that cel phone!) 
+
+  Standard, Out of the Box Scripting
+
+
+Write once run everywhere configuration. Java has been marketed as a
+&quot;Write Once, Run Everywhere&quot; programming language. While this is true
+for many aspects of an application, the developer is often plagued with
+having to write complicated, platform specific scripts which are tasked
+with building up class paths and collecting other system information
+necessary to launch an application. 
+
+The Java Service Wrapper helps to relieve the developer of this task by
+providing a set of scripts for a wide range of platforms that can be
+used as is to launch almost any Java Application controlled by the
+Wrapper. 
+
+The Wrapper moves all JVM configuration into a platform independent
+configuration file. See the integration examples for details. 
+
+  On Demand Restarts
+
+
+The Wrapper provides a way for a Java Application to request that its
+own JVM be restarted. This can be useful in a number of cases.
+Applications may wish to restart after having had their configuration
+files modified. Or the application may simply need to be restarted to
+avoid problems with a memory or resource leak of some kind. 
+
+JVM restarts can be triggered from within the JVM by making a call to
+WrapperManager.restart(). See the Javadocs for more details. 
+
+There are also more passive ways to trigger restarts. The Wrapper has
+the ability to monitor console output and trigger shutdowns or restarts
+whenever certain text is detected. 
+
+The Wrapper can also be configured to either restart another JVM
+instance or shudown normally depending on the exit code returned by a
+JVM. 
+
+  Flexible Configuration
+
+
+The Wrapper provides a wide range of configuration properties which can
+be used to configure the JVM in any way possible from the command line.
+The Wrapper configuration file also provides a number of properties to
+allow you configure things like logging and how the Wrapper is
+installed as a service. 
+
+See the Configuration Properties section for details on what is
+possible. Be sure you have read over the integration section before
+jumping into the configuration file. 
+
+  Ease Application Installations
+
+
+By using the Wrapper's standard scripts, and relative paths in the
+configuration file, it is usually possible to create an application
+which requires no further installation than simply expanding an archive
+file into a directory of the user's choice. 
+
+  Logging
+
+
+While the Wrapper does not attempt to, nor should it, replace any of
+the great logging tools available, it does provide a number of
+properties to configure how stdout and stderr output to the JVM console
+is handled. This output can be logged to any combination of the
+console, a file, or the Event Log (Windows) or syslog (UNIX). 
+
+Logging the output to the JVM console can be critical to tracking down
+problems with an application. Without the Wrapper, when a JVM is being
+run as a service under Windows, or as a daemon under UNIX, the console
+output would normally be lost. The Wrapper makes sure that all console
+output is logged. 
+
+Java-based logging tools are only capable of logging output generated
+from within the JVM. If the JVM crashes or prints out low level
+messages such as thread dumps, there is normally no way to log it. The
+Wrapper logs all console output from the JVM process regardless of its
+source meaning that a record of any crash will survive even after the
+Wrapper has restarted the JVM. 
+
+See the Logging Configuration section for further details. 
+
+
+Supported JVMs
+
+
+The Wrapper is known to work with the Sun, IBM, Blackdown and BEA
+WebLogic JRockit JVMs without any problems. If you get a chance to test
+any other JVMs, please be sure and let us know the results. 
+    NOTE MEG 
+The Wrapper can be used with 1.2.x versions however some functions are
+disabled due to this version of Java's lack of support for shutdown
+hooks. Shutdown hooks were implemented with the 1.3.0 release of Java. 
+
+
+Supported Platforms
+
+
+Binary distributions are provided for the following list of platforms
+and are available on the download page. 
+
+Only OS versions which are known to work have been listed. If you have
+had successful or unsuccessful results running on other OS versions,
+please post a comment below and it will be added to the list. 
+
+It should be fairly easy to build the Wrapper from source on additional
+UNIX platforms. Please let us know and we will update the list. 
+
+aix - AIX 
+
+freebsd - FreeBSD 
+
+hpux, hpux64 - HP-UX, 32 and 64-bit versions. 
+
+irix - SGI Irix 
+
+linux - Linux kernels; 2.2.x 2.4.x, 2.6.x. Known to work with Debian
+and Red Hat, but should work with any distribution. Currently supported
+on both 32 and 64-bit x86, and 64-bit ppc systems. 
+
+macosx - Macintosh OS X. 
+
+osf1 - DEC OSF1. 
+
+solaris - Sun OS, Solaris 7, 8, 9 and 10. Currently supported on both
+32 and 64-bit sparc, and x86 systems. 
+
+win32 - Windows NT, 2000, XP, and 2003. 
+
+Also known to run on Windows 98 and ME, however due the lack of support
+for services in the OS, the Wrapper can only be run in console mode.
+
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	
+	<LI>Next message: <A HREF="000003.html">[deepamehta-devel] [Feature #3184] time machine like
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2">[ date ]</a>
+              <a href="thread.html#2">[ thread ]</a>
+              <a href="subject.html#2">[ subject ]</a>
+              <a href="author.html#2">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/deepamehta-devel">More information about the deepamehta-devel
+mailing list</a><br>
+</body></html>

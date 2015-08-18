@@ -1,0 +1,133 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [deepamehta-devel] Serverausfall: schwerer Hardwarefehler
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/deepamehta-devel/2008-July/index.html" >
+   <LINK REL="made" HREF="mailto:deepamehta-devel%40lists.berlios.de?Subject=Re%3A%20%5Bdeepamehta-devel%5D%20Serverausfall%3A%20schwerer%20Hardwarefehler&In-Reply-To=%3C1216992174.6850.12.camel%40ursX61s%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000233.html">
+   <LINK REL="Next"  HREF="000235.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[deepamehta-devel] Serverausfall: schwerer Hardwarefehler</H1>
+    <B>Urs Lerch</B> 
+    <A HREF="mailto:deepamehta-devel%40lists.berlios.de?Subject=Re%3A%20%5Bdeepamehta-devel%5D%20Serverausfall%3A%20schwerer%20Hardwarefehler&In-Reply-To=%3C1216992174.6850.12.camel%40ursX61s%3E"
+       TITLE="[deepamehta-devel] Serverausfall: schwerer Hardwarefehler">mail at ulerch.net
+       </A><BR>
+    <I>Fri Jul 25 15:22:54 CEST 2008</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000233.html">[deepamehta-devel] Serverausfall: schwerer Hardwarefehler
+</A></li>
+        <LI>Next message: <A HREF="000235.html">[deepamehta-devel] Serverausfall: schwerer Hardwarefehler
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#234">[ date ]</a>
+              <a href="thread.html#234">[ thread ]</a>
+              <a href="subject.html#234">[ subject ]</a>
+              <a href="author.html#234">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hallo,
+
+w&#228;re es nicht allenfalls sinnvoll, die Homepage bei einem
+professionellen Provider zu hosten und f&#252;r die Demoumgebung (ich nehme
+an, nur diese ben&#246;tigt einen eigenen Server) ein Shared Hosting anstatt
+des dezidierten Servers zu w&#228;hlen? G&#252;nstige Provider mit der
+M&#246;glichkeit, eine Servletumgebung am laufen zu haben kenne ich leider
+keine.
+
+Gruss,
+Urs
+
+
+Am Freitag, den 25.07.2008, 15:13 +0200 schrieb J&#246;rg Richter:
+&gt;<i> Liebe Techniker,
+</I>&gt;<i> 
+</I>&gt;<i> der DeepaMehta-Server (www.deepamehta.de) ist ja seit Mittwoch down. 
+</I>&gt;<i> Jetzt ist es klar: unserer Root-Server hatte einen schweren 
+</I>&gt;<i> Hardwareausfall. Inzwischen sind einige Komponenten ausgetauscht, u.a. 
+</I>&gt;<i> die Netzwerkkarte. Die Festplatte und die Daten sind offenbar nicht 
+</I>&gt;<i> betroffen.
+</I>&gt;<i> 
+</I>&gt;<i> Nun gibt es ein ernstes Problem. Der Provider schreibt:
+</I>&gt;<i> &gt; [...] Dabei kommt eine neue Netzwerkkarte anderen Modells zum Einsatz 
+</I>&gt;<i> &gt; und wir m&#252;ssten den Netzwerkkartentreiber auf &quot;viarhine&quot; umstellen. 
+</I>&gt;<i> &gt; Ihr System ist jedoch etwas &#228;lter, hat keine Kernelmodule und 
+</I>&gt;<i> &gt; unterst&#252;tzt die &quot;viarhine&quot; noch nicht. Ihr Server kann zwar gebootet 
+</I>&gt;<i> &gt; und hochgefahren werden, da&#223; Netzwerk kann jedoch aufgrund des 
+</I>&gt;<i> &gt; fehlenden Treibers nicht gestartet werden und ihr Server bleibt 
+</I>&gt;<i> &gt; unerreichbar.
+</I>&gt;<i> &gt; [...]
+</I>&gt;<i> &gt; Bitte versuchen Sie es selbst nochmal die Netzwerkkarte mit dem 
+</I>&gt;<i> &gt; &quot;viarhine&quot; Treiber zu starten. Andernfalls sichern Sie bitte alle 
+</I>&gt;<i> &gt; Daten und f&#252;hren Sie eine Neuinstallation durch.
+</I>&gt;<i> 
+</I>&gt;<i> Gegenw&#228;rtig wurde der Server mit einem Notfallsystem hochgefahren, ein 
+</I>&gt;<i> minimales Ubuntu (galube ich), das in einer RAM-Disk l&#228;uft. Von dort 
+</I>&gt;<i> aus kann man die echte System-Festplatte mounten, und dort 
+</I>&gt;<i> Modifikationen vornehmen. Ich traue es mir aber nicht zu, die neue 
+</I>&gt;<i> Netzwerkkarte in Gang zu setzen. Erschwerend ist, wie oben erw&#228;hnt, das 
+</I>&gt;<i> veraltete System: ein Suse 7 (glaube ich).
+</I>&gt;<i> 
+</I>&gt;<i> =&gt; Wenn ein Administrator unter euch sich mit der Netzwerkkarte 
+</I>&gt;<i> besch&#228;ftigen m&#246;chte, dem gebe ich gerne das root-Passwort f&#252;r das 
+</I>&gt;<i> Notfallsystem.
+</I>&gt;<i> 
+</I>&gt;<i> Die n&#228;chste Option w&#228;re, ein Backup zu machen und eine komplette 
+</I>&gt;<i> Neuinstallation vorzunehmen. Der Provider bietet z.B. ein Debian 10 an 
+</I>&gt;<i> (glaube ich). Hier z&#246;gere ich aber. Eventuell ist das jetzt der 
+</I>&gt;<i> passende Moment den Server ganz aufzugeben, und zu einem 
+</I>&gt;<i> newthinking-Server umzuziehen. Denn: die urspr&#252;ngliche Server-Hardware 
+</I>&gt;<i> ist mindestens 5 Jahre alt und inzwischen zu klein (z.B. 256 MB, glaube 
+</I>&gt;<i> ich). Inzwischen wurden, wie gesagt, einige Hardware-Komponenten 
+</I>&gt;<i> ausgetauscht, aber genaues wei&#223; ich nicht. Ich nehme an, da&#223; ich mit 
+</I>&gt;<i> dem Provider (server4you.de) einen neuen Vertrag abschlie&#223;en m&#252;&#223;te, und 
+</I>&gt;<i> weitere Kosten entstehen w&#252;rden, wenn wir auf aktuelle Hardware 
+</I>&gt;<i> umziehen wollen.
+</I>&gt;<i> 
+</I>&gt;<i> =&gt; Wer kann ermitteln, welche Hardware (CPU) gegenw&#228;rtig vorhanden ist, 
+</I>&gt;<i> oder mir sagen, wie's geht. Das root-Passwort (f&#252;r das Notfallsystem) 
+</I>&gt;<i> teile ich gerne mit.
+</I>&gt;<i> 
+</I>&gt;<i> Gr&#252;&#223;e
+</I>&gt;<i> J&#246;rg
+</I>&gt;<i> 
+</I>&gt;<i> www.deepamehta.de
+</I>&gt;<i> 
+</I>&gt;<i> _______________________________________________
+</I>&gt;<i> deepamehta-devel mailing list
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/deepamehta-devel">deepamehta-devel at lists.berlios.de</A>
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/deepamehta-devel">https://lists.berlios.de/mailman/listinfo/deepamehta-devel</A>
+</I>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000233.html">[deepamehta-devel] Serverausfall: schwerer Hardwarefehler
+</A></li>
+	<LI>Next message: <A HREF="000235.html">[deepamehta-devel] Serverausfall: schwerer Hardwarefehler
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#234">[ date ]</a>
+              <a href="thread.html#234">[ thread ]</a>
+              <a href="subject.html#234">[ subject ]</a>
+              <a href="author.html#234">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/deepamehta-devel">More information about the deepamehta-devel
+mailing list</a><br>
+</body></html>

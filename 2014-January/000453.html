@@ -1,0 +1,83 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [deepamehta-devel] WebSockets
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/deepamehta-devel/2014-January/index.html" >
+   <LINK REL="made" HREF="mailto:deepamehta-devel%40lists.berlios.de?Subject=Re%3A%20%5Bdeepamehta-devel%5D%20WebSockets&In-Reply-To=%3C36947965-6973-4109-991D-B1307B4F7D9B%40deepamehta.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000456.html">
+   <LINK REL="Next"  HREF="000454.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[deepamehta-devel] WebSockets</H1>
+    <B>J&#246;rg Richter</B> 
+    <A HREF="mailto:deepamehta-devel%40lists.berlios.de?Subject=Re%3A%20%5Bdeepamehta-devel%5D%20WebSockets&In-Reply-To=%3C36947965-6973-4109-991D-B1307B4F7D9B%40deepamehta.de%3E"
+       TITLE="[deepamehta-devel] WebSockets">jri at deepamehta.de
+       </A><BR>
+    <I>Sun Jan 12 01:18:26 CET 2014</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000456.html">[deepamehta-devel] WebSockets
+</A></li>
+        <LI>Next message: <A HREF="000454.html">[deepamehta-devel] WebSockets
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#453">[ date ]</a>
+              <a href="thread.html#453">[ thread ]</a>
+              <a href="subject.html#453">[ subject ]</a>
+              <a href="author.html#453">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>
+On Jan 7, 2014, at 4:40, J&#246;rg Richter wrote:
+
+&gt;<i> Next possible step from my side:
+</I>&gt;<i> - Make the dm4-websockets plugin extensible by 3rd party plugin developers. That is abstracting the WebSocket server (and the Jetty API) away and provide the plugin developer a framework for handling client-side and server-side WebSocket messages.
+</I>
+The dm4-websockets plugin is now extensible by 3rd party plugin developers. That is your plugin can rely on the facilities provided by the dm4-websockets plugin, which basically are:
+	- a WebSocket server running on port 8081, usable by several plugins at the same time.
+	- a service to let your plugin broadcast messages to WebSocket clients (server push).
+	- server-side events to let your plugin react upon incoming WebSocket messages.
+<A HREF="https://github.com/jri/dm4-websockets">https://github.com/jri/dm4-websockets</A>
+
+For illustrative purposes there is a WebSockets example application. It performs mainly the example task described before: broadcasting topic update events to all connected WebSocket clients.
+<A HREF="https://github.com/jri/dm4-websockets-example">https://github.com/jri/dm4-websockets-example</A>
+
+So, DM is now ready for server push applications.
+However, it's just the first incarnation. If your plugin needs more elaborated WebSocket features don't hesitate and post here.
+
+Cheers,
+J&#246;rg
+
+</PRE>
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000456.html">[deepamehta-devel] WebSockets
+</A></li>
+	<LI>Next message: <A HREF="000454.html">[deepamehta-devel] WebSockets
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#453">[ date ]</a>
+              <a href="thread.html#453">[ thread ]</a>
+              <a href="subject.html#453">[ subject ]</a>
+              <a href="author.html#453">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/deepamehta-devel">More information about the deepamehta-devel
+mailing list</a><br>
+</body></html>

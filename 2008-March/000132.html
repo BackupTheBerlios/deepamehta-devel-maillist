@@ -1,0 +1,106 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [deepamehta-devel] [Bug #13143] Install script forgets to create	&quot;hsqldb-intern&quot; directory
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/deepamehta-devel/2008-March/index.html" >
+   <LINK REL="made" HREF="mailto:deepamehta-devel%40lists.berlios.de?Subject=Re%3A%20%5Bdeepamehta-devel%5D%20%5BBug%20%2313143%5D%20Install%20script%20forgets%20to%20create%0A%09%22hsqldb-intern%22%20directory&In-Reply-To=%3C200803241213.m2OCDZa6022866%40unicorn.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000131.html">
+   <LINK REL="Next"  HREF="000133.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[deepamehta-devel] [Bug #13143] Install script forgets to create	&quot;hsqldb-intern&quot; directory</H1>
+    <B>admin at berlios.de</B> 
+    <A HREF="mailto:deepamehta-devel%40lists.berlios.de?Subject=Re%3A%20%5Bdeepamehta-devel%5D%20%5BBug%20%2313143%5D%20Install%20script%20forgets%20to%20create%0A%09%22hsqldb-intern%22%20directory&In-Reply-To=%3C200803241213.m2OCDZa6022866%40unicorn.berlios.de%3E"
+       TITLE="[deepamehta-devel] [Bug #13143] Install script forgets to create	&quot;hsqldb-intern&quot; directory">admin at berlios.de
+       </A><BR>
+    <I>Mon Mar 24 13:13:35 CET 2008</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000131.html">[deepamehta-devel] [Bug #13437] Workspace join/leave oddities
+</A></li>
+        <LI>Next message: <A HREF="000133.html">[deepamehta-devel] [Bug #13085] concerning the windows run script
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#132">[ date ]</a>
+              <a href="thread.html#132">[ thread ]</a>
+              <a href="subject.html#132">[ subject ]</a>
+              <a href="author.html#132">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Bug #13143, was updated on 2008-Feb-17 15:58
+Here is a current snapshot of the bug.
+
+Project: DeepaMehta
+Category: None
+Status: Closed
+Resolution: Fixed
+Bug Group: None
+Priority: 7
+Submitted by: jri
+Assigned to : eschnepel
+Summary: Install script forgets to create &quot;hsqldb-intern&quot; directory
+
+Details: The default installation procedure emits an error and quits. DeepaMehta is not properly installed and can't run.
+
+While the installation procedre the command &quot;./run.sh config&quot; emits the error message:
+BUILD FAILED
+.../setup.xml:96: The following error occurred while executing this line:
+.../install/db/db-specific/list-db-hsqldb.xml:3: .../install/client/db/hsqldb-intern not found.
+
+Reason: the directory .../install/client/db/hsqldb-intern is missing.
+Workaround: before running &quot;./run.sh config&quot; create the dierectory manually.
+
+Required Fix: for a HSQL-based installation the directory must be created programmatically.
+
+Follow-Ups:
+
+Date: 2008-Mar-24 13:13
+By: jri
+
+Comment:
+Fixed in Rev 267.
+Closed.
+-------------------------------------------------------
+
+Date: 2008-Feb-24 08:35
+By: eschnepel
+
+Comment:
+I do not have the permissions to commit in trunk or change bug properties (to fixed) or to attach a diff file which would fix it...
+the problem was in the list-db task and not in the createdb task. the presence of the directory is now checked. patch send per mail.
+-------------------------------------------------------
+
+For detailed info, follow this link:
+<A HREF="http://developer.berlios.de/bugs/?func=detailbug&amp;bug_id=13143&amp;group_id=5174">http://developer.berlios.de/bugs/?func=detailbug&amp;bug_id=13143&amp;group_id=5174</A>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000131.html">[deepamehta-devel] [Bug #13437] Workspace join/leave oddities
+</A></li>
+	<LI>Next message: <A HREF="000133.html">[deepamehta-devel] [Bug #13085] concerning the windows run script
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#132">[ date ]</a>
+              <a href="thread.html#132">[ thread ]</a>
+              <a href="subject.html#132">[ subject ]</a>
+              <a href="author.html#132">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/deepamehta-devel">More information about the deepamehta-devel
+mailing list</a><br>
+</body></html>

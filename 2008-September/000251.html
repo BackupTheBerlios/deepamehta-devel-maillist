@@ -1,0 +1,97 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [deepamehta-devel] Forum-Probleme mit Tomcat 6
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/deepamehta-devel/2008-September/index.html" >
+   <LINK REL="made" HREF="mailto:deepamehta-devel%40lists.berlios.de?Subject=Re%3A%20%5Bdeepamehta-devel%5D%20Forum-Probleme%20mit%20Tomcat%206&In-Reply-To=%3C422aa05fb0f16dd6990ebe6d9ea9ab38%40deepamehta.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000250.html">
+   <LINK REL="Next"  HREF="000252.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[deepamehta-devel] Forum-Probleme mit Tomcat 6</H1>
+    <B>J&#246;rg Richter</B> 
+    <A HREF="mailto:deepamehta-devel%40lists.berlios.de?Subject=Re%3A%20%5Bdeepamehta-devel%5D%20Forum-Probleme%20mit%20Tomcat%206&In-Reply-To=%3C422aa05fb0f16dd6990ebe6d9ea9ab38%40deepamehta.de%3E"
+       TITLE="[deepamehta-devel] Forum-Probleme mit Tomcat 6">jri at deepamehta.de
+       </A><BR>
+    <I>Wed Sep  3 03:46:47 CEST 2008</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000250.html">[deepamehta-devel] [Bug #14438] CM corrupted in RC4
+</A></li>
+        <LI>Next message: <A HREF="000252.html">[deepamehta-devel] Forum-Probleme mit Tomcat 6
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#251">[ date ]</a>
+              <a href="thread.html#251">[ thread ]</a>
+              <a href="subject.html#251">[ subject ]</a>
+              <a href="author.html#251">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>
+Liebe Entwickler,
+
+trotz Bem&#252;hen gelingt es mir nicht, auf dem neuen Server das 
+DeepaMehta-Forum in Gang zu setzen, was wohl damit zusammenh&#228;ngt, da&#223; 
+wir jetzt unter Tomcat 6 laufen, mit dem ich nicht viel Erfahrung hab:
+www.deepamehta.de/messageboard/controller
+
+=&gt; Bitte helft mir mit Tomcat 6
+=&gt; Benedikt: f&#228;llt Dir was Besonderes zum unserem Tomcat 6 ein?
+
+Es sieht so aus, als ob die DeepaMehta-Configdateien nicht gelesen 
+werden, die ja au&#223;erhalb der Forum-Webabwendung liegen. Das deutet auf 
+ein Security-Problem hin. Torsten hatte mit Tomcat 5.5 das gleiche 
+Ph&#228;nomen beschrieben, und gel&#246;st, indem er den Security Manager 
+abgeschaltet hat (/etc/default/tomcat5.5: TOMCAT5_SECURITY=no).
+
+In Tomcat 6 gibt es diesen Schalter nicht. Meiner Meinung nach l&#228;uft 
+unser Tomcat 6 aber sowieso ohne Security Manager, denn wenn ich ich 
+ihn einschalte (mit -security beim Starten), bekommt wiederum unsere 
+Wiki-Webanwendung Security-Probleme!
+
+=&gt; Wer wei&#223;, ob Tomcat 6 standardm&#228;&#223;ig ohne Security Manager l&#228;uft?
+
+Da&#223; ich hier so im Dunkeln tappe liegt daran, da&#223; unser Tomcat 
+keinerlei Fehlermeldungen in den Logfiles (/var/log/tomcat-6/) anzeigt, 
+au&#223;er die aus dem Browser. Die Logdatei, die ich von Tomcat 5 kenne, 
+&quot;catalina.out&quot; wird bei Tomcat 6 nicht benutzt.
+
+=&gt; Wer wei&#223;, wie ich zu informativen Tomcat 6 Log-Meldungen komme?
+
+Bitte helft mir!
+
+Gr&#252;&#223;e
+J&#246;rg
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000250.html">[deepamehta-devel] [Bug #14438] CM corrupted in RC4
+</A></li>
+	<LI>Next message: <A HREF="000252.html">[deepamehta-devel] Forum-Probleme mit Tomcat 6
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#251">[ date ]</a>
+              <a href="thread.html#251">[ thread ]</a>
+              <a href="subject.html#251">[ subject ]</a>
+              <a href="author.html#251">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/deepamehta-devel">More information about the deepamehta-devel
+mailing list</a><br>
+</body></html>

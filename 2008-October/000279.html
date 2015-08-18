@@ -1,0 +1,145 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [deepamehta-devel] [Feature #4299] Better handling of result sets	(DONATED feature)
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/deepamehta-devel/2008-October/index.html" >
+   <LINK REL="made" HREF="mailto:deepamehta-devel%40lists.berlios.de?Subject=Re%3A%20%5Bdeepamehta-devel%5D%20%5BFeature%20%234299%5D%20Better%20handling%20of%20result%20sets%0A%09%28DONATED%20feature%29&In-Reply-To=%3C200810060943.m969hMor027677%40unicorn.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000278.html">
+   <LINK REL="Next"  HREF="000277.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[deepamehta-devel] [Feature #4299] Better handling of result sets	(DONATED feature)</H1>
+    <B>admin at berlios.de</B> 
+    <A HREF="mailto:deepamehta-devel%40lists.berlios.de?Subject=Re%3A%20%5Bdeepamehta-devel%5D%20%5BFeature%20%234299%5D%20Better%20handling%20of%20result%20sets%0A%09%28DONATED%20feature%29&In-Reply-To=%3C200810060943.m969hMor027677%40unicorn.berlios.de%3E"
+       TITLE="[deepamehta-devel] [Feature #4299] Better handling of result sets	(DONATED feature)">admin at berlios.de
+       </A><BR>
+    <I>Mon Oct  6 11:43:22 CEST 2008</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000278.html">[deepamehta-devel] [Feature #4289] Email feature: multiple	addressing schemas (DONATED)
+</A></li>
+        <LI>Next message: <A HREF="000277.html">[deepamehta-devel] [Bug #14516] Several bugs in feature #4299	(handling of result sets)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#279">[ date ]</a>
+              <a href="thread.html#279">[ thread ]</a>
+              <a href="subject.html#279">[ subject ]</a>
+              <a href="author.html#279">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Feature Request #4299, was updated on 2008-Sep-09 13:36
+You can respond by visiting: 
+<A HREF="http://developer.berlios.de/feature/?func=detailfeature&amp;feature_id=4299&amp;group_id=5174">http://developer.berlios.de/feature/?func=detailfeature&amp;feature_id=4299&amp;group_id=5174</A>
+
+Category: None
+Status: Closed
+Priority: 7
+Summary: Better handling of result sets (DONATED feature)
+
+By: jri
+Date: 2008-Oct-06 11:43
+
+Message:
+Logged In: YES 
+user_id=21119
+Browser: Mozilla/5.0 (Macintosh; U; PPC Mac OS X; en) AppleWebKit/312.9 (KHTML, like Gecko) Safari/312.6
+
+Largely realized in rev 354.
+Closed.
+
+Note: the limit for displaying large serach results has been increased from 
+150 to 500. And: there is a &quot;Reveal all&quot; button.
+
+One issue remains open:
+e) topics alreay revelaed should be marked some way in the list
+
+
+----------------------------------------------------------------------
+
+By: jri
+Date: 2008-Sep-09 13:36
+
+Message:
+Logged In: YES 
+user_id=21119
+Browser: Mozilla/5.0 (Macintosh; U; PPC Mac OS X; en) AppleWebKit/312.9 (KHTML, like Gecko) Safari/312.6
+
+This is the original specification of a DONATED feature:
+
+For the moment revelation of result sets is cumbersome for 2 
+reasons:
+1) It is very unhandy (requires a lot of mouse action) to reveal topics 
+one-by-one from a context-sub-menu.
+2) The menu provides no hint which topics are revealed already.
+
+Furthermore, usability-tests have proven it is not reasonable that, 
+after searching, another operation is required (&quot;Show Result&quot;) to 
+actually see the result (at least in case of result sets with more than 7 
+topics).
+
+There are 2 requirements:
+1) a permanent visualiziation of the result set.
+2) a possibility to reveal items from the result set very quickly.
+
+Furthermore, an indication which items are already revealed might be 
+helpful.
+
+Conception of requested feature:
+a) the &quot;Show Result&quot; command is dropped
+b) instead the result set is listed in the property panel (the search 
+topics, tons, get a new HTML-property: &quot;Result&quot;)
+c) all items in the result set are rendered as hypertext links
+d) clicking a link will reveal the topic (as before)
+e) topics alreay revelaed should be marked some way in the list
+
+[Update: issued b)-d) are realized in rev 335]
+
+One further issue remains to be discussed: what about large result 
+sets? The solution requested here:
+- increase the current limit of 150 to, lets say 300 or 500.
+- result sets below that limit may provide a &quot;Reveal all&quot; button.
+Result sets beyond that limit are still not visualized, but a message 
+that filtering is required.
+
+A detail: a search topic (in fact any topic with extensive content) 
+should remember its property panel scrollbar position. [Update: 
+realized in rev 344]
+
+Note: this feature request has been extracted from broader feature 
+request #3055 (&quot;Reveal More&quot;).
+
+----------------------------------------------------------------------
+You can respond by visiting: 
+<A HREF="http://developer.berlios.de/feature/?func=detailfeature&amp;feature_id=4299&amp;group_id=5174">http://developer.berlios.de/feature/?func=detailfeature&amp;feature_id=4299&amp;group_id=5174</A>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000278.html">[deepamehta-devel] [Feature #4289] Email feature: multiple	addressing schemas (DONATED)
+</A></li>
+	<LI>Next message: <A HREF="000277.html">[deepamehta-devel] [Bug #14516] Several bugs in feature #4299	(handling of result sets)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#279">[ date ]</a>
+              <a href="thread.html#279">[ thread ]</a>
+              <a href="subject.html#279">[ subject ]</a>
+              <a href="author.html#279">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/deepamehta-devel">More information about the deepamehta-devel
+mailing list</a><br>
+</body></html>

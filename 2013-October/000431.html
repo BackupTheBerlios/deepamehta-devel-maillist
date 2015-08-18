@@ -1,0 +1,154 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [deepamehta-devel] click detection
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/deepamehta-devel/2013-October/index.html" >
+   <LINK REL="made" HREF="mailto:deepamehta-devel%40lists.berlios.de?Subject=Re%3A%20%5Bdeepamehta-devel%5D%20click%20detection&In-Reply-To=%3C96C991F3-6AB6-496A-AF58-367228B5C4C1%40deepamehta.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000429.html">
+   
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[deepamehta-devel] click detection</H1>
+    <B>J&#246;rg Richter</B> 
+    <A HREF="mailto:deepamehta-devel%40lists.berlios.de?Subject=Re%3A%20%5Bdeepamehta-devel%5D%20click%20detection&In-Reply-To=%3C96C991F3-6AB6-496A-AF58-367228B5C4C1%40deepamehta.de%3E"
+       TITLE="[deepamehta-devel] click detection">jri at deepamehta.de
+       </A><BR>
+    <I>Tue Oct 29 21:59:37 CET 2013</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000429.html">[deepamehta-devel] Demonstrating in-topicmap data manipulation
+</A></li>
+        
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#431">[ date ]</a>
+              <a href="thread.html#431">[ thread ]</a>
+              <a href="subject.html#431">[ subject ]</a>
+              <a href="author.html#431">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>
+Hi Torsten,
+
+please excuse the late reply.
+(I know you were busy with other things anyway.)
+
+As you might have noticed DM's new View Customization framework made considerable progress. A lot of aspects you covered in the recent postings are addressed by the framework already. Despite the framework is only in its first incarnation I feel it is quite potent already, and the design lays a good basis. I'm very happy about your recent input as it triggered a lot of fruitful action and results.
+
+The Webclient's default CanvasRenderer and its extension mechanism is capable of both, Canvas based topic rendering and DOM based topic rendering. Related to Canvas topic rendering an extensible View layer is established above the viewmodel that holds all the data relevant for both, topic rendering and topic click detection. So the same calculations are not performed over and over. Generic click detection is implemented at framework-level.
+
+But the real power comes from DOM based topic rendering. Because it exploits a lot of the browser's intrinsic capabilities like rendering, object click detection, event handling and propagation, viewport management and so on, it reduces the burden of the DM View Customizer developer tremendously. In contrast to implementing all the boring geometry calculations involved in Canvas based rendering implementing a DOM based View Customizer is real fun :-)
+
+And that is what I like to share here, and what was all the result of the discussion you've invoked: Simulating movable and clickable Objects on a Canvas is kind of abusing the Canvas for things it is not made for. Of course you can deploy a Canvas-based toolkit which brings you all the nice object-oriented modes and interactions you need. In case of KineticJS (whose design and implementation is excellent!) this means 13.000 lines of JavaScript code resp. a footprint of 500KB to load, only to recreate a functionality which is already there, in every browser, for free: the DOM.
+(Yet I'm sure there are a lot of cases for KineticJS).
+
+There are 2 reference DM plugins that showcase the new View Customization framework:
+	<A HREF="https://github.com/jri/dm4-box-renderer-canvas">https://github.com/jri/dm4-box-renderer-canvas</A>
+	<A HREF="https://github.com/jri/dm4-box-renderer-dom">https://github.com/jri/dm4-box-renderer-dom</A>
+Both realize the very same look&amp;feel -- the one you've originally proposed by the means of your screenshot -- one is Canvas based, the other is DOM based. The rendering heart of the DOM based version takes half as many lines of code as the Canvas based one, and its code is much more comfortable to read and maintain.
+
+Torsten, I hope you'll like DM's new View Customization framework and the Box Renderer plugins and that we will bring them forward together.
+
+Cheers,
+J&#246;rg
+
+
+On Sep 24, 2013, at 10:31, Torsten Ziegler wrote:
+
+&gt;<i> Hi J&#246;rg and all GUI developers,
+</I>&gt;<i> 
+</I>&gt;<i> I am about to implement a new click detection for my renderer
+</I>&gt;<i> and seek for some advice, respectively am looking for a common
+</I>&gt;<i> ground of my development and the default renderer.
+</I>&gt;<i> 
+</I>&gt;<i> Right now the click detection in the functions
+</I>&gt;<i> find_topic_by_position and .._association_..
+</I>&gt;<i> implements &quot;a a second drawing process&quot;
+</I>&gt;<i> - all calculation is done over again on each mouse event
+</I>&gt;<i> - possible all but one objects on the canvas have to be examined
+</I>&gt;<i> - right now works only with rectangular bounding boxes of shapes
+</I>&gt;<i> (clicking on the &quot;not painted corner&quot; of the standard note ball will
+</I>&gt;<i> counted as click on the icon itself)
+</I>&gt;<i> - topics are always preferred over associations
+</I>&gt;<i> - topics first painted are preferred over the other ones in case of overlap
+</I>&gt;<i> (without repecting that visibility is the other way round)
+</I>&gt;<i> 
+</I>&gt;<i> What I would like to implement:
+</I>&gt;<i> - a lookup table to find the object without new calculations
+</I>&gt;<i> - non rectangular areas to reflect the transparent portions of an icon,
+</I>&gt;<i> or irregular shapes
+</I>&gt;<i> - allow for certain areas of one topic to react differently to the mouse interaction
+</I>&gt;<i> - allow more advanced detection of overlapped objects:
+</I>&gt;<i> -- certain objects might know that its not them to react but the lower one
+</I>&gt;<i> -- if unsure ask the user which one he/she tries to click
+</I>&gt;<i> (as it is just so nasty to move a topic accidently over another and
+</I>&gt;<i> suddenly you are not able to select it any more, but have to work your way
+</I>&gt;<i> through the selectable ones till you reach the one you would like to have selected
+</I>&gt;<i> in the beginning)
+</I>&gt;<i> 
+</I>&gt;<i> I see 2(3) ways to do this and here I would like your input:
+</I>&gt;<i> 
+</I>&gt;<i> 1. using a muldimensional array to keep track of all the objects and desired action on the canvas
+</I>&gt;<i> (object_canvas[x][y]=[{&quot;id&quot;:id,&quot;action&quot;:action},..] &lt;- each point holds an array of one or many object ids and actions,
+</I>&gt;<i> empty points may be removed from the array ?speed vs. memory use?)
+</I>&gt;<i> - on drawing each object registers itself to this array (object_id + action(show detail pane, start association, bring to front etc.))
+</I>&gt;<i> - for unregular shapes or icons with alpha a helper function
+</I>&gt;<i> -- is provided with the smallest possible bounding box that includes the object
+</I>&gt;<i> -- does a bitmap compare of the canvas region bevore and after drawing
+</I>&gt;<i> -- calculates the visible parts that should be registered in the array
+</I>&gt;<i> - on a mouse event only the array has to be queried and all possible objects are directly accessible by lookup of their id
+</I>&gt;<i> 
+</I>&gt;<i> 2. using the KineticJS (<A HREF="http://kinetikjs.com">http://kinetikjs.com</A>)
+</I>&gt;<i> - implement the whole drawing and click detection using the kineticjs framework
+</I>&gt;<i> - pro: less code as drawing, caching, event handling is allready implented (using a second canvas for hit detection)
+</I>&gt;<i> - contra: overlapping objects are not supported, topmost rules
+</I>&gt;<i> 
+</I>&gt;<i> 3. wait till browsers implement the HTML5 HitRegion
+</I>&gt;<i> - this may take a while
+</I>&gt;<i> 
+</I>&gt;<i> Inspired by the KineticJS I would also like to look into caching of the objects,
+</I>&gt;<i> if this makes sense for the yet simple objects.
+</I>&gt;<i> It works the way that the object is drawn only once but then saved as an image that is
+</I>&gt;<i> drawn to the canvas later on.
+</I>&gt;<i> 
+</I>&gt;<i> What do you think?
+</I>&gt;<i> torsten
+</I>&gt;<i> 
+</I>&gt;<i> -- 
+</I>&gt;<i> Torsten Ziegler
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/deepamehta-devel">torsten at ziegi.de</A>
+</I>&gt;<i> 
+</I>&gt;<i> _______________________________________________
+</I>&gt;<i> deepamehta-devel mailing list
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/deepamehta-devel">deepamehta-devel at lists.berlios.de</A>
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/deepamehta-devel">https://lists.berlios.de/mailman/listinfo/deepamehta-devel</A>
+</I>
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000429.html">[deepamehta-devel] Demonstrating in-topicmap data manipulation
+</A></li>
+	
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#431">[ date ]</a>
+              <a href="thread.html#431">[ thread ]</a>
+              <a href="subject.html#431">[ subject ]</a>
+              <a href="author.html#431">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/deepamehta-devel">More information about the deepamehta-devel
+mailing list</a><br>
+</body></html>

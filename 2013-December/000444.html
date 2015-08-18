@@ -1,0 +1,121 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [deepamehta-devel] a blog post on how to create a plugin and a	question
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/deepamehta-devel/2013-December/index.html" >
+   <LINK REL="made" HREF="mailto:deepamehta-devel%40lists.berlios.de?Subject=Re%3A%20%5Bdeepamehta-devel%5D%20a%20blog%20post%20on%20how%20to%20create%20a%20plugin%20and%20a%0A%09question&In-Reply-To=%3C14CC72A7-9A0C-43AB-A5D8-CE6850154896%40deepamehta.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000443.html">
+   <LINK REL="Next"  HREF="000445.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[deepamehta-devel] a blog post on how to create a plugin and a	question</H1>
+    <B>J&#246;rg Richter</B> 
+    <A HREF="mailto:deepamehta-devel%40lists.berlios.de?Subject=Re%3A%20%5Bdeepamehta-devel%5D%20a%20blog%20post%20on%20how%20to%20create%20a%20plugin%20and%20a%0A%09question&In-Reply-To=%3C14CC72A7-9A0C-43AB-A5D8-CE6850154896%40deepamehta.de%3E"
+       TITLE="[deepamehta-devel] a blog post on how to create a plugin and a	question">jri at deepamehta.de
+       </A><BR>
+    <I>Sun Dec 29 22:57:19 CET 2013</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000443.html">[deepamehta-devel] a blog post on how to create a plugin and a question
+</A></li>
+        <LI>Next message: <A HREF="000445.html">[deepamehta-devel] a blog post on how to create a plugin and a question
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#444">[ date ]</a>
+              <a href="thread.html#444">[ thread ]</a>
+              <a href="subject.html#444">[ subject ]</a>
+              <a href="author.html#444">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>
+On Dec 27, 2013, at 20:51, carolina wrote:
+
+&gt;<i> I've written a post explaining the steps of how to create a very simple plugin in DM
+</I>&gt;<i> 
+</I>&gt;<i> <A HREF="http://abriraqui.net/2013/12/27/creating-a-plugin-in-deepamehta-hackership/">http://abriraqui.net/2013/12/27/creating-a-plugin-in-deepamehta-hackership/</A>
+</I>&gt;<i> 
+</I>&gt;<i> [...]
+</I>&gt;<i> pd: any feedback on the post is also very welcome :))
+</I>
+
+Hi Carolina,
+
+thank you very much for the blog post!
+I just posted a comment there but line wrapping is kind of odd and XML elements (&lt;name&gt;, &lt;groupId&gt;, ...) are omitted.
+So I post my comment here as well.
+
+Cheers,
+J&#246;rg
+
+-------------------
+
+Thank you for this great article! It provides a good help in making DM approachable for new developers! I appreciate the clear language and structure as well as the handcrafted illustrations.
+
+While our personal &quot;hackership&quot;, which I enjoyed very much, I was not always as clear/complete as I could have been. So here I like to fill some of my gaps resp., relating to your article, suggest some improvements:
+
+- Before the introducing quote you could say that DeepaMehta is both, a *Webclient*, and an application development platform. (Most of the quote relates to the Webclient while the remainder of the article refers to the development platform).
+
+- The plugin directory name must not necessarily match the Maven artifact ID. You're free to choose any name. Anyway, it's not a bad idea to let these names match.
+
+- A migration does not only define the database schema. In general a migration transforms the DB to ensure its structure and content is compatible with your code.
+
+- For better readability the pom.xml contents could be indented.
+
+- I would not say the project &lt;name&gt; is a description of the project (which would be more verbose) but just, exactly as you said, &quot;the human readable name of the plugin&quot;.
+
+- The &lt;groupId&gt; must not actually be a valid URL, but a globally unique name under which you collect the project's artifacts. To fulfill the &quot;globally unique&quot; requirement it is best practice to begin the name with a reversed domain name (as you've described). You could use e.g. &quot;net.abriraqui.cgc-calendar&quot; as the group ID.
+
+- Generally in Maven the &lt;artifactId&gt; is the name of the generated .jar file (the Java binary). Within the group this name must be unique. Your choice (&quot;cgc-calendar&quot;) is a good one. (So, with the group ID suggested above &quot;cgc-calendar&quot; appears twice, which is fine. That's because your project consist of only 1 artifact, but in general there may be many). Remember: the artifact ID must not necessarily match the plugin's directory name.
+<A HREF="http://maven.apache.org/guides/mini/guide-naming-conventions.html">http://maven.apache.org/guides/mini/guide-naming-conventions.html</A>
+
+- I would not say relationships in DeepaMehta are *hypergraph* relationships. In a hypergraph a relationship can have more than 2 ends. In DM it has always 2. Although one thing is special with the DM data model: at a relationship's end there can be both: a node (as usual), or a relationship (!). Anyway, if this structure is equivalent to a hypergraph is an ongoing discussion (J&#252;rgen says yes, I say no :-)
+
+- It is a convention in DM to use underscores in URIs instead of dashes. So it should be e.g. &quot;cgc.calendar.start_date&quot;. (While our hackership I told differently.)
+
+- A type's &quot;value&quot; property is its (human readable) *name*, not actually a &quot;description&quot; (which would possibly more verbose).
+
+- I would talk about &quot;Event&quot;, &quot;Start Date&quot;, and &quot;End Date&quot; as *Topic Types* (instead of Topics). The distinction is like in OO: a type is like a *class* while a topic is like an *instance* of a class. However, it is technically correct to talk of DM Types as Topics, because in DM Type is derived from Topic. But the more specific term might make things more clear for the reader (especially if she is familiar with OO).
+
+- The plugin.properties file should contain a 2nd line:
+	importModels=de.deepamehta.webclient
+This declares your plugin makes use of the DM Webclient data model (namely its type dm4.webclient.view_config). DM then takes care the Webclient is installed *before* the Calendar plugin. However, this is only of importance if Calendar is installed along with DM (e.g. when you publish a custom DM distro). While our hackership I omitted that setting.
+
+- In the latter code examples indentation is a bit out of place.
+
+- At the article end: you should say that this configuration goes to DM's &quot;global&quot; pom.xml. This is found at the top-level of its home directory.
+
+Hmh, I feel little like a rigid schoolmaster now ;-)
+Your article is great!
+
+</PRE>
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000443.html">[deepamehta-devel] a blog post on how to create a plugin and a question
+</A></li>
+	<LI>Next message: <A HREF="000445.html">[deepamehta-devel] a blog post on how to create a plugin and a question
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#444">[ date ]</a>
+              <a href="thread.html#444">[ thread ]</a>
+              <a href="subject.html#444">[ subject ]</a>
+              <a href="author.html#444">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/deepamehta-devel">More information about the deepamehta-devel
+mailing list</a><br>
+</body></html>

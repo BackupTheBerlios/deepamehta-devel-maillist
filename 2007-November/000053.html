@@ -1,0 +1,93 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [deepamehta-devel] [Bug #12312] Re-publishing a topic map fails	with client/server scenario
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/deepamehta-devel/2007-November/index.html" >
+   <LINK REL="made" HREF="mailto:deepamehta-devel%40lists.berlios.de?Subject=Re%3A%20%5Bdeepamehta-devel%5D%20%5BBug%20%2312312%5D%20Re-publishing%20a%20topic%20map%20fails%0A%09with%20client/server%20scenario&In-Reply-To=%3C200711021445.lA2EjZQh000972%40unicorn.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   
+   <LINK REL="Next"  HREF="000054.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[deepamehta-devel] [Bug #12312] Re-publishing a topic map fails	with client/server scenario</H1>
+    <B>admin at berlios.de</B> 
+    <A HREF="mailto:deepamehta-devel%40lists.berlios.de?Subject=Re%3A%20%5Bdeepamehta-devel%5D%20%5BBug%20%2312312%5D%20Re-publishing%20a%20topic%20map%20fails%0A%09with%20client/server%20scenario&In-Reply-To=%3C200711021445.lA2EjZQh000972%40unicorn.berlios.de%3E"
+       TITLE="[deepamehta-devel] [Bug #12312] Re-publishing a topic map fails	with client/server scenario">admin at berlios.de
+       </A><BR>
+    <I>Fri Nov  2 15:45:35 CET 2007</I>
+    <P><UL>
+        
+        <LI>Next message: <A HREF="000054.html">[deepamehta-devel] [Bug #12312] Re-publishing a topic map fails	with client/server scenario
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#53">[ date ]</a>
+              <a href="thread.html#53">[ thread ]</a>
+              <a href="subject.html#53">[ subject ]</a>
+              <a href="author.html#53">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Bug #12312, was updated on 2007-Nov-02 15:45
+Here is a current snapshot of the bug.
+
+Project: DeepaMehta
+Category: None
+Status: Open
+Resolution: None
+Bug Group: None
+Priority: 9
+Submitted by: jri
+Assigned to : jri
+Summary: Re-publishing a topic map fails with client/server scenario
+
+Details: Publishing a topic map fails if 2 conditions are met:
+1) the topic map was already published
+2) the client/server scenario is used (instead of the monolitic app)
+
+Further investigation relvealed that the error happens since the introduction of the class CaseInsensitiveHashtable in revision 228. If in RelationalCorporateMemory.queryTopicData() the constructor call &quot;new CaseInsensitveHashtable()&quot; is replaced by &quot;new Hashtable()&quot; the error is gone&quot;.
+
+The error message:
+     [java] *** ApplicationService.executeTopicCommand(): Topic tt-ka-stadtplan:1 &quot;Wedding&quot; (t-4631:1) can't execute command &quot;publishToGroup|t-4576|319|687&quot; (error while writing directive of type 14 (java.lang.NullPointerException -- probably caused by wrong usage through application programmer))
+     [java] de.deepamehta.DeepaMehtaException: error while writing directive of type 14 (java.lang.NullPointerException -- probably caused by wrong usage through application programmer)
+     [java]     at de.deepamehta.service.CorporateDirectives.write(CorporateDirectives.java:626)
+     [java]     at de.deepamehta.service.MessagingConnection.sendDirectives(MessagingConnection.java:124)
+     [java]     at de.deepamehta.service.DeepaMehtaServer.sendDirectives(DeepaMehtaServer.java:83)
+     [java]     at de.deepamehta.service.ApplicationService.broadcastSessions(ApplicationService.java:3763)
+     [java]     at de.deepamehta.service.ApplicationService.broadcast(ApplicationService.java:3744)
+     [java]     at de.deepamehta.topics.TopicMapTopic.publish(TopicMapTopic.java:1017)
+...
+...
+
+
+For detailed info, follow this link:
+<A HREF="http://developer.berlios.de/bugs/?func=detailbug&amp;bug_id=12312&amp;group_id=5174">http://developer.berlios.de/bugs/?func=detailbug&amp;bug_id=12312&amp;group_id=5174</A>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	
+	<LI>Next message: <A HREF="000054.html">[deepamehta-devel] [Bug #12312] Re-publishing a topic map fails	with client/server scenario
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#53">[ date ]</a>
+              <a href="thread.html#53">[ thread ]</a>
+              <a href="subject.html#53">[ subject ]</a>
+              <a href="author.html#53">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/deepamehta-devel">More information about the deepamehta-devel
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,334 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [deepamehta-devel] DeepaMehta installieren aus dem SVN-Repository
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/deepamehta-devel/2007-October/index.html" >
+   <LINK REL="made" HREF="mailto:deepamehta-devel%40lists.berlios.de?Subject=Re%3A%20%5Bdeepamehta-devel%5D%20DeepaMehta%20installieren%20aus%20dem%20SVN-Repository&In-Reply-To=%3Ccdbbc350ee2ca052fb77464230505d7b%40deepamehta.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000051.html">
+   
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[deepamehta-devel] DeepaMehta installieren aus dem SVN-Repository</H1>
+    <B>J&#246;rg Richter</B> 
+    <A HREF="mailto:deepamehta-devel%40lists.berlios.de?Subject=Re%3A%20%5Bdeepamehta-devel%5D%20DeepaMehta%20installieren%20aus%20dem%20SVN-Repository&In-Reply-To=%3Ccdbbc350ee2ca052fb77464230505d7b%40deepamehta.de%3E"
+       TITLE="[deepamehta-devel] DeepaMehta installieren aus dem SVN-Repository">jri at deepamehta.de
+       </A><BR>
+    <I>Tue Oct 30 15:06:21 CET 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000051.html">[deepamehta-devel] [Bug #12290] Some associations lack privilegs	for non-administrators
+</A></li>
+        
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#52">[ date ]</a>
+              <a href="thread.html#52">[ thread ]</a>
+              <a href="subject.html#52">[ subject ]</a>
+              <a href="author.html#52">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>
+Liebe DeepaMehta-Entwickler,
+
+die aktuelle DeepaMehta Version mit integrierter HSQL Datenbank und 
+Gruppenkalender-Funktion kann direkt aus dem Berlios SVN-Repository 
+ausgecheckt und gebuildet werden. Beachte: das ist noch keine fertige 
+Release. Die n&#228;chste DeepaMehta 2.0b8 Release ist f&#252;r Dezember geplant. 
+Die aktuelle SVN-Version sollte aber funktionieren. Das README ist noch 
+nicht aktualisiert und zu gro&#223;en Teilen obsolet. Deshalb gebe ich hier 
+ein paar Installationshinweise.
+
+
+Quick Installation Guide
+==================
+
+0) Du brauchst ein Java SDK 1.4 -- Java 5 oder Java 6 funktionieren 
+nicht!
+1) Auschecken:
+		svn checkout <A HREF="svn://svn.berlios.de/deepamehta/trunk">svn://svn.berlios.de/deepamehta/trunk</A> deepamehta
+2) DB-Verzeichnis anlegen:
+		cd deepamehta
+		mkdir install/client/db
+		mkdir install/client/db/hsqldb-intern
+3) Konfigurieren:
+		./run.sh config
+	Beantworte alle Fragen mit Return
+4) Builden:
+		./run.sh build
+5) Installieren:
+		./run.sh install
+	Beantworte die Frage mit Return
+6) Starten:
+		./run.sh dm
+	Es erscheint der DeepaMehta-Login-Dialog.
+	Gebe &quot;root&quot; ein und dr&#252;cke 2x Return.
+	Der DeepaMehta Desktop erscheint.
+
+
+
+Installation Guide
+=============
+
+0) Voraussetzungen
+1) Auschecken
+2) DB-Verzeichnis anlegen
+3) Konfigurieren
+4) Builden
+5) Installieren
+6) Deployen der Web-Frontends
+7) Starten
+8) Beenden
+9) Wie geht's weiter?
+10) Was bleibt offen?
+
+
+0) Voraussetzungen
+
+- Java SDK 1.4 -- wird zum Builden ben&#246;tigt.
+ACHTUNG: DeepaMehta kann derzeit nicht mit Java 5 oder Java 6 gebuildet 
+werden.
+- Java JRE ab 1.4 (Versionen 5 und 6 gehen auch) -- wird zum Starten 
+ben&#246;tigt.
+Hinweis: das JRE ist im SDK enthalten.
+
+Optional:
+- MySQL (Version 4 oder 5) -- wird nur ben&#246;tigt, wenn nicht HSQL 
+benutzt werden soll.
+- Tomcat (ab 4) -- wird nur ben&#246;tigt, wenn die DeepaMehta 
+Beispiel-Webfrontends benutzt werden sollen.
+
+Nicht ben&#246;tigt:
+- HSQL und Ant m&#252;ssen nicht installiert werden, da DeepaMehta diese 
+Software selber mitbringt.
+
+
+1) Auschecken
+
+	svn checkout <A HREF="svn://svn.berlios.de/deepamehta/trunk">svn://svn.berlios.de/deepamehta/trunk</A> deepamehta
+
+Im aktuellen Verzeichnis wird dann das DeepaMehta-Homeverzeichnis 
+&quot;deepamehta&quot; angelegt. Du kannst das Homeverzeichnis auch anders nennen 
+(letzter Parameter).
+
+Wenn das Auschecken erfolgreich war, wird &quot;Checked out revision 240.&quot; 
+(o.&#228;.) angezeigt.
+
+
+2) DB-Verzeichnis anlegen
+
+Nur wenn die mitgelieferte HSQL-Datenbank benutzt werden soll, m&#252;ssen 
+jetzt 2 Verzeichnisse manuell angelegt werden.
+
+	cd deepamehta
+	mkdir install/client/db
+	mkdir install/client/db/hsqldb-intern
+
+Hinweis: Da&#223; diese Verzeichnisse manuell angelegt werden m&#252;ssen, ist 
+ein Fehler im derzeitigen DeepaMehta-Installer. Mit der DeepaMehta 
+2.0b8 Release wird dieser Schritt entfallen.
+
+
+3) Konfigurieren
+
+Jetzt wird die DeepaMehta-Installation konfiguriert.
+
+	./run.sh config
+
+Dir werden ein paar Fragen gestellt, wobei die Standard-Antwort, die 
+einfach durch Dr&#252;cken von Return ausgel&#246;st wird, in eckigen Klammern 
+angegeben ist.
+
+Als erstes wirst Du gefragt, ob Du auch die DeepaMehta 
+Beispiel-Webfrontends benutzen m&#246;chtest. Wenn Ja, mu&#223;t Du angeben, wo 
+das Tomcat Home-Verzeichnis ist.
+
+	[input] Do you want to install web applications? (y, [n])
+
+	[input] Please enter the root directory of your application server. 
+[/usr/local/tomcat]
+
+Dann wirst Du gefragt, in welcher Datenbank DeepaMehta seine Daten 
+ablegen soll. Wenn die HSQL-Datenbank benutzt werden soll, dr&#252;cke 
+einfach Return.
+
+	[echo] Please select one of the following instance configurations:
+	[echo]
+	[echo] * derby-intern
+	[echo] * hsqldb-intern
+	[echo] * mysql4
+	[echo] * mysql5
+	[echo]
+	[input] currently set (default) [hsqldb-intern]
+
+Dann wirst Du nach dem Namen der anzulegenden Datenbank gefragt. Gebe 
+den Namen der anzulegenden Datenbank ein, oder dr&#252;cke einfach Return.
+
+	[input] Please enter the name of your database: [DeepaMehta]
+
+Dann wirst Du gefragt, welche der mitgelieferten Beispiel-Anwendungen 
+Du installieren m&#246;chtest. Die Entscheidung steht Dir frei. Auch ohne 
+Beispielanwendungen ist DeepaMehta nutzbar.
+
+	[input] Shall the example kompetenzstern be processed? ([y], n)
+	[input] Shall the example messageboard be processed? ([y], n)
+	[input] Shall the example ldap be processed? ([y], n)
+	[input] Shall the example movies be processed? ([y], n)
+
+Sofern Du das &quot;movies&quot; Beispiel installieren m&#246;chtest, wirst Du jetzt 
+nach der Art der Datenquelle gefragt, die f&#252;r das movies-Beispiel 
+angelegt werden soll.
+
+	[echo] Please select one of the following instance configurations:
+	[echo]
+	[echo] * derby-intern
+	[echo] * hsqldb-intern
+	[echo] * mysql4
+	[echo] * mysql5
+	[echo] * xml
+	[echo]
+	[input] currently set (default) [hsqldb-intern]
+
+Sofern Du &quot;hsqldb-intern&quot; ausgew&#228;hlt hast, wirst Du jetzt nach dem 
+Namen der anzulegenden Beispiel-Film-Datenbank gefragt.
+
+	[input] Please enter the name of your database: [Movies]
+
+Weitere Beispiel-Anwendungen werden angeboten:
+
+	[input] Shall the example dm-browser be processed? (y, [n])
+	[input] Shall the example dm-search be processed? (y, [n])	[input] 
+Shall the example dm-topicmapviewer be processed? (y, [n])
+	[input] Shall the example dm-web be processed? (y, [n])
+	[input] Shall the example knoppixforum be processed? (y, [n])
+	[input] Shall the example musicforum be processed? (y, [n])
+
+Wenn die Konfiguration erfolgreich beendet wurde, wird &quot;BUILD 
+SUCCESSFUL&quot; angezeigt.
+
+
+4) Builden
+
+Zum Builden von DeepaMehta und der zuvor ausgew&#228;hlten 
+Beispiel-Anwendungen gebe folgendes Kommando ein:
+
+	./run.sh build
+
+Wenn das Builden erfolgreich beendet wurde, wird &quot;BUILD SUCCESSFUL&quot; 
+angezeigt.
+
+
+5) Installieren
+
+Zum Anlegen der initialen DeepaMehta-Datenbank gebe folgendes Kommando 
+ein:
+
+	./run.sh install
+
+Dir werden nochmal die konfigurierten Datenbank-Angaben gezeigt. Sobald 
+Du Return dr&#252;ckst wird die DeepaMehta-Datenbank angelegt und mit den 
+initialen Inhalten gef&#252;llt.
+
+	[echo] --- DeepaMehta Installation ---
+	[echo] You are about to create a database 'DeepaMehta' and an
+	[echo] user 'sa' (password '') with corresponding grants.
+	...
+	[input] Continue?  ([y], n)
+
+Sofern Du beim Konfigurieren die Movies-Beispielanwendung ausgew&#228;hlt 
+hast, und &quot;hsqldb-intern&quot; als Datenquelle gew&#228;hlt hast, wird jetzt die 
+Movies-Beispiel-Datenbank angelegt.
+
+	[echo] --- DeepaMehta Installation ---
+	[echo] You are about to create a database 'Movies' and an
+	[echo] user 'sa' (password '') with corresponding grants.
+	...
+	[input] Continue?  ([y], n)
+
+Wenn die Datenbanken erfolgreich angelegt wurden, wird &quot;BUILD 
+SUCCESSFUL&quot; angezeigt.
+
+
+6) Deployen der Web-Frontends
+
+Wenn Du beim Konfigurieren gesagt hast, da&#223; Du die DeepaMehta 
+Beispiel-Webfrontends benutzen m&#246;chtest, gebe zum Deployen folgendes 
+Kommando ein:
+
+	./run.sh deploy
+
+
+7) Starten
+
+Die monolithische DeepaMehta-Anwendung wird mit folgendem Kommando 
+gestartet:
+
+	./run.sh dm
+
+Es erscheint der DeepaMehta-Login-Dialog. Gebe &quot;root&quot; ein und dr&#252;cke 2x 
+Return (initial hat der DeepaMehta-root-User kein Passwort). Der 
+DeepaMehta Desktop erscheint.
+
+
+8) Beenden
+
+Zum Beenden der DeepaMehta-Sitzung dr&#252;cke das Schlie&#223;en-Feld des 
+DeepaMehta-Fensters.
+
+
+9) Wie geht's weiter?
+
+Ein paar Bedienhinweise f&#252;r den Anfang findest Du in unserem Wiki:
+<A HREF="https://www.mindworxs.de/zwiki/ErsteSchritte">https://www.mindworxs.de/zwiki/ErsteSchritte</A>
+
+Den Beginn eines Users Guides gibt es hier:
+www.deepamehta.de/docs/usersguide.html
+
+F&#252;r Deine Fragen benutze m&#246;glichst das Forum auf der DeepaMehta Website 
+oder abboniere die deepamehta-users Mailingliste. Im Forum befinden 
+sich bereits wichtige Hinweise zur Bedienung. Forum und Mailinglisten 
+sind auf der Website unter &quot;Community&quot; zu erreichen.
+
+
+10) Was bleibt offen?
+
+Soweit die Kurzanleitung zur Inbetriebnahme der aktuellen 
+DeepaMehta-Version aus dem Berlios SVN-Repository. Viele Themen sind 
+hier nicht erkl&#228;rt. Dazu geh&#246;ren:
+- DeepaMehta Client/Server Szenario
+- Das Client-Applet
+- Zweck und Funktionalit&#228;t der mitgelieferten Beispiel-Anwendungen
+- DeepaMehta Beispiel-Wenfrontends unter Tomcat
+- Einrichten weiterer DeepaMehta Instanzen
+- Vorhandene DeepaMehta Installation updaten
+- DeepaMehta deinstallieren
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000051.html">[deepamehta-devel] [Bug #12290] Some associations lack privilegs	for non-administrators
+</A></li>
+	
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#52">[ date ]</a>
+              <a href="thread.html#52">[ thread ]</a>
+              <a href="subject.html#52">[ subject ]</a>
+              <a href="author.html#52">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/deepamehta-devel">More information about the deepamehta-devel
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,122 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [deepamehta-devel] Creating Topics programmatically as part of	Migrations
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/deepamehta-devel/2012-November/index.html" >
+   <LINK REL="made" HREF="mailto:deepamehta-devel%40lists.berlios.de?Subject=Re%3A%20%5Bdeepamehta-devel%5D%20Creating%20Topics%20programmatically%20as%20part%20of%0A%09Migrations&In-Reply-To=%3C6AE00AA2-F650-4325-AEFF-D25AD7E0C29A%40deepamehta.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000379.html">
+   <LINK REL="Next"  HREF="000381.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[deepamehta-devel] Creating Topics programmatically as part of	Migrations</H1>
+    <B>J&#246;rg Richter</B> 
+    <A HREF="mailto:deepamehta-devel%40lists.berlios.de?Subject=Re%3A%20%5Bdeepamehta-devel%5D%20Creating%20Topics%20programmatically%20as%20part%20of%0A%09Migrations&In-Reply-To=%3C6AE00AA2-F650-4325-AEFF-D25AD7E0C29A%40deepamehta.de%3E"
+       TITLE="[deepamehta-devel] Creating Topics programmatically as part of	Migrations">jri at deepamehta.de
+       </A><BR>
+    <I>Sat Nov 24 20:22:35 CET 2012</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000379.html">[deepamehta-devel] Creating Topics programmatically as part of	Migrations
+</A></li>
+        <LI>Next message: <A HREF="000381.html">[deepamehta-devel] Creating Topics programmatically as part of Migrations
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#380">[ date ]</a>
+              <a href="thread.html#380">[ thread ]</a>
+              <a href="subject.html#380">[ subject ]</a>
+              <a href="author.html#380">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>
+Hi Malte!
+
+you do everything right. What you're missing is the Access Control setup for the new topic. That comprises
+	- a &quot;Creator&quot; assignment (who is the creator of the topic?)
+	- an &quot;Owner&quot; assignment (who is the owner of the topic?)
+	- entries for the Access Control List (what user role is allowed to perform an operation?)
+
+Normally a default Access Control setup is done automatically for every topic that is a) created interactively, or b) created programmatically, triggered by an HTTP request. In both cases the current user session is identified by the cookie.
+
+BUT -- and this is your problem -- in migrations it is different: Topics created in migrations will get *no* default Access Control setup! This is due to the fact that a migration is triggered by the server itself, and not through a HTTP request. There is no cookie and thus no user context.
+
+For every topic you create in an migration, you must care for its Access Control setup yourself. Unfortunately this goes along with another shortcoming: within a migrations you have no access to plugin services (see <A HREF="https://trac.deepamehta.de/ticket/324">https://trac.deepamehta.de/ticket/324</A>). That is, you can't consume the Access Control which would assist you with creating the required setup.
+
+For the moment the best practice is:
+- In your plugin consume the Access Control Service
+- Once the AC service arrives: For every topic created in a migration:
+	- Check if it is already setup, e.g. be checking if it has a creator assigned
+	- Only if not: set it up by the help of the AC service (the 3 settings mentioned above)
+
+	acService.setCreator(topicId, username);
+	acService.setOwner(topicId, username);
+	acService.createACL(topicId, acl);
+
+Also see dgf's MailPlugin.java. There exists exactly the same situation you describe.
+<A HREF="https://github.com/dgf/dm4-mail">https://github.com/dgf/dm4-mail</A>
+Let me know if you need further help.
+
+
+On Nov 24, 2012, at 18:44, Malte Rei&#223;ig wrote:
+
+&gt;<i> As I dont have a custom workspace in use, as the normal prerequisite I
+</I>&gt;<i> associated all my custom topicTypes with the default workspace
+</I>&gt;<i> DeepaMehta (&quot;de.workspaces.deepamehta&quot;). BTW: It would be nice if a
+</I>&gt;<i> plugin could define some sort of default &quot;Workspace&quot; for all it's own
+</I>&gt;<i> Topic- and AssociatonTypes.
+</I>
+That's a good idea! I filed a ticket:
+<A HREF="https://trac.deepamehta.de/ticket/371">https://trac.deepamehta.de/ticket/371</A>
+
+
+&gt;<i> Furthermore I related all newly created instances to the default
+</I>&gt;<i> workspace through executing the following command in my Migration:
+</I>&gt;<i> 
+</I>&gt;<i> dms.createAssociation(new AssociationModel(&quot;dm4.core.aggregation&quot;,
+</I>&gt;<i>    new TopicRoleModel(newTopic.getId(), &quot;dm4.core.whole&quot;),
+</I>&gt;<i>    new TopicRoleModel(&quot;de.workspaces.deepamehta&quot;, &quot;dm4.core.part&quot;)
+</I>&gt;<i> ), null);
+</I>
+This looks correct.
+Note: a workspace assignment is not necessarily required in the regard of Access Control. However, it *is* required when you want exploit the MEMBER user role (as appearing in an ACL entry) for workspace member-based access.
+
+Another note: if you were not in a migration you would use the Workspaces service's assignToWorkspace() call which would be more comfortable.
+
+
+Thanks for your question!
+Indeed, it points to serious issues of the DM plugin framework. Migrations in conjunction with Access Control must definitely become less cumbersome.
+
+Cheers,
+J&#246;rg
+
+</PRE>
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000379.html">[deepamehta-devel] Creating Topics programmatically as part of	Migrations
+</A></li>
+	<LI>Next message: <A HREF="000381.html">[deepamehta-devel] Creating Topics programmatically as part of Migrations
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#380">[ date ]</a>
+              <a href="thread.html#380">[ thread ]</a>
+              <a href="subject.html#380">[ subject ]</a>
+              <a href="author.html#380">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/deepamehta-devel">More information about the deepamehta-devel
+mailing list</a><br>
+</body></html>

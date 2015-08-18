@@ -1,0 +1,107 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [deepamehta-devel] WebSockets
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/deepamehta-devel/2014-January/index.html" >
+   <LINK REL="made" HREF="mailto:deepamehta-devel%40lists.berlios.de?Subject=Re%3A%20%5Bdeepamehta-devel%5D%20WebSockets&In-Reply-To=%3CC08BD101-07C4-43A0-A9E5-B3839968ECE5%40deepamehta.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000447.html">
+   <LINK REL="Next"  HREF="000449.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[deepamehta-devel] WebSockets</H1>
+    <B>J&#246;rg Richter</B> 
+    <A HREF="mailto:deepamehta-devel%40lists.berlios.de?Subject=Re%3A%20%5Bdeepamehta-devel%5D%20WebSockets&In-Reply-To=%3CC08BD101-07C4-43A0-A9E5-B3839968ECE5%40deepamehta.de%3E"
+       TITLE="[deepamehta-devel] WebSockets">jri at deepamehta.de
+       </A><BR>
+    <I>Tue Jan  7 04:40:04 CET 2014</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000447.html">[deepamehta-devel] a blog post on how to create a plugin and a	question
+</A></li>
+        <LI>Next message: <A HREF="000449.html">[deepamehta-devel] WebSockets
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#448">[ date ]</a>
+              <a href="thread.html#448">[ thread ]</a>
+              <a href="subject.html#448">[ subject ]</a>
+              <a href="author.html#448">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>
+Hi,
+
+I like to announce my first WebSockets experiences with DM.
+As a technology demo I created a new plugin (for usage info see the README):
+<A HREF="https://github.com/jri/dm4-websockets">https://github.com/jri/dm4-websockets</A>
+
+What this plugin does:
+- Setup a WebSocket server at <A HREF="ws://localhost:8081/">ws://localhost:8081/</A> and wait for WebSocket clients
+- Listen for Topic Update events from the DM Core and push them to all connected WebSocket clients (broadcast)
+- Write all WebSocket messages (handshake, open, message, frame, control, close) to the DM server log
+- Provide a WebSocket client at <A HREF="http://localhost:8080/de.deepamehta.websockets/">http://localhost:8080/de.deepamehta.websockets/</A>
+
+What the WebSocket client does:
+- Establish a WebSocket connection to <A HREF="ws://localhost:8081/">ws://localhost:8081/</A>
+- Send a greeting message to the server once the connection is established
+- Log all received messages (Topic Update events) to the browser console
+- Log the connection open and close events to the browser console
+
+So, the dm4-websockets plugin demonstrates all technical aspects of WebSockets. It performs no useful task, and it is not yet extensible by 3rd party plugin developers. It's just a tech demo.
+
+How the dm4-websockets plugin is realized:
+- Bundle a Jetty 7 web server and the jetty-websocket extension
+- Instantiate a Jetty Server on port 8081 and set a WebSocketHandler
+
+That means when the dm4-websockets plugin is installed the Jetty binaries are bundled *twice* and 2 Jetty servers are instantiated (each on its own port).
+
+What I've learned so far:
+- DM *can* provide WebSockets without relying on OPS4J Pax Web (an OSGi HTTP Service implementation).
+- DM can *not* use the Jetty web server that is bundled with Apache Felix HTTP Jetty (the OSGi HTTP Service implementation used by DM) because ...
+	- The OSGi 4.2 HTTP Service specification does not allow for accessing the WebSockets capabilities of the underlying web server. So we must setup a WebSocket server on our own. And for doing that we can *not* use the bundled Jetty because ...
+	- The org.eclipse.jetty.* Java packages of the Apache Felix HTTP Jetty bundle are not exported.
+
+That means the dm4-websockets plugin must bundle and instantiate its own WebSocket server anyway. (This must not necessarily be a full-blown web server like Jetty.)
+
+Please correct my if I'm wrong. I wish there would be a way to not bundle the Jetty binaries twice, and to not instantiate 2 Jetty servers, and to not open 2 HTTP ports.
+
+Next possible step from my side:
+- Make the dm4-websockets plugin extensible by 3rd party plugin developers. That is abstracting the WebSocket server (and the Jetty API) away and provide the plugin developer a framework for handling client-side and server-side WebSocket messages.
+
+Don't hesitate to sketch out your cool DM server push application here.
+This would be a good help for me when designing the framework.
+
+Cheers,
+J&#246;rg
+
+</PRE>
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000447.html">[deepamehta-devel] a blog post on how to create a plugin and a	question
+</A></li>
+	<LI>Next message: <A HREF="000449.html">[deepamehta-devel] WebSockets
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#448">[ date ]</a>
+              <a href="thread.html#448">[ thread ]</a>
+              <a href="subject.html#448">[ subject ]</a>
+              <a href="author.html#448">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/deepamehta-devel">More information about the deepamehta-devel
+mailing list</a><br>
+</body></html>
